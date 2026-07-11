@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hexcalc/app/providers.dart';
 import 'package:hexcalc/app/routing/app_router.dart';
 import 'package:hexcalc/features/gameplay/domain/domain.dart';
+
+import '../support/harness.dart';
 
 /// rs-v1 with a short run duration so the run finishes quickly in a test.
 Ruleset shortRuleset(int durationMs) {
@@ -29,8 +29,8 @@ void main() {
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
     await tester.pumpWidget(
-      ProviderScope(
-        overrides: [rulesetProvider.overrideWithValue(shortRuleset(800))],
+      await testScope(
+        ruleset: shortRuleset(800),
         child: MaterialApp.router(
           routerConfig: createRouter(initialLocation: '/play'),
         ),

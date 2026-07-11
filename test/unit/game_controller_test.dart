@@ -169,6 +169,40 @@ void main() {
     expect(c.notifier.value.comboCount, 0);
   });
 
+  test('cancelSelection aborts an in-progress path without recording', () {
+    final GameController c = newController();
+    final List<AxialCoordinate> sol = c.board.sampleSolutions.first;
+    c.pressCell(sol[0]);
+    c.extendToCell(sol[1]);
+    expect(c.path.length, 2);
+    c.cancelSelection();
+    expect(c.path, isEmpty);
+    expect(c.notifier.value.equationsSolved, 0);
+    expect(c.phase.acceptsPress, isTrue);
+  });
+
+  test('cancelling a complete-but-wrong path does not break the combo', () {
+    final GameController c = newController();
+    drivePath(c, c.board.sampleSolutions.first);
+    settle(c);
+    expect(c.notifier.value.comboCount, 1);
+
+    final List<AxialCoordinate>? wrong = _wrongVariant(c);
+    if (wrong == null) {
+      return; // no reachable wrong result; covered elsewhere
+    }
+    // Draw the wrong equation but CANCEL instead of releasing.
+    c.pressCell(wrong.first);
+    for (int i = 1; i < wrong.length; i++) {
+      c.extendToCell(wrong[i]);
+    }
+    c.cancelSelection();
+
+    // The wrong equation was never committed: combo intact, no penalty.
+    expect(c.notifier.value.comboCount, 1);
+    expect(c.notifier.value.lastEquationCorrect, isTrue);
+  });
+
   test('pausing clears an in-progress selection', () {
     final GameController c = newController();
     final List<AxialCoordinate> sol = c.board.sampleSolutions.first;

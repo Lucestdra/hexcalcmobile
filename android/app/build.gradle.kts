@@ -20,14 +20,35 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "studio.leonidas.hexcalc"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        // minSdk 26 per the product plan (deterministic native deps, modern APIs).
+        minSdk = 26
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+    }
+
+    // Three flavors on a single "app" dimension. The Dart side selects its typed
+    // FlavorConfig via the matching main_<flavor>.dart entrypoint; here we only
+    // vary the application id and display name so builds can coexist on a device.
+    flavorDimensions += "app"
+    productFlavors {
+        create("development") {
+            dimension = "app"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", "HEX CALC Dev")
+        }
+        create("staging") {
+            dimension = "app"
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
+            resValue("string", "app_name", "HEX CALC Staging")
+        }
+        create("production") {
+            dimension = "app"
+            resValue("string", "app_name", "HEX CALC")
+        }
     }
 
     buildTypes {

@@ -4,9 +4,9 @@ import 'package:hexcalc/features/gameplay/application/game_phase.dart';
 import 'package:hexcalc/features/gameplay/application/game_snapshot.dart';
 import 'package:hexcalc/features/gameplay/presentation/game_hud.dart';
 
-Widget host(GameSnapshot s) => MaterialApp(
+Widget host(GameSnapshot s, {bool reducedMotion = false}) => MaterialApp(
   home: Scaffold(
-    body: GameHud(snapshot: s, onPause: () {}),
+    body: GameHud(snapshot: s, onPause: () {}, reducedMotion: reducedMotion),
   ),
 );
 
@@ -39,13 +39,27 @@ GameSnapshot snapshotWith({
 void main() {
   testWidgets('HUD shows score, target, and time', (WidgetTester tester) async {
     await tester.pumpWidget(host(snapshotWith(score: 1234, target: 27)));
+    // Score counts up; let the travel animation settle before asserting.
+    await tester.pumpAndSettle();
     expect(find.text('1234'), findsOneWidget);
     expect(find.text('27'), findsOneWidget);
     expect(find.text('42'), findsOneWidget); // 42 s remaining
   });
 
+  testWidgets('reduced motion shows the score immediately (no travel)', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      host(snapshotWith(score: 999), reducedMotion: true),
+    );
+    // A single pump: with reduced motion the count-up is instant.
+    await tester.pump();
+    expect(find.text('999'), findsOneWidget);
+  });
+
   testWidgets('combo pill appears at combo >= 2', (WidgetTester tester) async {
     await tester.pumpWidget(host(snapshotWith(combo: 3)));
+    await tester.pumpAndSettle();
     expect(find.text('COMBO x3'), findsOneWidget);
   });
 
@@ -53,6 +67,7 @@ void main() {
     WidgetTester tester,
   ) async {
     await tester.pumpWidget(host(snapshotWith(fever: true)));
+    await tester.pumpAndSettle();
     expect(find.text('FEVER'), findsOneWidget);
   });
 
@@ -60,6 +75,7 @@ void main() {
     WidgetTester tester,
   ) async {
     await tester.pumpWidget(host(snapshotWith(feverEnergy: 3)));
+    await tester.pumpAndSettle();
     expect(find.text('FEVER 3/8'), findsOneWidget);
     expect(find.byType(LinearProgressIndicator), findsOneWidget);
   });

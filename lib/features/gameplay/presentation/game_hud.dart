@@ -6,10 +6,18 @@ import '../application/game_snapshot.dart';
 
 /// The heads-up display, built purely from an immutable [GameSnapshot].
 class GameHud extends StatelessWidget {
-  const GameHud({required this.snapshot, required this.onPause, super.key});
+  const GameHud({
+    required this.snapshot,
+    required this.onPause,
+    this.reducedMotion = false,
+    super.key,
+  });
 
   final GameSnapshot snapshot;
   final VoidCallback onPause;
+
+  /// When true, the score updates instantly instead of counting up (no travel).
+  final bool reducedMotion;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +32,7 @@ class GameHud extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                _Stat(label: 'SCORE', value: '${snapshot.score}'),
+                _ScoreStat(score: snapshot.score, reducedMotion: reducedMotion),
                 const Spacer(),
                 _Stat(
                   label: 'TIME',
@@ -78,6 +86,33 @@ class GameHud extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// The score stat with a count-up "travel" as it rises (instant under reduced
+/// motion). Score is monotonic within a run, so this always counts upward.
+class _ScoreStat extends StatelessWidget {
+  const _ScoreStat({required this.score, required this.reducedMotion});
+
+  final int score;
+  final bool reducedMotion;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text('SCORE', style: AppTypography.hudLabel),
+        TweenAnimationBuilder<int>(
+          tween: IntTween(begin: 0, end: score),
+          duration: reducedMotion ? Duration.zero : AppMotion.success,
+          curve: AppMotion.standard,
+          builder: (BuildContext context, int value, _) {
+            return Text('$value', style: AppTypography.hudNumeric);
+          },
+        ),
+      ],
     );
   }
 }
@@ -194,10 +229,16 @@ class _FeverMeter extends StatelessWidget {
 
 /// A translucent pause overlay.
 class PauseOverlay extends StatelessWidget {
-  const PauseOverlay({required this.onResume, required this.onQuit, super.key});
+  const PauseOverlay({
+    required this.onResume,
+    required this.onQuit,
+    this.onSettings,
+    super.key,
+  });
 
   final VoidCallback onResume;
   final VoidCallback onQuit;
+  final VoidCallback? onSettings;
 
   @override
   Widget build(BuildContext context) {
@@ -216,6 +257,11 @@ class PauseOverlay extends StatelessWidget {
               const SizedBox(height: AppSpacing.lg),
               FilledButton(onPressed: onResume, child: const Text('Resume')),
               const SizedBox(height: AppSpacing.sm),
+              if (onSettings != null)
+                TextButton(
+                  onPressed: onSettings,
+                  child: const Text('Settings'),
+                ),
               TextButton(onPressed: onQuit, child: const Text('Quit run')),
             ],
           ),

@@ -21,3 +21,6 @@ test/contract/fixtures/manifest.sha256 text eol=lf
 *.otf binary
 *.woff binary
 *.woff2 binary
+*.wav binary
+*.mp3 binary
+*.ogg binary

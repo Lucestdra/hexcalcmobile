@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../domain/domain.dart';
+import 'game_event.dart';
 import 'game_phase.dart';
 import 'game_snapshot.dart';
 
@@ -9,10 +10,15 @@ import 'game_snapshot.dart';
 /// the shared [ReplayEngine] on the event log, so the live HUD score always equals
 /// what the backend would verify. No Flutter widgets, no Flame — just [ValueNotifier].
 class GameController {
-  GameController({required this.ruleset, required this.seed});
+  GameController({required this.ruleset, required this.seed, this.onEvent});
 
   final Ruleset ruleset;
   final String seed;
+
+  /// Discrete one-shot signals (see [GameEvent]) for audio/haptics/analytics and
+  /// the Flame choreography. Optional so the controller stays testable in
+  /// isolation; never used for per-frame state (that is the [notifier]).
+  final void Function(GameEvent event)? onEvent;
 
   // Transient feedback-phase durations (ms). Kept here so the application layer
   // stays pure Dart; the presentation layer maps phases to motion tokens.
@@ -93,6 +99,7 @@ class GameController {
     _replay = ReplayEngine.replay(ruleset, _events);
     _phase = GamePhase.idle;
     _emit();
+    _signal(const GameEvent(GameSignal.runStarted));
   }
 
   /// True while the combo can still be continued (within the ruleset window of
@@ -115,6 +122,7 @@ class GameController {
       ..add(coord);
     _phase = GamePhase.selecting;
     _emit();
+    _signal(GameEvent(GameSignal.cellSelected, value: _path.length));
   }
 
   /// Extends (or backtracks) the selection to an adjacent cell during a drag.
@@ -127,6 +135,7 @@ class GameController {
     if (_path.length >= 2 && coord == _path[_path.length - 2]) {
       _path.removeLast();
       _emit();
+      _signal(const GameEvent(GameSignal.pathBacktrack));
       return;
     }
 
@@ -151,6 +160,20 @@ class GameController {
 
     _path.add(coord);
     _emit();
+    _signal(GameEvent(GameSignal.cellSelected, value: _path.length));
+  }
+
+  /// Aborts an in-progress selection WITHOUT validating it — e.g. the OS or a
+  /// competing recognizer cancels the pan. Clears the path with no penalty (a
+  /// cancel must never be scored as a wrong equation).
+  void cancelSelection() {
+    if (_phase != GamePhase.selecting) {
+      return;
+    }
+    _path.clear();
+    _phase = _restingPhase();
+    _emit();
+    _signal(const GameEvent(GameSignal.incompleteRewind));
   }
 
   /// Releases the finger: validate the committed path.
@@ -179,10 +202,14 @@ class GameController {
       _path.clear();
       _phase = _restingPhase();
       _emit();
+      _signal(const GameEvent(GameSignal.incompleteRewind));
     }
   }
 
   void _record({required bool correct, required bool matchedTarget}) {
+    // Snapshot the committed path before it is cleared — the choreography needs
+    // the exact cells to place spatial effects (energy wave, result burst).
+    final List<AxialCoordinate> committed = List<AxialCoordinate>.of(_path);
     final List<Operator> operators = <Operator>[
       for (final AxialCoordinate c in _path)
         if (_cellByCoord[c]!.kind == CellKind.operator)
@@ -203,6 +230,8 @@ class GameController {
     _path.clear();
     _lastCorrect = correct;
 
+    bool ignited = false;
+    bool leveled = false;
     if (correct) {
       _equationsSolved++;
       _hasLastCorrect = true;
@@ -211,8 +240,8 @@ class GameController {
         _bestCombo = _replay.finalState.comboCount;
       }
 
-      final bool ignited = _replay.finalState.feverActive && !_feverDisplay;
-      final bool leveled = _replay.finalState.level > prevLevel;
+      ignited = _replay.finalState.feverActive && !_feverDisplay;
+      leveled = _replay.finalState.level > prevLevel;
 
       if (ignited) {
         _feverDisplay = true;
@@ -240,6 +269,28 @@ class GameController {
     }
 
     _emit();
+
+    // Emit discrete signals after state is settled and the snapshot is pushed.
+    if (correct) {
+      _signal(
+        GameEvent(
+          GameSignal.equationCorrect,
+          value: _replay.finalState.comboCount,
+          cells: committed,
+        ),
+      );
+      if (matchedTarget) {
+        _signal(GameEvent(GameSignal.targetMatched, cells: committed));
+      }
+      if (ignited) {
+        _signal(const GameEvent(GameSignal.feverStarted));
+      }
+      if (leveled) {
+        _signal(GameEvent(GameSignal.levelCompleted, value: _levelIndex));
+      }
+    } else {
+      _signal(GameEvent(GameSignal.equationIncorrect, cells: committed));
+    }
   }
 
   /// Advances the run clock by [dtMs]. Driven by the Flame update loop (or tests).
@@ -253,8 +304,10 @@ class GameController {
       _elapsedMs = runDurationMs;
     }
 
+    bool feverJustEnded = false;
     if (_feverDisplay && _elapsedMs >= _feverEndsAtMs) {
       _feverDisplay = false;
+      feverJustEnded = true;
       if (_phase == GamePhase.feverActive) {
         _setTransient(GamePhase.feverExiting, _feverExitMs);
       }
@@ -264,11 +317,20 @@ class GameController {
       _phase = _restingAfter(_phase);
     }
 
+    bool justFinished = false;
     if (_elapsedMs >= runDurationMs) {
+      justFinished = _phase != GamePhase.finished;
       _phase = GamePhase.finished;
     }
 
     _emitOnTick();
+
+    if (feverJustEnded) {
+      _signal(const GameEvent(GameSignal.feverEnded));
+    }
+    if (justFinished) {
+      _signal(const GameEvent(GameSignal.runFinished));
+    }
   }
 
   /// Pauses/resumes; the clock is frozen while paused.
@@ -290,6 +352,8 @@ class GameController {
   void dispose() => notifier.dispose();
 
   // ----- internals -----
+
+  void _signal(GameEvent event) => onEvent?.call(event);
 
   void _rebuildCellMap() {
     _cellByCoord.clear();

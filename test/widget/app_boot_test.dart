@@ -1,24 +1,10 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hexcalc/app/providers.dart';
-import 'package:hexcalc/features/gameplay/domain/domain.dart';
-import 'package:hexcalc/main.dart';
+import 'package:hexcalc/app/app.dart';
+import 'package:hexcalc/features/gameplay/persistence/app_database.dart'
+    show RunStats;
 
-Ruleset loadRs1() => Ruleset.fromJson(
-  jsonDecode(
-        File('test/contract/fixtures/rulesets/rs-v1.json').readAsStringSync(),
-      )
-      as Map<String, dynamic>,
-);
-
-Widget appUnderTest(Ruleset rs) => ProviderScope(
-  overrides: [rulesetProvider.overrideWithValue(rs)],
-  child: const HexCalcApp(),
-);
+import '../support/harness.dart';
 
 void main() {
   testWidgets('home shows the wordmark and PLAY starts a run', (
@@ -27,7 +13,14 @@ void main() {
     await tester.binding.setSurfaceSize(const Size(400, 720));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    await tester.pumpWidget(appUnderTest(loadRs1()));
+    await tester.pumpWidget(
+      await testScope(
+        // Finite home streams so no live drift query lingers past teardown.
+        homeStats: RunStats.empty,
+        homeRecent: const [],
+        child: const HexCalcApp(),
+      ),
+    );
     await tester.pumpAndSettle();
 
     expect(find.text('HEX • CALC'), findsOneWidget);

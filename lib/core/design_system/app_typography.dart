@@ -2,12 +2,19 @@ import 'package:flutter/widgets.dart';
 
 import 'app_colors.dart';
 
-/// Typography tokens. Space Grotesk (UI) and a mono family (score/timer/equation)
-/// are bundled in a later phase; Phase 3 falls back to the platform families of
-/// the same character so layout and sizing are already tokenized.
+/// Typography tokens. Space Grotesk (UI) and Space Mono (score/timer/equation)
+/// are bundled under `assets/fonts/` (OFL, see the license files there), so
+/// rendering is now consistent across platforms — which also makes goldens
+/// deterministic.
 abstract final class AppTypography {
-  static const String _display = 'SpaceGrotesk';
-  static const String _mono = 'SpaceMono';
+  /// UI/display family (Space Grotesk). Also set as the app-wide default font.
+  static const String uiFamily = 'SpaceGrotesk';
+
+  /// Monospace family (Space Mono) for score/timer/equation glyphs.
+  static const String monoFamily = 'SpaceMono';
+
+  static const String _display = uiFamily;
+  static const String _mono = monoFamily;
 
   /// Large HUD numerics (score, timer) — monospace for stable digit width.
   static const TextStyle hudNumeric = TextStyle(
