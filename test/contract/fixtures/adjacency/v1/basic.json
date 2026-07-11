@@ -1,0 +1,150 @@
+{
+  "cases": [
+    {
+      "description": "single cell",
+      "expected": {
+        "errorCode": null,
+        "valid": true,
+        "violationIndex": null
+      },
+      "id": "adj-basic-001",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        }
+      ]
+    },
+    {
+      "description": "two adjacent cells",
+      "expected": {
+        "errorCode": null,
+        "valid": true,
+        "violationIndex": null
+      },
+      "id": "adj-basic-002",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        }
+      ]
+    },
+    {
+      "description": "straight line of three",
+      "expected": {
+        "errorCode": null,
+        "valid": true,
+        "violationIndex": null
+      },
+      "id": "adj-basic-003",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ]
+    },
+    {
+      "description": "turn through neighbors",
+      "expected": {
+        "errorCode": null,
+        "valid": true,
+        "violationIndex": null
+      },
+      "id": "adj-basic-004",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        }
+      ]
+    },
+    {
+      "description": "longer valid path",
+      "expected": {
+        "errorCode": null,
+        "valid": true,
+        "violationIndex": null
+      },
+      "id": "adj-basic-005",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ]
+    },
+    {
+      "description": "empty path",
+      "expected": {
+        "errorCode": "PATH_EMPTY",
+        "valid": false,
+        "violationIndex": null
+      },
+      "id": "adj-basic-006",
+      "path": []
+    },
+    {
+      "description": "valid path exercising direction index 1 (1,-1)",
+      "expected": {
+        "errorCode": null,
+        "valid": true,
+        "violationIndex": null
+      },
+      "id": "adj-basic-007",
+      "path": [
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": -1
+        }
+      ]
+    }
+  ],
+  "contract": "adjacency",
+  "version": "v1"
+}

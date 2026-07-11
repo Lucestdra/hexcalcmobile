@@ -1,0 +1,23 @@
+# Normalize all text to LF in the repo and on checkout, regardless of
+# core.autocrlf. Critical: the synced gameplay golden fixtures are validated by a
+# byte-exact SHA-256 manifest, so any CRLF conversion would break the guard on
+# Windows checkouts.
+* text=auto eol=lf
+
+# Synced golden fixtures + manifest: LF-locked (byte-exact SHA-256 contract).
+test/contract/fixtures/**/*.json text eol=lf
+test/contract/fixtures/manifest.sha256 text eol=lf
+
+# Shell scripts must stay LF.
+*.sh text eol=lf
+
+# Common binaries: never touch.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary

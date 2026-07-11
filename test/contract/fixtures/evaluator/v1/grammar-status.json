@@ -1,0 +1,67 @@
+{
+  "cases": [
+    {
+      "description": "5 = 5 (no operator)",
+      "expected": {
+        "errorCode": "NO_OPERATOR",
+        "leftHandValue": null,
+        "resultValue": null,
+        "status": "grammarError"
+      },
+      "id": "eval-grammar-001",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "2 + = 2 (operator missing operand)",
+      "expected": {
+        "errorCode": "OPERATOR_MISSING_OPERAND",
+        "leftHandValue": null,
+        "resultValue": null,
+        "status": "grammarError"
+      },
+      "id": "eval-grammar-002",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "description": "empty token stream",
+      "expected": {
+        "errorCode": "EMPTY",
+        "leftHandValue": null,
+        "resultValue": null,
+        "status": "grammarError"
+      },
+      "id": "eval-grammar-003",
+      "tokens": []
+    }
+  ],
+  "contract": "evaluator",
+  "version": "v1"
+}

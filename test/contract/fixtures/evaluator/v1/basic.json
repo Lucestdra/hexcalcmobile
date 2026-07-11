@@ -1,0 +1,324 @@
+{
+  "cases": [
+    {
+      "description": "2 + 3 = 5",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 5,
+        "resultValue": 5,
+        "status": "valid"
+      },
+      "id": "eval-basic-001",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "10 - 4 = 6",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 6,
+        "resultValue": 6,
+        "status": "valid"
+      },
+      "id": "eval-basic-002",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 10
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "description": "3 * 4 = 12",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 12,
+        "resultValue": 12,
+        "status": "valid"
+      },
+      "id": "eval-basic-003",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "description": "8 / 2 = 4",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 4,
+        "resultValue": 4,
+        "status": "valid"
+      },
+      "id": "eval-basic-004",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 8
+        },
+        {
+          "kind": "operator",
+          "operator": "divide"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "description": "0 + 0 = 0",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 0,
+        "resultValue": 0,
+        "status": "valid"
+      },
+      "id": "eval-basic-005",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "9 - 9 = 0 (subtract to exactly zero is allowed)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 0,
+        "resultValue": 0,
+        "status": "valid"
+      },
+      "id": "eval-basic-006",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 9
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 9
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "1 * 1 = 1",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 1,
+        "resultValue": 1,
+        "status": "valid"
+      },
+      "id": "eval-basic-007",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "description": "5 + 5 + 5 = 15",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 15,
+        "resultValue": 15,
+        "status": "valid"
+      },
+      "id": "eval-basic-008",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "description": "0 * 5 = 0 (exercises the a!=0 short-circuit in mulOverflows)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 0,
+        "resultValue": 0,
+        "status": "valid"
+      },
+      "id": "eval-basic-009",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "9223372036854775807 * 0 = 0 (huge term times zero, no false overflow)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 0,
+        "resultValue": 0,
+        "status": "valid"
+      },
+      "id": "eval-basic-010",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 9223372036854775807
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "contract": "evaluator",
+  "version": "v1"
+}

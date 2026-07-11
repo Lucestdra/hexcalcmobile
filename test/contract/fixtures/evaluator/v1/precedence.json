@@ -1,0 +1,404 @@
+{
+  "cases": [
+    {
+      "description": "2 + 3 * 4 = 14 (multiply binds first)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 14,
+        "resultValue": 14,
+        "status": "valid"
+      },
+      "id": "eval-precedence-001",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 14
+        }
+      ]
+    },
+    {
+      "description": "2 * 3 + 4 = 10",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 10,
+        "resultValue": 10,
+        "status": "valid"
+      },
+      "id": "eval-precedence-002",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "description": "10 - 2 * 3 = 4",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 4,
+        "resultValue": 4,
+        "status": "valid"
+      },
+      "id": "eval-precedence-003",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 10
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "description": "2 + 3 * 4 = 20 (mismatch, lhs is 14)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 14,
+        "resultValue": 20,
+        "status": "resultMismatch"
+      },
+      "id": "eval-precedence-004",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "description": "12 / 2 / 3 = 2 (left associative)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 2,
+        "resultValue": 2,
+        "status": "valid"
+      },
+      "id": "eval-precedence-005",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 12
+        },
+        {
+          "kind": "operator",
+          "operator": "divide"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "divide"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "description": "2 * 3 * 4 = 24",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 24,
+        "resultValue": 24,
+        "status": "valid"
+      },
+      "id": "eval-precedence-006",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 24
+        }
+      ]
+    },
+    {
+      "description": "1 + 2 * 3 + 4 = 11",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 11,
+        "resultValue": 11,
+        "status": "valid"
+      },
+      "id": "eval-precedence-007",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 11
+        }
+      ]
+    },
+    {
+      "description": "20 / 4 + 3 = 8",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 8,
+        "resultValue": 8,
+        "status": "valid"
+      },
+      "id": "eval-precedence-008",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 20
+        },
+        {
+          "kind": "operator",
+          "operator": "divide"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "description": "6 + 6 / 3 = 8",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 8,
+        "resultValue": 8,
+        "status": "valid"
+      },
+      "id": "eval-precedence-009",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 6
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 6
+        },
+        {
+          "kind": "operator",
+          "operator": "divide"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "description": "100 - 10 * 9 = 10",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 10,
+        "resultValue": 10,
+        "status": "valid"
+      },
+      "id": "eval-precedence-010",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 100
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 10
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 9
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 10
+        }
+      ]
+    }
+  ],
+  "contract": "evaluator",
+  "version": "v1"
+}

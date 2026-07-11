@@ -1,0 +1,279 @@
+{
+  "cases": [
+    {
+      "description": "2 - 5 + 10 = 7 (negative intermediate at 2-5)",
+      "expected": {
+        "errorCode": "NEGATIVE_INTERMEDIATE",
+        "leftHandValue": null,
+        "resultValue": 7,
+        "status": "arithmeticError"
+      },
+      "id": "eval-negative-001",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 10
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "description": "3 - 5 = 0 (final negative)",
+      "expected": {
+        "errorCode": "NEGATIVE_INTERMEDIATE",
+        "leftHandValue": null,
+        "resultValue": 0,
+        "status": "arithmeticError"
+      },
+      "id": "eval-negative-002",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "5 - 3 - 2 = 0",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 0,
+        "resultValue": 0,
+        "status": "valid"
+      },
+      "id": "eval-negative-003",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "5 - 3 - 4 = 0 (negative at second step)",
+      "expected": {
+        "errorCode": "NEGATIVE_INTERMEDIATE",
+        "leftHandValue": null,
+        "resultValue": 0,
+        "status": "arithmeticError"
+      },
+      "id": "eval-negative-004",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "1 - 2 * 3 = 5 (precedence makes 1 - 6)",
+      "expected": {
+        "errorCode": "NEGATIVE_INTERMEDIATE",
+        "leftHandValue": null,
+        "resultValue": 5,
+        "status": "arithmeticError"
+      },
+      "id": "eval-negative-005",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "10 - 4 - 3 - 2 - 1 = 0",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 0,
+        "resultValue": 0,
+        "status": "valid"
+      },
+      "id": "eval-negative-006",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 10
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "0 - 1 = 0",
+      "expected": {
+        "errorCode": "NEGATIVE_INTERMEDIATE",
+        "leftHandValue": null,
+        "resultValue": 0,
+        "status": "arithmeticError"
+      },
+      "id": "eval-negative-007",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "contract": "evaluator",
+  "version": "v1"
+}

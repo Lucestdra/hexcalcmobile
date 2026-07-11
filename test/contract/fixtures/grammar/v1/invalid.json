@@ -1,0 +1,423 @@
+{
+  "cases": [
+    {
+      "description": "empty stream",
+      "expected": {
+        "errorCode": "EMPTY",
+        "valid": false
+      },
+      "id": "gram-invalid-empty",
+      "tokens": []
+    },
+    {
+      "description": "2 + 3 (no equals)",
+      "expected": {
+        "errorCode": "EQUALS_MISSING",
+        "valid": false
+      },
+      "id": "gram-invalid-equals-missing",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "description": "2 + 3 = 5 = 5",
+      "expected": {
+        "errorCode": "EQUALS_MULTIPLE",
+        "valid": false
+      },
+      "id": "gram-invalid-equals-multiple",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "2 + 3 = (nothing after equals)",
+      "expected": {
+        "errorCode": "RESULT_MISSING",
+        "valid": false
+      },
+      "id": "gram-invalid-result-missing",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        }
+      ]
+    },
+    {
+      "description": "= (result checked before left)",
+      "expected": {
+        "errorCode": "RESULT_MISSING",
+        "valid": false
+      },
+      "id": "gram-invalid-only-equals",
+      "tokens": [
+        {
+          "kind": "equals"
+        }
+      ]
+    },
+    {
+      "description": "2 + 3 = 5 5",
+      "expected": {
+        "errorCode": "RESULT_MULTIPLE",
+        "valid": false
+      },
+      "id": "gram-invalid-result-multiple",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "2 + 3 = + (operator as result)",
+      "expected": {
+        "errorCode": "RESULT_NOT_NUMBER",
+        "valid": false
+      },
+      "id": "gram-invalid-result-not-number",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        }
+      ]
+    },
+    {
+      "description": "= 5 (equals first, valid result)",
+      "expected": {
+        "errorCode": "LEFT_EMPTY",
+        "valid": false
+      },
+      "id": "gram-invalid-left-empty",
+      "tokens": [
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "+ 2 = 2 (starts with operator)",
+      "expected": {
+        "errorCode": "MUST_START_WITH_NUMBER",
+        "valid": false
+      },
+      "id": "gram-invalid-must-start",
+      "tokens": [
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "description": "2 + + 3 = 5",
+      "expected": {
+        "errorCode": "CONSECUTIVE_OPERATORS",
+        "valid": false
+      },
+      "id": "gram-invalid-consecutive-ops",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "2 3 + 4 = 9",
+      "expected": {
+        "errorCode": "CONSECUTIVE_NUMBERS",
+        "valid": false
+      },
+      "id": "gram-invalid-consecutive-nums",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "description": "2 + = 2",
+      "expected": {
+        "errorCode": "OPERATOR_MISSING_OPERAND",
+        "valid": false
+      },
+      "id": "gram-invalid-operator-missing-operand",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "description": "5 = 5",
+      "expected": {
+        "errorCode": "NO_OPERATOR",
+        "valid": false
+      },
+      "id": "gram-invalid-no-operator",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "2 + 3 = + 5 (rhs length beats non-number rhs[0])",
+      "expected": {
+        "errorCode": "RESULT_MULTIPLE",
+        "valid": false
+      },
+      "id": "gram-invalid-result-multiple-nonnumber",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "2 = 3 + 4 (rhs checked before lhs NO_OPERATOR)",
+      "expected": {
+        "errorCode": "RESULT_MULTIPLE",
+        "valid": false
+      },
+      "id": "gram-invalid-result-multiple-lone-lhs",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "description": "+ 2 (equals count beats MUST_START_WITH_NUMBER)",
+      "expected": {
+        "errorCode": "EQUALS_MISSING",
+        "valid": false
+      },
+      "id": "gram-invalid-equals-missing-malformed-lhs",
+      "tokens": [
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "description": "= = (equals count beats split/RHS/LHS checks)",
+      "expected": {
+        "errorCode": "EQUALS_MULTIPLE",
+        "valid": false
+      },
+      "id": "gram-invalid-equals-multiple-empty-sides",
+      "tokens": [
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "equals"
+        }
+      ]
+    }
+  ],
+  "contract": "grammar",
+  "version": "v1"
+}

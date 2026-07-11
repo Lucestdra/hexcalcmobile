@@ -1,0 +1,22 @@
+{
+  "algorithm": "SHA-256",
+  "contracts": {
+    "adjacency": "v1",
+    "evaluator": "v1",
+    "grammar": "v1"
+  },
+  "files": {
+    "adjacency/v1/basic.json": "b5cf5f0c4b699f3f49c3537ad4e6c0c6919709fc0aef5da13a4bee46aacceefe",
+    "adjacency/v1/violations.json": "3ece69828b92b2b5ada8b19e4a217352f19497fce4b33ed19112ec9973a56aff",
+    "evaluator/v1/basic.json": "3297cc225150d6dedb20103b977e8880318d3909c578ede8196ce2a657164921",
+    "evaluator/v1/division.json": "e10aaa3729ce3d1b54e42be51da954b5fb9e9f8596ee296625b12970eb052440",
+    "evaluator/v1/grammar-status.json": "3733a9550bb29e9fd663326a67d0525f8e76771e41344571c92f065d4aa7ab1b",
+    "evaluator/v1/mismatch.json": "c8ac614d16dced423905096a4c14bc0b5d24ec4ca350fdbbfd30713977e25775",
+    "evaluator/v1/negative-intermediate.json": "dd6ddbc42cb8ef4285494d4d518c28a7a02aebc2cd6274d0779410205de9322f",
+    "evaluator/v1/overflow.json": "0d8f64ff690b67dc882629d70f19634afd4592ea3397e1222b4fb04f01359ba6",
+    "evaluator/v1/precedence.json": "bb92cb325d56102862e3dd76a0302f4949f9c4fa2d72e9682f14b3d4066c399a",
+    "grammar/v1/invalid.json": "abdb99b76c81b8427c6899b92b10632e88656140d41846e7e2244dd8560b6e3a",
+    "grammar/v1/valid.json": "590e0358354029bc027ddcb3a24bd1205733c59aee2ae69bf79fce8ef341de11"
+  },
+  "generatedBy": "HexCalc.Tools.FixtureGen"
+}

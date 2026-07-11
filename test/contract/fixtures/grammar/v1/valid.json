@@ -1,0 +1,249 @@
+{
+  "cases": [
+    {
+      "description": "2 + 3 = 5",
+      "expected": {
+        "errorCode": null,
+        "valid": true
+      },
+      "id": "gram-valid-001",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "2 + 3 * 4 = 14 (grammar valid regardless of arithmetic)",
+      "expected": {
+        "errorCode": null,
+        "valid": true
+      },
+      "id": "gram-valid-002",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 14
+        }
+      ]
+    },
+    {
+      "description": "1 - 2 = 99 (grammar valid even if arithmetic would fail)",
+      "expected": {
+        "errorCode": null,
+        "valid": true
+      },
+      "id": "gram-valid-003",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 99
+        }
+      ]
+    },
+    {
+      "description": "5 * 5 * 5 = 0",
+      "expected": {
+        "errorCode": null,
+        "valid": true
+      },
+      "id": "gram-valid-004",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "100 / 5 = 20",
+      "expected": {
+        "errorCode": null,
+        "valid": true
+      },
+      "id": "gram-valid-005",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 100
+        },
+        {
+          "kind": "operator",
+          "operator": "divide"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "description": "0 + 0 = 0",
+      "expected": {
+        "errorCode": null,
+        "valid": true
+      },
+      "id": "gram-valid-006",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "1 + 1 + 1 + 1 + 1 = 5",
+      "expected": {
+        "errorCode": null,
+        "valid": true
+      },
+      "id": "gram-valid-007",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    }
+  ],
+  "contract": "grammar",
+  "version": "v1"
+}

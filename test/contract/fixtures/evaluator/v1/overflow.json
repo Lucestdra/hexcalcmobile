@@ -1,0 +1,340 @@
+{
+  "cases": [
+    {
+      "description": "Int64Max * 2 overflows",
+      "expected": {
+        "errorCode": "OVERFLOW",
+        "leftHandValue": null,
+        "resultValue": 0,
+        "status": "arithmeticError"
+      },
+      "id": "eval-overflow-001",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 9223372036854775807
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "Int64Max + 1 overflows",
+      "expected": {
+        "errorCode": "OVERFLOW",
+        "leftHandValue": null,
+        "resultValue": 0,
+        "status": "arithmeticError"
+      },
+      "id": "eval-overflow-002",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 9223372036854775807
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "(Int64Max - 1) + 1 = Int64Max (boundary, no overflow)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 9223372036854775807,
+        "resultValue": 9223372036854775807,
+        "status": "valid"
+      },
+      "id": "eval-overflow-003",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 9223372036854775806
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 9223372036854775807
+        }
+      ]
+    },
+    {
+      "description": "4611686018427387904 * 2 overflows (Int64Max+1)",
+      "expected": {
+        "errorCode": "OVERFLOW",
+        "leftHandValue": null,
+        "resultValue": 0,
+        "status": "arithmeticError"
+      },
+      "id": "eval-overflow-004",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 4611686018427387904
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "1000000000 * 1000000000 = 1000000000000000000 (safe)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 1000000000000000000,
+        "resultValue": 1000000000000000000,
+        "status": "valid"
+      },
+      "id": "eval-overflow-005",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 1000000000
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 1000000000
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 1000000000000000000
+        }
+      ]
+    },
+    {
+      "description": "3 * 3074457345618258602 = 9223372036854775806 (exact mul boundary b == MAX/3, no overflow)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 9223372036854775806,
+        "resultValue": 9223372036854775806,
+        "status": "valid"
+      },
+      "id": "eval-overflow-006",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 3074457345618258602
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 9223372036854775806
+        }
+      ]
+    },
+    {
+      "description": "3 * 3074457345618258603 overflows (just past MAX/3 boundary)",
+      "expected": {
+        "errorCode": "OVERFLOW",
+        "leftHandValue": null,
+        "resultValue": 0,
+        "status": "arithmeticError"
+      },
+      "id": "eval-overflow-007",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 3074457345618258603
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "4611686018427387903 * 2 + 2 = 0 (add overflows after a near-MAX multiply)",
+      "expected": {
+        "errorCode": "OVERFLOW",
+        "leftHandValue": null,
+        "resultValue": 0,
+        "status": "arithmeticError"
+      },
+      "id": "eval-overflow-008",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 4611686018427387903
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "description": "4611686018427387903 * 2 + 1 = 9223372036854775807 (add just under the boundary, valid)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 9223372036854775807,
+        "resultValue": 9223372036854775807,
+        "status": "valid"
+      },
+      "id": "eval-overflow-009",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 4611686018427387903
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 9223372036854775807
+        }
+      ]
+    },
+    {
+      "description": "5 + 4611686018427387904 * 2 = 0 (multiply overflow on a non-first term)",
+      "expected": {
+        "errorCode": "OVERFLOW",
+        "leftHandValue": null,
+        "resultValue": 0,
+        "status": "arithmeticError"
+      },
+      "id": "eval-overflow-010",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 4611686018427387904
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "contract": "evaluator",
+  "version": "v1"
+}

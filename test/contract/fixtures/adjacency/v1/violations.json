@@ -1,0 +1,240 @@
+{
+  "cases": [
+    {
+      "description": "gap of two on first step",
+      "expected": {
+        "errorCode": "NOT_ADJACENT",
+        "valid": false,
+        "violationIndex": 1
+      },
+      "id": "adj-not-adjacent-001",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ]
+    },
+    {
+      "description": "gap on third cell",
+      "expected": {
+        "errorCode": "NOT_ADJACENT",
+        "valid": false,
+        "violationIndex": 2
+      },
+      "id": "adj-not-adjacent-002",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 3,
+          "r": 0
+        }
+      ]
+    },
+    {
+      "description": "repeat that is also not adjacent -> adjacency reported first",
+      "expected": {
+        "errorCode": "NOT_ADJACENT",
+        "valid": false,
+        "violationIndex": 1
+      },
+      "id": "adj-not-adjacent-003",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 0
+        }
+      ]
+    },
+    {
+      "description": "back to start",
+      "expected": {
+        "errorCode": "REPEATED_CELL",
+        "valid": false,
+        "violationIndex": 2
+      },
+      "id": "adj-repeated-001",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 0
+        }
+      ]
+    },
+    {
+      "description": "triangle closing on start",
+      "expected": {
+        "errorCode": "REPEATED_CELL",
+        "valid": false,
+        "violationIndex": 3
+      },
+      "id": "adj-repeated-002",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 0
+        }
+      ]
+    },
+    {
+      "description": "revisit an earlier middle cell",
+      "expected": {
+        "errorCode": "REPEATED_CELL",
+        "valid": false,
+        "violationIndex": 3
+      },
+      "id": "adj-repeated-003",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        }
+      ]
+    },
+    {
+      "description": "cube-diagonal (1,1) is not a neighbor",
+      "expected": {
+        "errorCode": "NOT_ADJACENT",
+        "valid": false,
+        "violationIndex": 1
+      },
+      "id": "adj-not-adjacent-diagonal-pos",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        }
+      ]
+    },
+    {
+      "description": "cube-diagonal (-1,-1) is not a neighbor",
+      "expected": {
+        "errorCode": "NOT_ADJACENT",
+        "valid": false,
+        "violationIndex": 1
+      },
+      "id": "adj-not-adjacent-diagonal-neg",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": -1
+        }
+      ]
+    },
+    {
+      "description": "delta spanning the Int32 boundary must not wrap (C#/Dart parity)",
+      "expected": {
+        "errorCode": "NOT_ADJACENT",
+        "valid": false,
+        "violationIndex": 1
+      },
+      "id": "adj-not-adjacent-int32-boundary",
+      "path": [
+        {
+          "q": 2147483647,
+          "r": 0
+        },
+        {
+          "q": -2147483648,
+          "r": 0
+        }
+      ]
+    },
+    {
+      "description": "ring closing on start; covers all six adjacent deltas then REPEATED_CELL",
+      "expected": {
+        "errorCode": "REPEATED_CELL",
+        "valid": false,
+        "violationIndex": 6
+      },
+      "id": "adj-ring-all-directions",
+      "path": [
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 0
+        }
+      ]
+    }
+  ],
+  "contract": "adjacency",
+  "version": "v1"
+}

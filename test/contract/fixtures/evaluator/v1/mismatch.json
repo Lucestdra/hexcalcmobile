@@ -1,0 +1,99 @@
+{
+  "cases": [
+    {
+      "description": "2 + 2 = 5 (lhs 4)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 4,
+        "resultValue": 5,
+        "status": "resultMismatch"
+      },
+      "id": "eval-mismatch-001",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "description": "3 * 3 = 10 (lhs 9)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 9,
+        "resultValue": 10,
+        "status": "resultMismatch"
+      },
+      "id": "eval-mismatch-002",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "description": "10 / 2 = 4 (lhs 5)",
+      "expected": {
+        "errorCode": null,
+        "leftHandValue": 5,
+        "resultValue": 4,
+        "status": "resultMismatch"
+      },
+      "id": "eval-mismatch-003",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 10
+        },
+        {
+          "kind": "operator",
+          "operator": "divide"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "contract": "evaluator",
+  "version": "v1"
+}
