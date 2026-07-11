@@ -1,0 +1,637 @@
+{
+  "boards": [
+    {
+      "attemptsUsed": 27,
+      "boardRadius": 2,
+      "cells": [
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 1,
+          "value": 7
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 2,
+          "value": 2
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": -1,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "divide",
+          "q": -1,
+          "r": 0
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": 1,
+          "value": 7
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply",
+          "q": -1,
+          "r": 2
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": -2,
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 0,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 0,
+          "value": 7
+        },
+        {
+          "kind": "operator",
+          "operator": "divide",
+          "q": 0,
+          "r": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "divide",
+          "q": 0,
+          "r": 2
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": -2,
+          "value": 5
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": -1,
+          "value": 7
+        },
+        {
+          "kind": "equals",
+          "q": 1,
+          "r": 0
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": 1,
+          "value": 2
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -2,
+          "value": 4
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -1,
+          "value": 8
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": 0,
+          "value": 6
+        }
+      ],
+      "generatorVersion": "gen-v1",
+      "levelIndex": 0,
+      "rulesetVersion": "rs-v1",
+      "sampleSolutions": [
+        [
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 1,
+            "r": -1
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": -1
+          }
+        ],
+        [
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": -1
+          }
+        ],
+        [
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 1,
+            "r": -1
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": -1
+          }
+        ]
+      ],
+      "seed": "foxtrot",
+      "target": 8,
+      "usedFallback": false
+    },
+    {
+      "attemptsUsed": 25,
+      "boardRadius": 2,
+      "cells": [
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -2,
+          "r": 0
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 1,
+          "value": 4
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 2,
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": -1,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": 0,
+          "value": 3
+        },
+        {
+          "kind": "equals",
+          "q": -1,
+          "r": 1
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": 2,
+          "value": 8
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": -2,
+          "value": 5
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": -1,
+          "value": 3
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 0,
+          "value": 7
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": 0,
+          "r": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 0,
+          "r": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": 1,
+          "r": -2
+        },
+        {
+          "kind": "equals",
+          "q": 1,
+          "r": -1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 1,
+          "r": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": 1,
+          "r": 1
+        },
+        {
+          "kind": "equals",
+          "q": 2,
+          "r": -2
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -1,
+          "value": 2
+        },
+        {
+          "kind": "equals",
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "generatorVersion": "gen-v1",
+      "levelIndex": 1,
+      "rulesetVersion": "rs-v1",
+      "sampleSolutions": [
+        [
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 0
+          }
+        ],
+        [
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 0
+          }
+        ],
+        [
+          {
+            "q": -1,
+            "r": 2
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": -1
+          },
+          {
+            "q": 1,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -1
+          }
+        ]
+      ],
+      "seed": "foxtrot",
+      "target": 7,
+      "usedFallback": false
+    },
+    {
+      "attemptsUsed": 3,
+      "boardRadius": 2,
+      "cells": [
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "divide",
+          "q": -2,
+          "r": 1
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 2,
+          "value": 2
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": -1,
+          "value": 6
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 0
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": 1,
+          "value": 8
+        },
+        {
+          "kind": "equals",
+          "q": -1,
+          "r": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 0,
+          "r": -2
+        },
+        {
+          "kind": "equals",
+          "q": 0,
+          "r": -1
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": 0,
+          "r": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 0,
+          "r": 1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 2,
+          "value": 5
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": -2,
+          "value": 4
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": -1,
+          "value": 9
+        },
+        {
+          "kind": "operator",
+          "operator": "divide",
+          "q": 1,
+          "r": 0
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": 1,
+          "value": 2
+        },
+        {
+          "kind": "equals",
+          "q": 2,
+          "r": -2
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -1,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": 0,
+          "value": 1
+        }
+      ],
+      "generatorVersion": "gen-v1",
+      "levelIndex": 2,
+      "rulesetVersion": "rs-v1",
+      "sampleSolutions": [
+        [
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -2,
+            "r": 2
+          },
+          {
+            "q": -1,
+            "r": 2
+          },
+          {
+            "q": 0,
+            "r": 2
+          }
+        ],
+        [
+          {
+            "q": 0,
+            "r": 2
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": -1
+          },
+          {
+            "q": 2,
+            "r": -2
+          },
+          {
+            "q": 1,
+            "r": -2
+          }
+        ],
+        [
+          {
+            "q": 0,
+            "r": 2
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 1,
+            "r": -2
+          }
+        ]
+      ],
+      "seed": "foxtrot",
+      "target": 5,
+      "usedFallback": false
+    }
+  ],
+  "generatorVersion": "gen-v1",
+  "rulesetVersion": "rs-v1",
+  "seed": "foxtrot"
+}

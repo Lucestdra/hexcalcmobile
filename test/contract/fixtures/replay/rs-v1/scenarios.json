@@ -1,0 +1,1098 @@
+{
+  "cases": [
+    {
+      "description": "one correct single-operator add equation",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        }
+      ],
+      "expected": {
+        "comboCount": 1,
+        "consecutiveCorrect": 1,
+        "equationsThisLevel": 1,
+        "feverActive": false,
+        "feverEnergy": 1,
+        "level": 0,
+        "runningTotals": [
+          100
+        ],
+        "totalScore": 100
+      },
+      "id": "replay-single-add"
+    },
+    {
+      "description": "two correct adds within the combo window (spec 7 example)",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1000
+        }
+      ],
+      "expected": {
+        "comboCount": 2,
+        "consecutiveCorrect": 2,
+        "equationsThisLevel": 2,
+        "feverActive": false,
+        "feverEnergy": 2,
+        "level": 0,
+        "runningTotals": [
+          100,
+          246
+        ],
+        "totalScore": 246
+      },
+      "id": "replay-combo-two-adds"
+    },
+    {
+      "description": "second correct after the combo window resets the combo",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 5000
+        }
+      ],
+      "expected": {
+        "comboCount": 1,
+        "consecutiveCorrect": 2,
+        "equationsThisLevel": 2,
+        "feverActive": false,
+        "feverEnergy": 2,
+        "level": 0,
+        "runningTotals": [
+          100,
+          200
+        ],
+        "totalScore": 200
+      },
+      "id": "replay-combo-break-time"
+    },
+    {
+      "description": "a wrong equation breaks the combo",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": false,
+          "matchedTarget": false,
+          "operators": [],
+          "tMs": 500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1000
+        }
+      ],
+      "expected": {
+        "comboCount": 1,
+        "consecutiveCorrect": 1,
+        "equationsThisLevel": 2,
+        "feverActive": false,
+        "feverEnergy": 1,
+        "level": 0,
+        "runningTotals": [
+          100,
+          100,
+          233
+        ],
+        "totalScore": 233
+      },
+      "id": "replay-combo-break-wrong"
+    },
+    {
+      "description": "matching the target doubles the score",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": true,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        }
+      ],
+      "expected": {
+        "comboCount": 1,
+        "consecutiveCorrect": 1,
+        "equationsThisLevel": 1,
+        "feverActive": false,
+        "feverEnergy": 1,
+        "level": 0,
+        "runningTotals": [
+          200
+        ],
+        "totalScore": 200
+      },
+      "id": "replay-target-match"
+    },
+    {
+      "description": "a fast second equation earns a large speed bonus",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 200
+        }
+      ],
+      "expected": {
+        "comboCount": 2,
+        "consecutiveCorrect": 2,
+        "equationsThisLevel": 2,
+        "feverActive": false,
+        "feverEnergy": 2,
+        "level": 0,
+        "runningTotals": [
+          100,
+          260
+        ],
+        "totalScore": 260
+      },
+      "id": "replay-speed-fast"
+    },
+    {
+      "description": "a divide equation earns the operator difficulty bonus",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "divide"
+          ],
+          "tMs": 0
+        }
+      ],
+      "expected": {
+        "comboCount": 1,
+        "consecutiveCorrect": 1,
+        "equationsThisLevel": 1,
+        "feverActive": false,
+        "feverEnergy": 1,
+        "level": 0,
+        "runningTotals": [
+          115
+        ],
+        "totalScore": 115
+      },
+      "id": "replay-operator-divide"
+    },
+    {
+      "description": "a two-operator equation earns a length bonus",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add",
+            "multiply"
+          ],
+          "tMs": 0
+        }
+      ],
+      "expected": {
+        "comboCount": 1,
+        "consecutiveCorrect": 1,
+        "equationsThisLevel": 1,
+        "feverActive": false,
+        "feverEnergy": 1,
+        "level": 0,
+        "runningTotals": [
+          130
+        ],
+        "totalScore": 130
+      },
+      "id": "replay-length-bonus"
+    },
+    {
+      "description": "eight consecutive correct equations ignite Fever",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3500
+        }
+      ],
+      "expected": {
+        "comboCount": 8,
+        "consecutiveCorrect": 8,
+        "equationsThisLevel": 3,
+        "feverActive": true,
+        "feverEnergy": 0,
+        "level": 1,
+        "runningTotals": [
+          100,
+          255,
+          424,
+          607,
+          804,
+          1015,
+          1240,
+          1479
+        ],
+        "totalScore": 1479
+      },
+      "id": "replay-fever-ignite"
+    },
+    {
+      "description": "an equation during Fever scores double",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 4000
+        }
+      ],
+      "expected": {
+        "comboCount": 9,
+        "consecutiveCorrect": 9,
+        "equationsThisLevel": 4,
+        "feverActive": true,
+        "feverEnergy": 0,
+        "level": 1,
+        "runningTotals": [
+          100,
+          255,
+          424,
+          607,
+          804,
+          1015,
+          1240,
+          1479,
+          1986
+        ],
+        "totalScore": 1986
+      },
+      "id": "replay-fever-scoring"
+    },
+    {
+      "description": "Fever expires before a much later equation is scored",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 25000
+        }
+      ],
+      "expected": {
+        "comboCount": 1,
+        "consecutiveCorrect": 9,
+        "equationsThisLevel": 4,
+        "feverActive": false,
+        "feverEnergy": 1,
+        "level": 1,
+        "runningTotals": [
+          100,
+          255,
+          424,
+          607,
+          804,
+          1015,
+          1240,
+          1479,
+          1579
+        ],
+        "totalScore": 1579
+      },
+      "id": "replay-fever-expiry"
+    },
+    {
+      "description": "a wrong equation outside Fever drains stored energy",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2000
+        },
+        {
+          "correct": false,
+          "matchedTarget": false,
+          "operators": [],
+          "tMs": 2500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3000
+        }
+      ],
+      "expected": {
+        "comboCount": 1,
+        "consecutiveCorrect": 1,
+        "equationsThisLevel": 1,
+        "feverActive": false,
+        "feverEnergy": 2,
+        "level": 1,
+        "runningTotals": [
+          100,
+          255,
+          424,
+          607,
+          804,
+          804,
+          937
+        ],
+        "totalScore": 937
+      },
+      "id": "replay-wrong-drains-energy"
+    },
+    {
+      "description": "a wrong equation during Fever does not end Fever",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3500
+        },
+        {
+          "correct": false,
+          "matchedTarget": false,
+          "operators": [],
+          "tMs": 4000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 4500
+        }
+      ],
+      "expected": {
+        "comboCount": 1,
+        "consecutiveCorrect": 1,
+        "equationsThisLevel": 4,
+        "feverActive": true,
+        "feverEnergy": 0,
+        "level": 1,
+        "runningTotals": [
+          100,
+          255,
+          424,
+          607,
+          804,
+          1015,
+          1240,
+          1479,
+          1479,
+          1745
+        ],
+        "totalScore": 1745
+      },
+      "id": "replay-wrong-during-fever"
+    },
+    {
+      "description": "five correct equations complete level 0",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2000
+        }
+      ],
+      "expected": {
+        "comboCount": 5,
+        "consecutiveCorrect": 5,
+        "equationsThisLevel": 0,
+        "feverActive": false,
+        "feverEnergy": 5,
+        "level": 1,
+        "runningTotals": [
+          100,
+          255,
+          424,
+          607,
+          804
+        ],
+        "totalScore": 804
+      },
+      "id": "replay-level-progression"
+    },
+    {
+      "description": "a mixed run: target match, combo, speed, a wrong, then recovery",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": true,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "multiply"
+          ],
+          "tMs": 400
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "subtract",
+            "add"
+          ],
+          "tMs": 800
+        },
+        {
+          "correct": false,
+          "matchedTarget": false,
+          "operators": [],
+          "tMs": 2000
+        },
+        {
+          "correct": true,
+          "matchedTarget": true,
+          "operators": [
+            "divide"
+          ],
+          "tMs": 2400
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 9000
+        }
+      ],
+      "expected": {
+        "comboCount": 1,
+        "consecutiveCorrect": 2,
+        "equationsThisLevel": 0,
+        "feverActive": false,
+        "feverEnergy": 2,
+        "level": 1,
+        "runningTotals": [
+          200,
+          368,
+          569,
+          569,
+          845,
+          945
+        ],
+        "totalScore": 945
+      },
+      "id": "replay-mixed"
+    },
+    {
+      "description": "twelve fast correct equations saturate the combo multiplier at its cap",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 300
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 600
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 900
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1200
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1800
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2100
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2400
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2700
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3300
+        }
+      ],
+      "expected": {
+        "comboCount": 12,
+        "consecutiveCorrect": 12,
+        "equationsThisLevel": 1,
+        "feverActive": true,
+        "feverEnergy": 0,
+        "level": 2,
+        "runningTotals": [
+          100,
+          259,
+          433,
+          621,
+          824,
+          1041,
+          1273,
+          1519,
+          2041,
+          2592,
+          3172,
+          3752
+        ],
+        "totalScore": 3752
+      },
+      "id": "replay-combo-cap"
+    },
+    {
+      "description": "eleven correct equations clear level 0 then level 1 (growthPerLevel)",
+      "events": [
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 0
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 1500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 2500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 3500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 4000
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 4500
+        },
+        {
+          "correct": true,
+          "matchedTarget": false,
+          "operators": [
+            "add"
+          ],
+          "tMs": 5000
+        }
+      ],
+      "expected": {
+        "comboCount": 11,
+        "consecutiveCorrect": 11,
+        "equationsThisLevel": 0,
+        "feverActive": true,
+        "feverEnergy": 0,
+        "level": 2,
+        "runningTotals": [
+          100,
+          255,
+          424,
+          607,
+          804,
+          1015,
+          1240,
+          1479,
+          1986,
+          2521,
+          3085
+        ],
+        "totalScore": 3085
+      },
+      "id": "replay-two-levels"
+    }
+  ],
+  "rulesetVersion": "rs-v1"
+}

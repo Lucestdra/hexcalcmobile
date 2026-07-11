@@ -1,0 +1,35 @@
+{
+  "combo": {
+    "windowMs": 4000
+  },
+  "fever": {
+    "durationMs": 20000,
+    "multiplierPercent": 200,
+    "threshold": 8,
+    "wrongEnergyPenalty": 4
+  },
+  "level": {
+    "equationsToComplete": 5,
+    "growthPerLevel": 1
+  },
+  "rulesetVersion": "rs-v1",
+  "run": {
+    "durationMs": 60000
+  },
+  "scoring": {
+    "baseEquationScore": 100,
+    "comboBasePercent": 100,
+    "comboMaxPercent": 200,
+    "comboStepPercent": 10,
+    "lengthBonusPerUnit": 20,
+    "operatorDifficultyBonus": {
+      "add": 0,
+      "divide": 15,
+      "multiply": 10,
+      "subtract": 5
+    },
+    "speedBonusMax": 50,
+    "speedBonusWindowMs": 3000,
+    "targetMatchPercent": 200
+  }
+}

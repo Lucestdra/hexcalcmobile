@@ -29,17 +29,13 @@ echo "Syncing fixtures"
 echo "  from: $SRC"
 echo "  to:   $DEST"
 
-# Replace only the generated contract dirs + manifest; keep any local README.
-for contract in evaluator grammar adjacency; do
-  rm -rf "${DEST:?}/$contract"
-done
+# Replace every generated contract directory + manifest; keep any local README.
+# Contract dirs are every immediate subdirectory of the source fixtures folder.
 mkdir -p "$DEST"
-
-# Copy the contract directories and the manifest verbatim.
-for contract in evaluator grammar adjacency; do
-  if [[ -d "$SRC/$contract" ]]; then
-    cp -R "$SRC/$contract" "$DEST/$contract"
-  fi
+for dir in "$SRC"/*/; do
+  name="$(basename "$dir")"
+  rm -rf "${DEST:?}/$name"
+  cp -R "$dir" "$DEST/$name"
 done
 cp "$SRC/manifest.sha256" "$DEST/manifest.sha256"
 

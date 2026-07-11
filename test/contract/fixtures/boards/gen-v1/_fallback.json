@@ -1,0 +1,580 @@
+{
+  "boards": [
+    {
+      "attemptsUsed": 64,
+      "boardRadius": 2,
+      "cells": [
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 1,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 2,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": -1,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 2
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": -2,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 0,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 1,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 2,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 1,
+          "r": -2
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": -1,
+          "value": 1
+        },
+        {
+          "kind": "equals",
+          "q": 1,
+          "r": 0
+        },
+        {
+          "kind": "equals",
+          "q": 1,
+          "r": 1
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -2,
+          "value": 1
+        },
+        {
+          "kind": "equals",
+          "q": 2,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": 0,
+          "value": 2
+        }
+      ],
+      "generatorVersion": "gen-v1",
+      "levelIndex": 0,
+      "rulesetVersion": "rs-v1",
+      "sampleSolutions": [
+        [
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ],
+        [
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": 1,
+            "r": 1
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ],
+        [
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ]
+      ],
+      "seed": "(fallback)",
+      "target": 2,
+      "usedFallback": true
+    },
+    {
+      "attemptsUsed": 64,
+      "boardRadius": 2,
+      "cells": [
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 1,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 2,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": -1,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 2
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": -2,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 0,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 1,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 2,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 1,
+          "r": -2
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": -1,
+          "value": 1
+        },
+        {
+          "kind": "equals",
+          "q": 1,
+          "r": 0
+        },
+        {
+          "kind": "equals",
+          "q": 1,
+          "r": 1
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -2,
+          "value": 1
+        },
+        {
+          "kind": "equals",
+          "q": 2,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": 0,
+          "value": 2
+        }
+      ],
+      "generatorVersion": "gen-v1",
+      "levelIndex": 1,
+      "rulesetVersion": "rs-v1",
+      "sampleSolutions": [
+        [
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ],
+        [
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": 1,
+            "r": 1
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ],
+        [
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ]
+      ],
+      "seed": "(fallback)",
+      "target": 2,
+      "usedFallback": true
+    },
+    {
+      "attemptsUsed": 64,
+      "boardRadius": 2,
+      "cells": [
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 1,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 2,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": -1,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 2
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": -2,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 0,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 1,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 2,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 1,
+          "r": -2
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": -1,
+          "value": 1
+        },
+        {
+          "kind": "equals",
+          "q": 1,
+          "r": 0
+        },
+        {
+          "kind": "equals",
+          "q": 1,
+          "r": 1
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -2,
+          "value": 1
+        },
+        {
+          "kind": "equals",
+          "q": 2,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": 0,
+          "value": 2
+        }
+      ],
+      "generatorVersion": "gen-v1",
+      "levelIndex": 2,
+      "rulesetVersion": "rs-v1",
+      "sampleSolutions": [
+        [
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ],
+        [
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": 1,
+            "r": 1
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ],
+        [
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ]
+      ],
+      "seed": "(fallback)",
+      "target": 2,
+      "usedFallback": true
+    }
+  ],
+  "generatorVersion": "gen-v1",
+  "rulesetVersion": "rs-v1",
+  "seed": "(fallback)"
+}

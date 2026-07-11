@@ -2,12 +2,24 @@
   "algorithm": "SHA-256",
   "contracts": {
     "adjacency": "v1",
+    "boards": "gen-v1",
     "evaluator": "v1",
-    "grammar": "v1"
+    "grammar": "v1",
+    "replay": "rs-v1",
+    "rulesets": "rs-v1"
   },
   "files": {
     "adjacency/v1/basic.json": "b5cf5f0c4b699f3f49c3537ad4e6c0c6919709fc0aef5da13a4bee46aacceefe",
     "adjacency/v1/violations.json": "3ece69828b92b2b5ada8b19e4a217352f19497fce4b33ed19112ec9973a56aff",
+    "boards/gen-v1/_fallback.json": "79dd469ae3c39a22f92cb0e28dce49f8bf386eb5ca166300ead74f9ce3c13760",
+    "boards/gen-v1/alpha.json": "79cdd3ee9ec404b3db029a20fa442efd1052eb7e43129ce4ee93df9249ab22df",
+    "boards/gen-v1/bravo.json": "da16e0f4d974d24e59305e09a551c09488b46ad0b87a4fba09b423265a448545",
+    "boards/gen-v1/charlie.json": "fef6f2d4afcd49ac7b6cd0f75ed0865f413a4ad2387d281a19dfbf452a213d8a",
+    "boards/gen-v1/delta.json": "5c8b4729a145d17b038862b56f567a195fe9100984dc2963390b3fa20063ebb0",
+    "boards/gen-v1/echo.json": "5291b01d131e51798b303a2d4a95caa9c911ff2fbaf06a48784063946f952210",
+    "boards/gen-v1/foxtrot.json": "e4f765d0f4b047fa718ad0fbfba100b5b41d0e464f8d6f65ee097ce765748062",
+    "boards/gen-v1/golf.json": "faa8f3a760dc760fd22bb6125e9bb3ca7170158d8e57b9716039a621f0446512",
+    "boards/gen-v1/hotel.json": "167c4199b98378a518e6970eb36d03a1155af8b2ef78cfa66accd7dfba9ce063",
     "evaluator/v1/basic.json": "3297cc225150d6dedb20103b977e8880318d3909c578ede8196ce2a657164921",
     "evaluator/v1/division.json": "e10aaa3729ce3d1b54e42be51da954b5fb9e9f8596ee296625b12970eb052440",
     "evaluator/v1/grammar-status.json": "3733a9550bb29e9fd663326a67d0525f8e76771e41344571c92f065d4aa7ab1b",
@@ -16,7 +28,9 @@
     "evaluator/v1/overflow.json": "0d8f64ff690b67dc882629d70f19634afd4592ea3397e1222b4fb04f01359ba6",
     "evaluator/v1/precedence.json": "bb92cb325d56102862e3dd76a0302f4949f9c4fa2d72e9682f14b3d4066c399a",
     "grammar/v1/invalid.json": "abdb99b76c81b8427c6899b92b10632e88656140d41846e7e2244dd8560b6e3a",
-    "grammar/v1/valid.json": "590e0358354029bc027ddcb3a24bd1205733c59aee2ae69bf79fce8ef341de11"
+    "grammar/v1/valid.json": "590e0358354029bc027ddcb3a24bd1205733c59aee2ae69bf79fce8ef341de11",
+    "replay/rs-v1/scenarios.json": "474efa8e241f03afc4b562448381fa76142bb5653333807dab4ce3526726d9c8",
+    "rulesets/rs-v1.json": "43f5b69230b68421de5b4a82a533a5e0e57f51eefbbd284aecf622569efc1e76"
   },
   "generatedBy": "HexCalc.Tools.FixtureGen"
 }
