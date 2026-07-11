@@ -1,55 +1,72 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-/// Phase 1 placeholder shell. The real gameplay surface, routing, theme, and
-/// state machine arrive in Phase 3. This confirms the app boots portrait-only
-/// with the HEX • CALC visual identity (near-black background, white wordmark).
+import 'app/providers.dart';
+import 'app/routing/app_router.dart';
+import 'core/design_system/design_system.dart';
+import 'features/gameplay/domain/domain.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
   ]);
-  runApp(const HexCalcApp());
+
+  final String rulesetJson = await rootBundle.loadString(
+    'assets/gameplay/rs-v1.json',
+  );
+  final Ruleset ruleset = Ruleset.fromJson(
+    jsonDecode(rulesetJson) as Map<String, dynamic>,
+  );
+
+  runApp(
+    ProviderScope(
+      overrides: [rulesetProvider.overrideWithValue(ruleset)],
+      child: const HexCalcApp(),
+    ),
+  );
 }
 
-class HexCalcApp extends StatelessWidget {
+class HexCalcApp extends StatefulWidget {
   const HexCalcApp({super.key});
 
-  // Design tokens land in Phase 3 (lib/core/design_system); these literals are
-  // the placeholder identity for the boot screen only.
-  static const Color _background = Color(0xFF05070A);
-  static const Color _primaryText = Color(0xFFFFFFFF);
-  static const Color _neonBlue = Color(0xFF00BDF2);
+  @override
+  State<HexCalcApp> createState() => _HexCalcAppState();
+}
+
+class _HexCalcAppState extends State<HexCalcApp> {
+  late final GoRouter _router = createRouter();
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
       title: 'HEX CALC',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: _background,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'HEX • CALC',
-                style: TextStyle(
-                  color: _primaryText,
-                  fontSize: 32,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 4,
-                ),
-              ),
-              SizedBox(height: 12),
-              Text(
-                'Phase 1 — deterministic core',
-                style: TextStyle(color: _neonBlue, fontSize: 14),
-              ),
-            ],
+      theme: ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: AppColors.background,
+        colorScheme: const ColorScheme.dark(
+          primary: AppColors.neonBlue,
+          surface: AppColors.background,
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            backgroundColor: AppColors.neonBlue,
+            foregroundColor: AppColors.background,
+            textStyle: AppTypography.button,
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.xl,
+              vertical: AppSpacing.md,
+            ),
           ),
         ),
       ),
+      routerConfig: _router,
     );
   }
 }
