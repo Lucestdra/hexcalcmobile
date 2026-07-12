@@ -1,0 +1,798 @@
+{
+  "cases": [
+    {
+      "description": "one correct equation on level 0",
+      "eventLog": {
+        "clientTotalScore": 105,
+        "events": [
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": -1
+              }
+            ],
+            "tMs": 1500,
+            "type": "equation"
+          }
+        ],
+        "payloadVersion": 1
+      },
+      "expected": {
+        "anomalyFlags": [],
+        "outcome": "verified",
+        "verifiedScore": 105
+      },
+      "generatorVersion": "gen-v1",
+      "id": "event-log-single-equation",
+      "payloadVersion": 1,
+      "rulesetVersion": "rs-v1",
+      "seed": "alpha"
+    },
+    {
+      "description": "three correct equations within the combo window on level 0",
+      "eventLog": {
+        "clientTotalScore": 470,
+        "events": [
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 1,
+                "r": 0
+              }
+            ],
+            "tMs": 1000,
+            "type": "equation"
+          },
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 2,
+                "r": 0
+              }
+            ],
+            "tMs": 1800,
+            "type": "equation"
+          },
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "tMs": 2600,
+            "type": "equation"
+          }
+        ],
+        "payloadVersion": 1
+      },
+      "expected": {
+        "anomalyFlags": [],
+        "outcome": "verified",
+        "verifiedScore": 470
+      },
+      "generatorVersion": "gen-v1",
+      "id": "event-log-multi-equation-combo",
+      "payloadVersion": 1,
+      "rulesetVersion": "rs-v1",
+      "seed": "bravo"
+    },
+    {
+      "description": "five correct equations clear level 0, then two on level 1's board",
+      "eventLog": {
+        "clientTotalScore": 2253,
+        "events": [
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "tMs": 1000,
+            "type": "equation"
+          },
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "tMs": 1800,
+            "type": "equation"
+          },
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "tMs": 2600,
+            "type": "equation"
+          },
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "tMs": 3400,
+            "type": "equation"
+          },
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "tMs": 4200,
+            "type": "equation"
+          },
+          {
+            "levelIndex": 1,
+            "path": [
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "tMs": 5200,
+            "type": "equation"
+          },
+          {
+            "levelIndex": 1,
+            "path": [
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 2
+              },
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 2,
+                "r": 0
+              }
+            ],
+            "tMs": 6200,
+            "type": "equation"
+          }
+        ],
+        "payloadVersion": 1
+      },
+      "expected": {
+        "anomalyFlags": [],
+        "outcome": "verified",
+        "verifiedScore": 2253
+      },
+      "generatorVersion": "gen-v1",
+      "id": "event-log-level-progression",
+      "payloadVersion": 1,
+      "rulesetVersion": "rs-v1",
+      "seed": "charlie"
+    },
+    {
+      "description": "two correct equations with an audit-only pause/resume between them",
+      "eventLog": {
+        "clientTotalScore": 375,
+        "events": [
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "tMs": 1000,
+            "type": "equation"
+          },
+          {
+            "tMs": 2000,
+            "type": "pause"
+          },
+          {
+            "tMs": 8000,
+            "type": "resume"
+          },
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -1
+              }
+            ],
+            "tMs": 8800,
+            "type": "equation"
+          }
+        ],
+        "payloadVersion": 1
+      },
+      "expected": {
+        "anomalyFlags": [],
+        "outcome": "verified",
+        "verifiedScore": 375
+      },
+      "generatorVersion": "gen-v1",
+      "id": "event-log-pause-resume",
+      "payloadVersion": 1,
+      "rulesetVersion": "rs-v1",
+      "seed": "delta"
+    },
+    {
+      "description": "a correct run whose client total disagrees is flagged, still verified",
+      "eventLog": {
+        "clientTotalScore": 5270,
+        "events": [
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "tMs": 1500,
+            "type": "equation"
+          }
+        ],
+        "payloadVersion": 1
+      },
+      "expected": {
+        "anomalyFlags": [
+          "score_mismatch"
+        ],
+        "outcome": "verified",
+        "verifiedScore": 270
+      },
+      "generatorVersion": "gen-v1",
+      "id": "event-log-score-mismatch",
+      "payloadVersion": 1,
+      "rulesetVersion": "rs-v1",
+      "seed": "foxtrot"
+    },
+    {
+      "description": "two equations committed faster than a human are flagged, still verified",
+      "eventLog": {
+        "clientTotalScore": 304,
+        "events": [
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": -1
+              }
+            ],
+            "tMs": 1000,
+            "type": "equation"
+          },
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": -1
+              }
+            ],
+            "tMs": 1050,
+            "type": "equation"
+          }
+        ],
+        "payloadVersion": 1
+      },
+      "expected": {
+        "anomalyFlags": [
+          "implausibly_fast"
+        ],
+        "outcome": "verified",
+        "verifiedScore": 304
+      },
+      "generatorVersion": "gen-v1",
+      "id": "event-log-implausibly-fast",
+      "payloadVersion": 1,
+      "rulesetVersion": "rs-v1",
+      "seed": "golf"
+    },
+    {
+      "description": "a tampered, non-adjacent path is rejected",
+      "eventLog": {
+        "clientTotalScore": 0,
+        "events": [
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": 0
+              }
+            ],
+            "tMs": 1000,
+            "type": "equation"
+          }
+        ],
+        "payloadVersion": 1
+      },
+      "expected": {
+        "anomalyFlags": [],
+        "outcome": "rejected",
+        "rejectionReason": "non_adjacent_path",
+        "verifiedScore": null
+      },
+      "generatorVersion": "gen-v1",
+      "id": "event-log-rejected-non-adjacent",
+      "payloadVersion": 1,
+      "rulesetVersion": "rs-v1",
+      "seed": "echo"
+    },
+    {
+      "description": "an equation past the run duration + tolerance is rejected",
+      "eventLog": {
+        "clientTotalScore": 0,
+        "events": [
+          {
+            "levelIndex": 0,
+            "path": [
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 2,
+                "r": 0
+              }
+            ],
+            "tMs": 62001,
+            "type": "equation"
+          }
+        ],
+        "payloadVersion": 1
+      },
+      "expected": {
+        "anomalyFlags": [],
+        "outcome": "rejected",
+        "rejectionReason": "duration_exceeded",
+        "verifiedScore": null
+      },
+      "generatorVersion": "gen-v1",
+      "id": "event-log-rejected-duration-exceeded",
+      "payloadVersion": 1,
+      "rulesetVersion": "rs-v1",
+      "seed": "hotel"
+    },
+    {
+      "description": "an equation declaring the wrong level is rejected",
+      "eventLog": {
+        "clientTotalScore": 0,
+        "events": [
+          {
+            "levelIndex": 1,
+            "path": [
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": -1
+              }
+            ],
+            "tMs": 1000,
+            "type": "equation"
+          }
+        ],
+        "payloadVersion": 1
+      },
+      "expected": {
+        "anomalyFlags": [],
+        "outcome": "rejected",
+        "rejectionReason": "level_mismatch",
+        "verifiedScore": null
+      },
+      "generatorVersion": "gen-v1",
+      "id": "event-log-rejected-level-mismatch",
+      "payloadVersion": 1,
+      "rulesetVersion": "rs-v1",
+      "seed": "alpha"
+    }
+  ],
+  "generatorVersion": "gen-v1",
+  "payloadVersion": 1,
+  "rulesetVersion": "rs-v1"
+}

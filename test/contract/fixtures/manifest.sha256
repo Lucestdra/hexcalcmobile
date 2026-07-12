@@ -4,6 +4,7 @@
     "adjacency": "v1",
     "boards": "gen-v1",
     "evaluator": "v1",
+    "event-log": "v1",
     "grammar": "v1",
     "replay": "rs-v1",
     "rulesets": "rs-v1"
@@ -27,6 +28,7 @@
     "evaluator/v1/negative-intermediate.json": "dd6ddbc42cb8ef4285494d4d518c28a7a02aebc2cd6274d0779410205de9322f",
     "evaluator/v1/overflow.json": "0d8f64ff690b67dc882629d70f19634afd4592ea3397e1222b4fb04f01359ba6",
     "evaluator/v1/precedence.json": "bb92cb325d56102862e3dd76a0302f4949f9c4fa2d72e9682f14b3d4066c399a",
+    "event-log/v1/scenarios.json": "1510615dc96ba563654fc7b92d911712b2f8f0a42f76ecc7d87bc40f0aa7b739",
     "grammar/v1/invalid.json": "abdb99b76c81b8427c6899b92b10632e88656140d41846e7e2244dd8560b6e3a",
     "grammar/v1/valid.json": "590e0358354029bc027ddcb3a24bd1205733c59aee2ae69bf79fce8ef341de11",
     "replay/rs-v1/scenarios.json": "474efa8e241f03afc4b562448381fa76142bb5653333807dab4ce3526726d9c8",
