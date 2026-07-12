@@ -22,7 +22,7 @@ LeonidasStudio/Hexcalc/
 - Dart **3.10.7** (bundled with the pinned Flutter SDK).
 - Flame **1.35.1** (pinned in `pubspec.lock`; verified compatible with the SDK).
 
-## Current state (Phase 4)
+## Current state (Phase 7)
 
 - **Phase 1–2** — the deterministic gameplay core in pure Dart (`geometry`,
   `expression`, `drbg`, `board`, `board_generator_v1`, `ruleset`, `replay`),
@@ -46,6 +46,56 @@ LeonidasStudio/Hexcalc/
     implementations (`docs/analytics-events.md` is the event catalog);
   - bundled **Space Grotesk / Space Mono** fonts (OFL, `assets/fonts/`) and
     golden tests.
+- **Phase 7** — networking + auth integration (`lib/core/{api,networking,auth,errors}`):
+  - a **Dio** stack with a correlation-ID header, a single-flight **refresh
+    coordinator** (concurrent 401s await one refresh; a rejected refresh →
+    recoverable signed-out; an offline refresh keeps tokens), and RFC 9457
+    `ProblemDetails` → typed `AppError` mapping;
+  - a typed API client (`lib/core/api/`) and DTOs mirroring the backend OpenAPI,
+    guarded against drift by `test/contract/api_contract_test.dart`
+    (see **Generated API client** below);
+  - tokens in **flutter_secure_storage**; a Riverpod `AuthSessionNotifier` that
+    runs a **non-blocking guest bootstrap** (offline play never waits, and a guest
+    is retried when connectivity returns);
+  - **auth screens** — sign in, register, forgot/reset password, and guest→account
+    **link** — plus a **profile** screen, all with loading/error/offline states.
+
+## Generated API client (deviation)
+
+The plan calls for an openapi-generator (dart-dio) client under `lib/generated/api/`.
+Two concrete blockers make that non-viable today, so the client in `lib/core/api/`
+is **hand-authored and contract-guarded** instead:
+
+1. The backend's .NET 10 OpenAPI is 3.1 and types integer fields as the multi-type
+   `["integer","string"]` (e.g. `AuthTokens.expiresInSeconds`); openapi-generator's
+   `dart`/`dart-dio` generators render these as broken empty wrapper classes.
+2. `dart-dio` needs `build_runner`, which collides with this repo's
+   `sqlite3_flutter_libs` native build hooks (the same issue Drift codegen hit).
+
+`test/contract/api_contract_test.dart` parses the committed
+`test/contract/openapi.v1.json` and fails if any endpoint, required field, or key
+field type the client uses drifts from the spec — comparable drift protection to a
+generated client (short of full round-trip type-safety). `tool/generate_api.sh`
+re-syncs the spec and can be switched to emit the client once the toolchain handles
+3.1 cleanly. Do not hand-edit under `lib/generated/api/` (kept for that future).
+
+## Local end-to-end smoke (against a running backend)
+
+With the backend running (`dotnet run --project src/HexCalc.Api` in the sibling
+`backend/` repo) and its base URL set in `FlavorConfig.development.apiBaseUrl`
+(default `http://10.0.2.2:8080` for the Android emulator → host loopback):
+
+1. **Fresh install, offline** — turn on airplane mode, launch dev flavor. Home and
+   Play work immediately (guest bootstrap is non-blocking; no session required).
+2. **Guest on reconnect** — turn networking back on. A guest session is created in
+   the background (Profile shows "Guest").
+3. **Register → sign in** — Profile → Create account → register (enumeration-safe
+   confirmation) → sign in with the same credentials.
+4. **Link (merge)** — as a guest (fresh install), Profile → Link an account → enter
+   the account's email/password → the guest merges into it (Profile shows "Signed
+   in"); local run history is preserved.
+5. **Refresh** — leave the app until the 15-minute access token expires, then open
+   Profile; the profile still loads (the interceptor silently refreshed).
 
 ## Assets
 

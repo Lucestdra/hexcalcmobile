@@ -1,0 +1,7 @@
+{
+  "type": "https://hexcalc.dev/errors/auth.rate_limited",
+  "title": "Too many requests",
+  "status": 429,
+  "detail": "Too many requests. Please retry later.",
+  "code": "auth.rate_limited"
+}

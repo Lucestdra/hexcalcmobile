@@ -10,8 +10,11 @@ import 'package:hexcalc/app/providers.dart';
 import 'package:hexcalc/core/analytics/analytics_event.dart';
 import 'package:hexcalc/core/analytics/analytics_service.dart';
 import 'package:hexcalc/core/audio/audio_service.dart';
+import 'package:hexcalc/core/auth/auth_session.dart';
+import 'package:hexcalc/core/auth/token_store.dart';
 import 'package:hexcalc/core/crash/crash_reporter.dart';
 import 'package:hexcalc/core/haptics/haptics_service.dart';
+import 'package:hexcalc/core/networking/api_client.dart';
 import 'package:hexcalc/core/settings/app_settings.dart';
 import 'package:hexcalc/core/settings/settings_controller.dart';
 import 'package:hexcalc/core/settings/settings_repository.dart';
@@ -19,6 +22,8 @@ import 'package:hexcalc/features/gameplay/domain/domain.dart';
 import 'package:hexcalc/features/gameplay/persistence/app_database.dart';
 import 'package:hexcalc/features/gameplay/persistence/run_history_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'fake_http_adapter.dart';
 
 /// Loads rs-v1 from the synced fixtures for tests.
 Ruleset loadTestRuleset() => Ruleset.fromJson(
@@ -68,6 +73,21 @@ Future<Widget> testScope({
         db ?? AppDatabase(NativeDatabase.memory()),
       ),
       hapticsServiceProvider.overrideWithValue(HapticsService(enabled: false)),
+      // Auth/networking: boot with an in-memory token store and a fake HTTP client
+      // (guest bootstrap succeeds instantly), so the non-blocking bootstrap runs
+      // but no real network or secure-storage platform channel is touched.
+      apiBaseUrlProvider.overrideWithValue('http://test.local'),
+      tokenStoreProvider.overrideWithValue(InMemoryTokenStore()),
+      apiClientProvider.overrideWith(
+        (ref) => ApiClient(
+          baseUrl: ref.read(apiBaseUrlProvider),
+          tokenStore: ref.read(tokenStoreProvider),
+          dioBuilder: fakeDioBuilder(_bootstrapFake()),
+        ),
+      ),
+      // App-level tests don't exercise the auth lifecycle (it is unit-tested):
+      // stub the session as a ready guest so app boot runs no async network work.
+      authSessionProvider.overrideWith(_StubAuthSession.new),
       if (homeStats != null)
         runStatsProvider.overrideWith(
           (ref) => Stream<RunStats>.value(homeStats),
@@ -79,6 +99,32 @@ Future<Widget> testScope({
     ],
     child: child,
   );
+}
+
+/// A session that is already a ready guest and does no async work — keeps
+/// app-level widget tests free of the real bootstrap's network lifecycle.
+class _StubAuthSession extends AuthSessionNotifier {
+  @override
+  AuthState build() =>
+      const AuthState(kind: AuthKind.guest, userId: 'guest-test');
+}
+
+/// A fake HTTP client whose only route is a successful guest sign-in, so the app's
+/// non-blocking bootstrap resolves immediately in widget tests.
+FakeHttpAdapter _bootstrapFake() {
+  final FakeHttpAdapter fake = FakeHttpAdapter();
+  fake.on(
+    'POST',
+    '/api/v1/auth/guest',
+    (_) => FakeResponse.json(200, <String, dynamic>{
+      'accessToken': 'guest.access',
+      'refreshToken': 'guest.refresh',
+      'tokenType': 'Bearer',
+      'expiresInSeconds': 900,
+      'userId': 'guest-test',
+    }),
+  );
+  return fake;
 }
 
 /// An [AnalyticsService] that records every event, for assertions in tests.

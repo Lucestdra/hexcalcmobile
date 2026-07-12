@@ -20,6 +20,12 @@ dependencies:
   drift_flutter: ^0.2.7
   path_provider: ^2.1.5
   path: ^1.9.1
+  # Networking + auth (Phase 7). dio is pure Dart; secure_storage and
+  # connectivity_plus are standard platform-channel plugins (no native build
+  # hooks), so they do not affect the sqlite3 codegen constraint.
+  dio: ^5.7.0
+  flutter_secure_storage: ^9.2.4
+  connectivity_plus: ^6.1.0
 
 dev_dependencies:
   flutter_test:

@@ -25,16 +25,26 @@ class HomeScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.settings_rounded,
-                    color: AppColors.secondaryText,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  IconButton(
+                    icon: const Icon(
+                      Icons.person_rounded,
+                      color: AppColors.secondaryText,
+                    ),
+                    tooltip: 'Profile',
+                    onPressed: () => context.push('/profile'),
                   ),
-                  tooltip: 'Settings',
-                  onPressed: () => context.push('/settings'),
-                ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.settings_rounded,
+                      color: AppColors.secondaryText,
+                    ),
+                    tooltip: 'Settings',
+                    onPressed: () => context.push('/settings'),
+                  ),
+                ],
               ),
               const Spacer(),
               const Center(

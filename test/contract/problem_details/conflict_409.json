@@ -1,0 +1,7 @@
+{
+  "type": "https://hexcalc.dev/errors/auth.guest_already_linked",
+  "title": "Conflict",
+  "status": 409,
+  "detail": "This guest is already linked to an account.",
+  "code": "auth.guest_already_linked"
+}

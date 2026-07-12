@@ -9,7 +9,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../core/analytics/analytics_event.dart';
 import '../core/analytics/analytics_service.dart';
 import '../core/audio/flame_audio_service.dart';
+import '../core/auth/auth_session.dart';
+import '../core/auth/token_store.dart';
 import '../core/crash/crash_reporter.dart';
+import '../core/networking/connectivity_monitor.dart';
 import '../core/settings/app_settings.dart';
 import '../core/settings/settings_controller.dart';
 import '../core/settings/settings_repository.dart';
@@ -72,6 +75,13 @@ Future<void> bootstrap(FlavorConfig config) async {
             crashReporterProvider.overrideWithValue(crash),
             audioServiceProvider.overrideWithValue(audio),
             appDatabaseProvider.overrideWithValue(openAppDatabase()),
+            // Networking + auth (Phase 7): base URL from the flavor, tokens in
+            // secure storage, real connectivity signal for the guest retry.
+            apiBaseUrlProvider.overrideWithValue(config.apiBaseUrl),
+            tokenStoreProvider.overrideWithValue(SecureTokenStore()),
+            connectivityMonitorProvider.overrideWithValue(
+              ConnectivityPlusMonitor(),
+            ),
           ],
           child: const HexCalcApp(),
         ),

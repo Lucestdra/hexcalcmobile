@@ -1,0 +1,7 @@
+{
+  "type": "https://hexcalc.dev/errors/auth.invalid_credentials",
+  "title": "Unauthorized",
+  "status": 401,
+  "detail": "Email or password is incorrect.",
+  "code": "auth.invalid_credentials"
+}

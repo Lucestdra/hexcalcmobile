@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/auth/auth_session.dart';
 import '../core/design_system/design_system.dart';
 import 'providers.dart';
 import 'routing/app_router.dart';
@@ -16,6 +17,14 @@ class HexCalcApp extends ConsumerStatefulWidget {
 
 class _HexCalcAppState extends ConsumerState<HexCalcApp> {
   late final GoRouter _router = createRouter();
+
+  @override
+  void initState() {
+    super.initState();
+    // Start the non-blocking guest bootstrap at app launch; gameplay never waits
+    // on it. Reading the provider instantiates the notifier and runs build().
+    ref.read(authSessionProvider);
+  }
 
   @override
   Widget build(BuildContext context) {
