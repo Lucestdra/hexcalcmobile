@@ -93,7 +93,7 @@ class _GameplayScreenState extends ConsumerState<GameplayScreen> {
 
   Future<void> _finishRun(GameSnapshot s) async {
     final RankedRunConfig? ranked = widget.ranked;
-    final String mode = ranked != null ? 'ranked' : 'normal';
+    final String mode = ranked?.mode ?? 'normal';
 
     ref
         .read(analyticsProvider)
@@ -141,7 +141,7 @@ class _GameplayScreenState extends ConsumerState<GameplayScreen> {
         // permanent spinner over an orphaned pending row).
         await store.enqueueRankedSubmit(
           runId: ranked.runId,
-          mode: 'ranked',
+          mode: ranked.mode,
           clientScore: s.score,
           payloadVersion: kEventLogPayloadVersion,
           payload: <String, dynamic>{
@@ -156,7 +156,11 @@ class _GameplayScreenState extends ConsumerState<GameplayScreen> {
             .read(analyticsProvider)
             .logEvent(AnalyticsEvent.rankedSubmissionQueued());
         route = '/ranked-result';
-        navExtra = RankedResultArgs(runId: ranked.runId, clientScore: s.score);
+        navExtra = RankedResultArgs(
+          runId: ranked.runId,
+          clientScore: s.score,
+          isDaily: ranked.isDaily,
+        );
       } else {
         await store.enqueue(
           operationType: kOpNormalResult,

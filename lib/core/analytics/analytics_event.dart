@@ -61,6 +61,13 @@ class AnalyticsEvent {
   factory AnalyticsEvent.rankedSubmissionRejected() =>
       const AnalyticsEvent._('ranked_submission_rejected');
 
+  // ----- Leaderboard / daily -----
+  factory AnalyticsEvent.leaderboardViewed() =>
+      const AnalyticsEvent._('leaderboard_viewed');
+
+  factory AnalyticsEvent.dailyChallengeStarted() =>
+      const AnalyticsEvent._('daily_challenge_started');
+
   // ----- Navigation / settings -----
   factory AnalyticsEvent.settingsOpened() =>
       const AnalyticsEvent._('settings_opened');

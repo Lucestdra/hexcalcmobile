@@ -1887,12 +1887,298 @@ class RankedRunsCompanion extends UpdateCompanion<RankedRunRow> {
   }
 }
 
+class $LeaderboardCacheTable extends LeaderboardCache
+    with TableInfo<$LeaderboardCacheTable, LeaderboardCacheRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LeaderboardCacheTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _cacheKeyMeta = const VerificationMeta(
+    'cacheKey',
+  );
+  @override
+  late final GeneratedColumn<String> cacheKey = GeneratedColumn<String>(
+    'cache_key',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 32,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _payloadMeta = const VerificationMeta(
+    'payload',
+  );
+  @override
+  late final GeneratedColumn<String> payload = GeneratedColumn<String>(
+    'payload',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _fetchedAtMsMeta = const VerificationMeta(
+    'fetchedAtMs',
+  );
+  @override
+  late final GeneratedColumn<int> fetchedAtMs = GeneratedColumn<int>(
+    'fetched_at_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [cacheKey, payload, fetchedAtMs];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'leaderboard_cache';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<LeaderboardCacheRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('cache_key')) {
+      context.handle(
+        _cacheKeyMeta,
+        cacheKey.isAcceptableOrUnknown(data['cache_key']!, _cacheKeyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_cacheKeyMeta);
+    }
+    if (data.containsKey('payload')) {
+      context.handle(
+        _payloadMeta,
+        payload.isAcceptableOrUnknown(data['payload']!, _payloadMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_payloadMeta);
+    }
+    if (data.containsKey('fetched_at_ms')) {
+      context.handle(
+        _fetchedAtMsMeta,
+        fetchedAtMs.isAcceptableOrUnknown(
+          data['fetched_at_ms']!,
+          _fetchedAtMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_fetchedAtMsMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {cacheKey};
+  @override
+  LeaderboardCacheRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LeaderboardCacheRow(
+      cacheKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}cache_key'],
+      )!,
+      payload: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}payload'],
+      )!,
+      fetchedAtMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}fetched_at_ms'],
+      )!,
+    );
+  }
+
+  @override
+  $LeaderboardCacheTable createAlias(String alias) {
+    return $LeaderboardCacheTable(attachedDatabase, alias);
+  }
+}
+
+class LeaderboardCacheRow extends DataClass
+    implements Insertable<LeaderboardCacheRow> {
+  final String cacheKey;
+
+  /// The full response body as JSON text (parsed back into a DTO on read).
+  final String payload;
+
+  /// Epoch ms the cached value was fetched from the server (freshness stamp).
+  final int fetchedAtMs;
+  const LeaderboardCacheRow({
+    required this.cacheKey,
+    required this.payload,
+    required this.fetchedAtMs,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['cache_key'] = Variable<String>(cacheKey);
+    map['payload'] = Variable<String>(payload);
+    map['fetched_at_ms'] = Variable<int>(fetchedAtMs);
+    return map;
+  }
+
+  LeaderboardCacheCompanion toCompanion(bool nullToAbsent) {
+    return LeaderboardCacheCompanion(
+      cacheKey: Value(cacheKey),
+      payload: Value(payload),
+      fetchedAtMs: Value(fetchedAtMs),
+    );
+  }
+
+  factory LeaderboardCacheRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LeaderboardCacheRow(
+      cacheKey: serializer.fromJson<String>(json['cacheKey']),
+      payload: serializer.fromJson<String>(json['payload']),
+      fetchedAtMs: serializer.fromJson<int>(json['fetchedAtMs']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'cacheKey': serializer.toJson<String>(cacheKey),
+      'payload': serializer.toJson<String>(payload),
+      'fetchedAtMs': serializer.toJson<int>(fetchedAtMs),
+    };
+  }
+
+  LeaderboardCacheRow copyWith({
+    String? cacheKey,
+    String? payload,
+    int? fetchedAtMs,
+  }) => LeaderboardCacheRow(
+    cacheKey: cacheKey ?? this.cacheKey,
+    payload: payload ?? this.payload,
+    fetchedAtMs: fetchedAtMs ?? this.fetchedAtMs,
+  );
+  LeaderboardCacheRow copyWithCompanion(LeaderboardCacheCompanion data) {
+    return LeaderboardCacheRow(
+      cacheKey: data.cacheKey.present ? data.cacheKey.value : this.cacheKey,
+      payload: data.payload.present ? data.payload.value : this.payload,
+      fetchedAtMs: data.fetchedAtMs.present
+          ? data.fetchedAtMs.value
+          : this.fetchedAtMs,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LeaderboardCacheRow(')
+          ..write('cacheKey: $cacheKey, ')
+          ..write('payload: $payload, ')
+          ..write('fetchedAtMs: $fetchedAtMs')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(cacheKey, payload, fetchedAtMs);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LeaderboardCacheRow &&
+          other.cacheKey == this.cacheKey &&
+          other.payload == this.payload &&
+          other.fetchedAtMs == this.fetchedAtMs);
+}
+
+class LeaderboardCacheCompanion extends UpdateCompanion<LeaderboardCacheRow> {
+  final Value<String> cacheKey;
+  final Value<String> payload;
+  final Value<int> fetchedAtMs;
+  final Value<int> rowid;
+  const LeaderboardCacheCompanion({
+    this.cacheKey = const Value.absent(),
+    this.payload = const Value.absent(),
+    this.fetchedAtMs = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LeaderboardCacheCompanion.insert({
+    required String cacheKey,
+    required String payload,
+    required int fetchedAtMs,
+    this.rowid = const Value.absent(),
+  }) : cacheKey = Value(cacheKey),
+       payload = Value(payload),
+       fetchedAtMs = Value(fetchedAtMs);
+  static Insertable<LeaderboardCacheRow> custom({
+    Expression<String>? cacheKey,
+    Expression<String>? payload,
+    Expression<int>? fetchedAtMs,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (cacheKey != null) 'cache_key': cacheKey,
+      if (payload != null) 'payload': payload,
+      if (fetchedAtMs != null) 'fetched_at_ms': fetchedAtMs,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LeaderboardCacheCompanion copyWith({
+    Value<String>? cacheKey,
+    Value<String>? payload,
+    Value<int>? fetchedAtMs,
+    Value<int>? rowid,
+  }) {
+    return LeaderboardCacheCompanion(
+      cacheKey: cacheKey ?? this.cacheKey,
+      payload: payload ?? this.payload,
+      fetchedAtMs: fetchedAtMs ?? this.fetchedAtMs,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (cacheKey.present) {
+      map['cache_key'] = Variable<String>(cacheKey.value);
+    }
+    if (payload.present) {
+      map['payload'] = Variable<String>(payload.value);
+    }
+    if (fetchedAtMs.present) {
+      map['fetched_at_ms'] = Variable<int>(fetchedAtMs.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LeaderboardCacheCompanion(')
+          ..write('cacheKey: $cacheKey, ')
+          ..write('payload: $payload, ')
+          ..write('fetchedAtMs: $fetchedAtMs, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $RunsTable runs = $RunsTable(this);
   late final $OutboxTable outbox = $OutboxTable(this);
   late final $RankedRunsTable rankedRuns = $RankedRunsTable(this);
+  late final $LeaderboardCacheTable leaderboardCache = $LeaderboardCacheTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1901,6 +2187,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     runs,
     outbox,
     rankedRuns,
+    leaderboardCache,
   ];
 }
 
@@ -2782,6 +3069,180 @@ typedef $$RankedRunsTableProcessedTableManager =
       RankedRunRow,
       PrefetchHooks Function()
     >;
+typedef $$LeaderboardCacheTableCreateCompanionBuilder =
+    LeaderboardCacheCompanion Function({
+      required String cacheKey,
+      required String payload,
+      required int fetchedAtMs,
+      Value<int> rowid,
+    });
+typedef $$LeaderboardCacheTableUpdateCompanionBuilder =
+    LeaderboardCacheCompanion Function({
+      Value<String> cacheKey,
+      Value<String> payload,
+      Value<int> fetchedAtMs,
+      Value<int> rowid,
+    });
+
+class $$LeaderboardCacheTableFilterComposer
+    extends Composer<_$AppDatabase, $LeaderboardCacheTable> {
+  $$LeaderboardCacheTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get cacheKey => $composableBuilder(
+    column: $table.cacheKey,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get payload => $composableBuilder(
+    column: $table.payload,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get fetchedAtMs => $composableBuilder(
+    column: $table.fetchedAtMs,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$LeaderboardCacheTableOrderingComposer
+    extends Composer<_$AppDatabase, $LeaderboardCacheTable> {
+  $$LeaderboardCacheTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get cacheKey => $composableBuilder(
+    column: $table.cacheKey,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get payload => $composableBuilder(
+    column: $table.payload,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get fetchedAtMs => $composableBuilder(
+    column: $table.fetchedAtMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$LeaderboardCacheTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LeaderboardCacheTable> {
+  $$LeaderboardCacheTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get cacheKey =>
+      $composableBuilder(column: $table.cacheKey, builder: (column) => column);
+
+  GeneratedColumn<String> get payload =>
+      $composableBuilder(column: $table.payload, builder: (column) => column);
+
+  GeneratedColumn<int> get fetchedAtMs => $composableBuilder(
+    column: $table.fetchedAtMs,
+    builder: (column) => column,
+  );
+}
+
+class $$LeaderboardCacheTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $LeaderboardCacheTable,
+          LeaderboardCacheRow,
+          $$LeaderboardCacheTableFilterComposer,
+          $$LeaderboardCacheTableOrderingComposer,
+          $$LeaderboardCacheTableAnnotationComposer,
+          $$LeaderboardCacheTableCreateCompanionBuilder,
+          $$LeaderboardCacheTableUpdateCompanionBuilder,
+          (
+            LeaderboardCacheRow,
+            BaseReferences<
+              _$AppDatabase,
+              $LeaderboardCacheTable,
+              LeaderboardCacheRow
+            >,
+          ),
+          LeaderboardCacheRow,
+          PrefetchHooks Function()
+        > {
+  $$LeaderboardCacheTableTableManager(
+    _$AppDatabase db,
+    $LeaderboardCacheTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LeaderboardCacheTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LeaderboardCacheTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LeaderboardCacheTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> cacheKey = const Value.absent(),
+                Value<String> payload = const Value.absent(),
+                Value<int> fetchedAtMs = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => LeaderboardCacheCompanion(
+                cacheKey: cacheKey,
+                payload: payload,
+                fetchedAtMs: fetchedAtMs,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String cacheKey,
+                required String payload,
+                required int fetchedAtMs,
+                Value<int> rowid = const Value.absent(),
+              }) => LeaderboardCacheCompanion.insert(
+                cacheKey: cacheKey,
+                payload: payload,
+                fetchedAtMs: fetchedAtMs,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$LeaderboardCacheTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $LeaderboardCacheTable,
+      LeaderboardCacheRow,
+      $$LeaderboardCacheTableFilterComposer,
+      $$LeaderboardCacheTableOrderingComposer,
+      $$LeaderboardCacheTableAnnotationComposer,
+      $$LeaderboardCacheTableCreateCompanionBuilder,
+      $$LeaderboardCacheTableUpdateCompanionBuilder,
+      (
+        LeaderboardCacheRow,
+        BaseReferences<
+          _$AppDatabase,
+          $LeaderboardCacheTable,
+          LeaderboardCacheRow
+        >,
+      ),
+      LeaderboardCacheRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -2791,4 +3252,6 @@ class $AppDatabaseManager {
       $$OutboxTableTableManager(_db, _db.outbox);
   $$RankedRunsTableTableManager get rankedRuns =>
       $$RankedRunsTableTableManager(_db, _db.rankedRuns);
+  $$LeaderboardCacheTableTableManager get leaderboardCache =>
+      $$LeaderboardCacheTableTableManager(_db, _db.leaderboardCache);
 }

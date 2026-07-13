@@ -155,6 +155,65 @@ class HexcalcApi {
     Options(headers: <String, dynamic>{'Idempotency-Key': idempotencyKey}),
   );
 
+  // ── Leaderboards (authenticated) ──────────────────────────────────────────
+
+  /// The weekly top page (top 100, cursor-paginated). [limit] and [cursor] are
+  /// optional; an omitted cursor returns the first page.
+  Future<WeeklyLeaderboardResponse> getWeeklyLeaderboard({
+    int? limit,
+    String? cursor,
+  }) async {
+    try {
+      final Response<dynamic> response = await _auth.get<dynamic>(
+        '/api/v1/leaderboards/weekly',
+        queryParameters: <String, dynamic>{'limit': ?limit, 'cursor': ?cursor},
+      );
+      return _parse(response.data, WeeklyLeaderboardResponse.fromJson);
+    } catch (error) {
+      throw toAppError(error);
+    }
+  }
+
+  /// The requesting player's weekly rank and a ±5 window centred on them.
+  Future<MyWeeklyRankResponse> getMyWeeklyRank() async {
+    try {
+      final Response<dynamic> response = await _auth.get<dynamic>(
+        '/api/v1/leaderboards/weekly/me',
+      );
+      return _parse(response.data, MyWeeklyRankResponse.fromJson);
+    } catch (error) {
+      throw toAppError(error);
+    }
+  }
+
+  // ── Daily challenge (authenticated) ───────────────────────────────────────
+
+  /// The current daily challenge card (window + whether the player has attempted).
+  Future<DailyChallengeView> getDailyChallenge() async {
+    try {
+      final Response<dynamic> response = await _auth.get<dynamic>(
+        '/api/v1/daily-challenges/current',
+      );
+      return _parse(response.data, DailyChallengeView.fromJson);
+    } catch (error) {
+      throw toAppError(error);
+    }
+  }
+
+  /// Starts the player's daily attempt, returning a signed challenge to play
+  /// through the ranked pipeline. Throws [ConflictError] (409) if the player has
+  /// already made their one scored attempt today.
+  Future<DailyAttemptResponse> startDailyAttempt() async {
+    try {
+      final Response<dynamic> response = await _auth.post<dynamic>(
+        '/api/v1/daily-challenges/current/attempts',
+      );
+      return _parse(response.data, DailyAttemptResponse.fromJson);
+    } catch (error) {
+      throw toAppError(error);
+    }
+  }
+
   Future<T> _json<T>(
     String path,
     Map<String, dynamic> body,

@@ -120,6 +120,19 @@ With the backend running (`dotnet run --project src/HexCalc.Api` in the sibling
    server score. Kill the app mid-verification and relaunch — the queued submit
    survives and completes. Force a reject (tamper) or an expiry to see the distinct
    non-ranked outcomes; an unverified run is never shown as a confirmed rank.
+8. **Leaderboard** — after a run verifies, Home → WEEKLY RANK (or the LEADERBOARD
+   entry) shows the weekly board: the top 100, and your ±5 window when you rank
+   below the visible page, with your row emphasised (a "YOU" tag, not colour
+   alone). A locally-pending run is flagged "awaiting verification — not yet
+   ranked", never as a confirmed rank. Turn on airplane mode and reopen — the last
+   loaded standings show with a **"Saved standings · as of …"** banner; with no
+   cache it shows the offline state with a retry. Pull to refresh.
+9. **Daily** — Home → DAILY. Offline, it messages that a connection is required to
+   start (issuance needs connectivity). Online, **START DAILY RUN** issues a
+   server challenge and plays through the ranked pipeline; the result screen is
+   labelled **Daily challenge** and verifies like ranked. Re-open Daily — it now
+   shows **Played today** (one scored attempt/UTC day); a second start returns the
+   honest "already played" message.
 
 ## Assets
 
@@ -143,6 +156,17 @@ hook-free package, and the portable generated part file is copied back:
    copy `app_database.dart`, run `dart run build_runner build`.
 2. Copy the produced `app_database.g.dart` back here (it references only
    `package:drift`, so it compiles unchanged).
+
+Under Dart 3.10+ the scratch package needs one more guard: `drift_dev` pulls
+`sqlite3` transitively, and current `sqlite3` (3.x) ships its own native build
+hook, which re-triggers the same `dart compile` failure. Pin it below the hook
+in the scratch package's `pubspec.yaml` (it is only used by the generator's
+schema analysis, never at app runtime):
+
+```yaml
+dependency_overrides:
+  sqlite3: 2.9.4
+```
 
 The generated `*.g.dart` is committed and excluded from analysis. `flutter test`,
 `flutter analyze`, and `flutter build` never invoke `build_runner`.

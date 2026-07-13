@@ -21,7 +21,11 @@ RankedRunView _run(
   updatedAtMs: 0,
 );
 
-Future<void> _pump(WidgetTester tester, RankedRunView? run) async {
+Future<void> _pump(
+  WidgetTester tester,
+  RankedRunView? run, {
+  bool isDaily = false,
+}) async {
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
@@ -29,8 +33,12 @@ Future<void> _pump(WidgetTester tester, RankedRunView? run) async {
           'run-1',
         ).overrideWith((ref) => Stream<RankedRunView?>.value(run)),
       ],
-      child: const MaterialApp(
-        home: RankedResultScreen(runId: 'run-1', clientScore: 105),
+      child: MaterialApp(
+        home: RankedResultScreen(
+          runId: 'run-1',
+          clientScore: 105,
+          isDaily: isDaily,
+        ),
       ),
     ),
   );
@@ -71,5 +79,27 @@ void main() {
     expect(find.text('Not verified'), findsOneWidget);
     expect(find.text('YOUR SCORE (UNVERIFIED)'), findsOneWidget);
     expect(find.byType(CircularProgressIndicator), findsNothing);
+  });
+
+  testWidgets('a ranked run is labelled RANKED RUN with a ranked retry', (
+    WidgetTester tester,
+  ) async {
+    await _pump(tester, _run(kRankedVerified, verifiedScore: 250));
+
+    expect(find.text('RANKED RUN'), findsOneWidget);
+    expect(find.text('Play ranked again'), findsOneWidget);
+  });
+
+  testWidgets('a daily run is labelled DAILY CHALLENGE with a daily retry', (
+    WidgetTester tester,
+  ) async {
+    await _pump(
+      tester,
+      _run(kRankedVerified, verifiedScore: 250),
+      isDaily: true,
+    );
+
+    expect(find.text('DAILY CHALLENGE'), findsOneWidget);
+    expect(find.text('Back to daily'), findsOneWidget);
   });
 }

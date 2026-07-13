@@ -64,6 +64,25 @@ class RankedRuns extends Table {
   Set<Column<Object>> get primaryKey => <Column<Object>>{runId};
 }
 
+/// A single-row-per-key cache of the last successfully-fetched leaderboard reads,
+/// so the leaderboard screen can show saved standings (with a freshness stamp)
+/// when the device is offline. Non-authoritative and derived: the server is the
+/// truth; a miss just means "fetch live or show offline". [cacheKey] is a small
+/// enum-like string (`weekly_top` | `weekly_me`); [payload] is the response JSON.
+@DataClassName('LeaderboardCacheRow')
+class LeaderboardCache extends Table {
+  TextColumn get cacheKey => text().withLength(min: 1, max: 32)();
+
+  /// The full response body as JSON text (parsed back into a DTO on read).
+  TextColumn get payload => text()();
+
+  /// Epoch ms the cached value was fetched from the server (freshness stamp).
+  IntColumn get fetchedAtMs => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => <Column<Object>>{cacheKey};
+}
+
 /// Aggregate stats derived from [Runs] for the home screen.
 class RunStats {
   const RunStats({
@@ -83,7 +102,7 @@ class RunStats {
   );
 }
 
-@DriftDatabase(tables: <Type>[Runs, Outbox, RankedRuns])
+@DriftDatabase(tables: <Type>[Runs, Outbox, RankedRuns, LeaderboardCache])
 class AppDatabase extends _$AppDatabase {
   /// Takes a [QueryExecutor] so this file depends only on `package:drift`. The
   /// native/on-device connection is built in `database_connection.dart` (which
@@ -91,7 +110,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase(super.executor);
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -100,6 +119,9 @@ class AppDatabase extends _$AppDatabase {
       if (from < 2) {
         await m.createTable(outbox);
         await m.createTable(rankedRuns);
+      }
+      if (from < 3) {
+        await m.createTable(leaderboardCache);
       }
     },
   );
@@ -236,6 +258,18 @@ class AppDatabase extends _$AppDatabase {
           ])
           ..limit(limit))
         .watch();
+  }
+
+  // ── Leaderboard cache ───────────────────────────────────────────────────────
+
+  /// Upserts a cached leaderboard read (last-write-wins per key).
+  Future<void> upsertLeaderboardCache(LeaderboardCacheCompanion row) =>
+      into(leaderboardCache).insertOnConflictUpdate(row);
+
+  Future<LeaderboardCacheRow?> leaderboardCacheEntry(String cacheKey) {
+    return (select(leaderboardCache)
+          ..where(($LeaderboardCacheTable t) => t.cacheKey.equals(cacheKey)))
+        .getSingleOrNull();
   }
 
   Future<RunStats> stats() async {

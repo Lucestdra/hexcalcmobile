@@ -84,6 +84,10 @@ void main() {
       '/api/v1/game-runs/{runId}/submit': 'post',
       '/api/v1/game-runs/{runId}': 'get',
       '/api/v1/game-runs/normal-results': 'post',
+      '/api/v1/leaderboards/weekly': 'get',
+      '/api/v1/leaderboards/weekly/me': 'get',
+      '/api/v1/daily-challenges/current': 'get',
+      '/api/v1/daily-challenges/current/attempts': 'post',
     };
     endpoints.forEach((String path, String method) {
       expect(paths.containsKey(path), isTrue, reason: 'missing path $path');
@@ -170,6 +174,50 @@ void main() {
       'submittedAtUtc',
     ]);
     expectProps('NormalRunAckResponse', <String>['status']);
+    expectProps('WeeklyLeaderboardResponse', <String>[
+      'weekStartUtc',
+      'status',
+      'entries',
+      'nextCursor',
+      'asOfUtc',
+    ]);
+    expectProps('MyWeeklyRankResponse', <String>[
+      'weekStartUtc',
+      'status',
+      'rank',
+      'totalPlayers',
+      'window',
+      'asOfUtc',
+    ]);
+    expectProps('LeaderboardEntryView', <String>[
+      'rank',
+      'playerId',
+      'displayName',
+      'score',
+      'achievedAtUtc',
+      'isCurrentPlayer',
+    ]);
+    expectProps('DailyChallengeView', <String>[
+      'challengeDateUtc',
+      'windowStartUtc',
+      'windowEndUtc',
+      'rulesetVersion',
+      'generatorVersion',
+      'attempted',
+      'asOfUtc',
+    ]);
+    expectProps('DailyAttemptResponse', <String>[
+      'runId',
+      'mode',
+      'seed',
+      'rulesetVersion',
+      'generatorVersion',
+      'runDurationMs',
+      'nonce',
+      'issuedAtUtc',
+      'expiresAtUtc',
+      'challengeToken',
+    ]);
   });
 
   test('response fields the client casts non-null are required by the spec', () {
@@ -194,6 +242,40 @@ void main() {
       'challengeToken',
     ]);
     expectRequired('GameRunResultResponse', <String>['runId']);
+    // The leaderboard/daily reads cast these non-null (dtos.dart).
+    expectRequired('WeeklyLeaderboardResponse', <String>[
+      'weekStartUtc',
+      'entries',
+      'asOfUtc',
+    ]);
+    expectRequired('MyWeeklyRankResponse', <String>[
+      'weekStartUtc',
+      'totalPlayers',
+      'window',
+      'asOfUtc',
+    ]);
+    expectRequired('LeaderboardEntryView', <String>[
+      'rank',
+      'playerId',
+      'displayName',
+      'score',
+      'achievedAtUtc',
+      'isCurrentPlayer',
+    ]);
+    expectRequired('DailyChallengeView', <String>[
+      'challengeDateUtc',
+      'windowStartUtc',
+      'windowEndUtc',
+      'attempted',
+      'asOfUtc',
+    ]);
+    expectRequired('DailyAttemptResponse', <String>[
+      'runId',
+      'seed',
+      'rulesetVersion',
+      'generatorVersion',
+      'challengeToken',
+    ]);
   });
 
   test('key response field types match the client casts', () {
@@ -206,5 +288,14 @@ void main() {
     expectType('GameRunResultResponse', 'status', 'string');
     expectType('GameRunResultResponse', 'verifiedScore', 'integer');
     expectType('MetaConfigResponse', 'runDurationMs', 'integer');
+    expectType('LeaderboardEntryView', 'playerId', 'string');
+    expectType('LeaderboardEntryView', 'rank', 'integer');
+    expectType('LeaderboardEntryView', 'score', 'integer');
+    expectType('LeaderboardEntryView', 'isCurrentPlayer', 'boolean');
+    expectType('MyWeeklyRankResponse', 'totalPlayers', 'integer');
+    expectType('WeeklyLeaderboardResponse', 'entries', 'array');
+    expectType('DailyChallengeView', 'attempted', 'boolean');
+    expectType('DailyAttemptResponse', 'runId', 'string');
+    expectType('DailyAttemptResponse', 'challengeToken', 'string');
   });
 }

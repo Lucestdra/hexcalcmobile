@@ -8,11 +8,18 @@ import '../persistence/sync_store.dart';
 import 'ranked_status.dart';
 
 /// Route arguments for the ranked-result screen (passed as GoRouter `extra`).
+/// [isDaily] tags a daily-challenge run so the screen labels it and routes "play
+/// again" back to the daily entry rather than ranked.
 class RankedResultArgs {
-  const RankedResultArgs({required this.runId, required this.clientScore});
+  const RankedResultArgs({
+    required this.runId,
+    required this.clientScore,
+    this.isDaily = false,
+  });
 
   final String runId;
   final int clientScore;
+  final bool isDaily;
 }
 
 /// Shows a submitted ranked run's verification status, updating live as the outbox
@@ -22,11 +29,15 @@ class RankedResultScreen extends ConsumerWidget {
   const RankedResultScreen({
     required this.runId,
     required this.clientScore,
+    this.isDaily = false,
     super.key,
   });
 
   final String runId;
   final int clientScore;
+
+  /// True for a daily-challenge run (relabels the screen and the retry action).
+  final bool isDaily;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +62,7 @@ class RankedResultScreen extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  'RANKED RUN',
+                  isDaily ? 'DAILY CHALLENGE' : 'RANKED RUN',
                   style: AppTypography.hudLabel.copyWith(
                     color: AppColors.neonBlue,
                   ),
@@ -94,12 +105,12 @@ class RankedResultScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSpacing.xxl),
                 FilledButton(
-                  onPressed: () => context.go('/ranked'),
+                  onPressed: () => context.go(isDaily ? '/daily' : '/ranked'),
                   style: FilledButton.styleFrom(
                     backgroundColor: AppColors.neonBlue,
                     foregroundColor: AppColors.background,
                   ),
-                  child: const Text('Play ranked again'),
+                  child: Text(isDaily ? 'Back to daily' : 'Play ranked again'),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 TextButton(

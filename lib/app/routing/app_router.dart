@@ -5,12 +5,14 @@ import '../../features/authentication/forgot_password_screen.dart';
 import '../../features/authentication/login_screen.dart';
 import '../../features/authentication/register_screen.dart';
 import '../../features/authentication/reset_password_screen.dart';
+import '../../features/daily_challenge/presentation/daily_challenge_screen.dart';
 import '../../features/gameplay/presentation/gameplay_screen.dart';
 import '../../features/gameplay/presentation/ranked_result_screen.dart';
 import '../../features/gameplay/presentation/ranked_run_config.dart';
 import '../../features/gameplay/presentation/ranked_screen.dart';
 import '../../features/gameplay/presentation/run_result_screen.dart';
 import '../../features/home/home_screen.dart';
+import '../../features/leaderboard/presentation/leaderboard_screen.dart';
 import '../../features/profile/profile_screen.dart';
 import '../../features/settings/settings_screen.dart';
 
@@ -24,6 +26,11 @@ GoRouter createRouter({String initialLocation = '/'}) {
       GoRoute(path: '/', builder: (_, _) => const HomeScreen()),
       GoRoute(path: '/play', builder: (_, _) => const GameplayScreen()),
       GoRoute(path: '/ranked', builder: (_, _) => const RankedScreen()),
+      GoRoute(
+        path: '/leaderboard',
+        builder: (_, _) => const LeaderboardScreen(),
+      ),
+      GoRoute(path: '/daily', builder: (_, _) => const DailyChallengeScreen()),
       GoRoute(
         path: '/play-ranked',
         builder: (_, GoRouterState state) {
@@ -43,6 +50,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
               ? RankedResultScreen(
                   runId: extra.runId,
                   clientScore: extra.clientScore,
+                  isDaily: extra.isDaily,
                 )
               : const HomeScreen();
         },

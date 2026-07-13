@@ -380,3 +380,232 @@ class NormalRunAckResponse {
   static NormalRunAckResponse fromJson(Map<String, dynamic> json) =>
       NormalRunAckResponse(status: json['status'] as String? ?? 'recorded');
 }
+
+// ── Leaderboards (Phase 10/11) ───────────────────────────────────────────────
+
+/// One ranked standing on the weekly board. [score] is the server-authoritative
+/// verified score; [isCurrentPlayer] flags the requesting player's own row.
+class LeaderboardEntryView {
+  const LeaderboardEntryView({
+    required this.rank,
+    required this.playerId,
+    required this.displayName,
+    required this.score,
+    required this.achievedAtUtc,
+    required this.isCurrentPlayer,
+  });
+
+  final int rank;
+  final String playerId;
+  final String displayName;
+  final int score;
+  final DateTime achievedAtUtc;
+  final bool isCurrentPlayer;
+
+  static LeaderboardEntryView fromJson(Map<String, dynamic> json) =>
+      LeaderboardEntryView(
+        rank: ProblemDetails.asInt(json['rank']) ?? 0,
+        playerId: json['playerId'] as String? ?? '',
+        displayName: json['displayName'] as String? ?? '',
+        score: ProblemDetails.asInt(json['score']) ?? 0,
+        achievedAtUtc:
+            DateTime.tryParse(
+              json['achievedAtUtc'] as String? ?? '',
+            )?.toUtc() ??
+            DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
+        isCurrentPlayer: json['isCurrentPlayer'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'rank': rank,
+    'playerId': playerId,
+    'displayName': displayName,
+    'score': score,
+    'achievedAtUtc': achievedAtUtc.toUtc().toIso8601String(),
+    'isCurrentPlayer': isCurrentPlayer,
+  };
+}
+
+/// The weekly top page. [status] is `open` for the live week; [nextCursor] is the
+/// opaque cursor for the next page (null on the last page). [asOfUtc] is when the
+/// standings were computed server-side (surfaced as a freshness stamp).
+class WeeklyLeaderboardResponse {
+  const WeeklyLeaderboardResponse({
+    required this.weekStartUtc,
+    required this.status,
+    required this.entries,
+    required this.nextCursor,
+    required this.asOfUtc,
+  });
+
+  final DateTime weekStartUtc;
+  final String status;
+  final List<LeaderboardEntryView> entries;
+  final String? nextCursor;
+  final DateTime asOfUtc;
+
+  static WeeklyLeaderboardResponse fromJson(Map<String, dynamic> json) =>
+      WeeklyLeaderboardResponse(
+        weekStartUtc: _utc(json['weekStartUtc']),
+        status: json['status'] as String? ?? 'open',
+        entries: _entries(json['entries']),
+        nextCursor: json['nextCursor'] as String?,
+        asOfUtc: _utc(json['asOfUtc']),
+      );
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'weekStartUtc': weekStartUtc.toUtc().toIso8601String(),
+    'status': status,
+    'entries': entries.map((LeaderboardEntryView e) => e.toJson()).toList(),
+    'nextCursor': nextCursor,
+    'asOfUtc': asOfUtc.toUtc().toIso8601String(),
+  };
+}
+
+/// The requesting player's weekly standing: their [rank] (null before any verified
+/// run this week), the total ranked [totalPlayers], and a ±5 [window] centred on
+/// them (empty when unranked).
+class MyWeeklyRankResponse {
+  const MyWeeklyRankResponse({
+    required this.weekStartUtc,
+    required this.status,
+    required this.rank,
+    required this.totalPlayers,
+    required this.window,
+    required this.asOfUtc,
+  });
+
+  final DateTime weekStartUtc;
+  final String status;
+  final int? rank;
+  final int totalPlayers;
+  final List<LeaderboardEntryView> window;
+  final DateTime asOfUtc;
+
+  static MyWeeklyRankResponse fromJson(Map<String, dynamic> json) =>
+      MyWeeklyRankResponse(
+        weekStartUtc: _utc(json['weekStartUtc']),
+        status: json['status'] as String? ?? 'open',
+        rank: ProblemDetails.asInt(json['rank']),
+        totalPlayers: ProblemDetails.asInt(json['totalPlayers']) ?? 0,
+        window: _entries(json['window']),
+        asOfUtc: _utc(json['asOfUtc']),
+      );
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'weekStartUtc': weekStartUtc.toUtc().toIso8601String(),
+    'status': status,
+    'rank': rank,
+    'totalPlayers': totalPlayers,
+    'window': window.map((LeaderboardEntryView e) => e.toJson()).toList(),
+    'asOfUtc': asOfUtc.toUtc().toIso8601String(),
+  };
+}
+
+// ── Daily challenge (Phase 10/11) ────────────────────────────────────────────
+
+/// The current daily challenge card. [attempted] is true once the player has made
+/// their one scored attempt for [challengeDateUtc]; the window bounds when the
+/// challenge is playable.
+class DailyChallengeView {
+  const DailyChallengeView({
+    required this.challengeDateUtc,
+    required this.windowStartUtc,
+    required this.windowEndUtc,
+    required this.rulesetVersion,
+    required this.generatorVersion,
+    required this.attempted,
+    required this.asOfUtc,
+  });
+
+  /// The UTC calendar date (date-only) the challenge belongs to.
+  final DateTime challengeDateUtc;
+  final DateTime windowStartUtc;
+  final DateTime windowEndUtc;
+  final String rulesetVersion;
+  final String generatorVersion;
+  final bool attempted;
+  final DateTime asOfUtc;
+
+  static DailyChallengeView fromJson(Map<String, dynamic> json) =>
+      DailyChallengeView(
+        challengeDateUtc: _utcDate(json['challengeDateUtc']),
+        windowStartUtc: _utc(json['windowStartUtc']),
+        windowEndUtc: _utc(json['windowEndUtc']),
+        rulesetVersion: json['rulesetVersion'] as String? ?? '',
+        generatorVersion: json['generatorVersion'] as String? ?? '',
+        attempted: json['attempted'] as bool? ?? false,
+        asOfUtc: _utc(json['asOfUtc']),
+      );
+}
+
+/// The signed challenge issued for a daily attempt — structurally the same as a
+/// ranked [GameRunChallengeResponse], played and submitted through the same
+/// game-runs pipeline (server-side `mode=daily`).
+class DailyAttemptResponse {
+  const DailyAttemptResponse({
+    required this.runId,
+    required this.mode,
+    required this.seed,
+    required this.rulesetVersion,
+    required this.generatorVersion,
+    required this.runDurationMs,
+    required this.nonce,
+    required this.issuedAtUtc,
+    required this.expiresAtUtc,
+    required this.challengeToken,
+  });
+
+  final String runId;
+  final String mode;
+  final String seed;
+  final String rulesetVersion;
+  final String generatorVersion;
+  final int runDurationMs;
+  final String nonce;
+  final DateTime issuedAtUtc;
+  final DateTime expiresAtUtc;
+  final String challengeToken;
+
+  static DailyAttemptResponse fromJson(Map<String, dynamic> json) =>
+      DailyAttemptResponse(
+        runId: json['runId'] as String,
+        mode: json['mode'] as String? ?? 'daily',
+        seed: json['seed'] as String,
+        rulesetVersion: json['rulesetVersion'] as String,
+        generatorVersion: json['generatorVersion'] as String,
+        runDurationMs: ProblemDetails.asInt(json['runDurationMs']) ?? 0,
+        nonce: json['nonce'] as String? ?? '',
+        issuedAtUtc: _utc(json['issuedAtUtc']),
+        expiresAtUtc: _utc(json['expiresAtUtc']),
+        challengeToken: json['challengeToken'] as String,
+      );
+}
+
+/// Parses a required date/date-time string into a UTC [DateTime], falling back to
+/// the epoch so a malformed value never throws mid-parse.
+DateTime _utc(Object? value) =>
+    DateTime.tryParse(value as String? ?? '')?.toUtc() ??
+    DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
+
+/// Parses an OpenAPI `date` (date-only, e.g. `2026-07-13`) as a UTC calendar
+/// date. A bare date has no zone, so `DateTime.parse` reads it as LOCAL midnight;
+/// `.toUtc()` would then shift the calendar day for any non-UTC device (e.g.
+/// UTC+3 turns 2026-07-13 into 2026-07-12). Appending a `Z` when absent forces
+/// the intended UTC interpretation. A value that already carries a time/zone is
+/// parsed as-is.
+DateTime _utcDate(Object? value) {
+  final String raw = value as String? ?? '';
+  final String normalized = raw.contains('T') ? raw : '${raw}T00:00:00Z';
+  return DateTime.tryParse(normalized)?.toUtc() ??
+      DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
+}
+
+List<LeaderboardEntryView> _entries(Object? value) =>
+    (value as List<dynamic>?)
+        ?.map(
+          (dynamic e) =>
+              LeaderboardEntryView.fromJson((e as Map).cast<String, dynamic>()),
+        )
+        .toList(growable: false) ??
+    const <LeaderboardEntryView>[];

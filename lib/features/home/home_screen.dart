@@ -6,6 +6,7 @@ import '../../app/providers.dart';
 import '../../core/design_system/design_system.dart';
 import '../gameplay/persistence/app_database.dart';
 import '../gameplay/persistence/run_history_repository.dart';
+import '../leaderboard/application/leaderboard_providers.dart';
 
 /// Home: wordmark, personal best, Play, recent runs, and a settings entry.
 class HomeScreen extends ConsumerWidget {
@@ -59,6 +60,8 @@ class HomeScreen extends ConsumerWidget {
               ),
               const SizedBox(height: AppSpacing.xl),
               _PersonalBest(score: personalBest),
+              const SizedBox(height: AppSpacing.sm),
+              const _RankTeaser(),
               const Spacer(),
               FilledButton(
                 onPressed: () => context.go('/play'),
@@ -70,23 +73,105 @@ class HomeScreen extends ConsumerWidget {
                 child: const Text('PLAY'),
               ),
               const SizedBox(height: AppSpacing.sm),
-              OutlinedButton(
-                onPressed: () => context.push('/ranked'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.neonBlue,
-                  side: BorderSide(
-                    color: AppColors.neonBlue.withValues(alpha: 0.5),
-                    width: AppStroke.thin,
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: _SecondaryButton(
+                      label: 'RANKED',
+                      onPressed: () => context.push('/ranked'),
+                    ),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                ),
-                child: const Text('RANKED'),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: _SecondaryButton(
+                      label: 'DAILY',
+                      onPressed: () => context.push('/daily'),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: AppSpacing.lg),
               _RecentRuns(recent: recent),
               const SizedBox(height: AppSpacing.lg),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// A neon secondary action used for the RANKED / DAILY entries.
+class _SecondaryButton extends StatelessWidget {
+  const _SecondaryButton({required this.label, required this.onPressed});
+
+  final String label;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: onPressed,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: AppColors.neonBlue,
+        side: BorderSide(
+          color: AppColors.neonBlue.withValues(alpha: 0.5),
+          width: AppStroke.thin,
+        ),
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+      ),
+      child: Text(label),
+    );
+  }
+}
+
+/// A best-effort weekly-rank teaser that doubles as the leaderboard entry point.
+/// Shows the player's rank when known, otherwise a neutral "View" — it never
+/// blocks or errors the home screen (the underlying provider swallows failures).
+class _RankTeaser extends ConsumerWidget {
+  const _RankTeaser();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final int? rank = ref.watch(weeklyRankTeaserProvider).asData?.value;
+    return InkWell(
+      onTap: () => context.push('/leaderboard'),
+      borderRadius: BorderRadius.circular(AppRadii.lg),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg,
+          vertical: AppSpacing.md,
+        ),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(AppRadii.lg),
+          border: Border.all(
+            color: AppColors.inactiveBorder,
+            width: AppStroke.thin,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const Text('WEEKLY RANK', style: AppTypography.hudLabel),
+            Row(
+              children: <Widget>[
+                Text(
+                  rank != null ? '#$rank' : 'View',
+                  style: AppTypography.hudNumeric.copyWith(
+                    color: AppColors.neonBlue,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.xs),
+                const Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.secondaryText,
+                  size: 20,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
