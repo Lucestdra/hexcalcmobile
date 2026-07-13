@@ -18,6 +18,8 @@ import '../core/settings/settings_controller.dart';
 import '../core/settings/settings_repository.dart';
 import '../features/gameplay/domain/domain.dart';
 import '../features/gameplay/persistence/database_connection.dart';
+import '../features/onboarding/application/onboarding_controller.dart';
+import '../features/onboarding/data/onboarding_store.dart';
 import 'app.dart';
 import 'flavors/flavor_config.dart';
 import 'providers.dart';
@@ -71,6 +73,9 @@ Future<void> bootstrap(FlavorConfig config) async {
             flavorProvider.overrideWithValue(config),
             rulesetProvider.overrideWithValue(ruleset),
             settingsRepositoryProvider.overrideWithValue(settingsRepo),
+            onboardingStoreProvider.overrideWithValue(
+              PrefsOnboardingStore(prefs),
+            ),
             analyticsProvider.overrideWithValue(analytics),
             crashReporterProvider.overrideWithValue(crash),
             audioServiceProvider.overrideWithValue(audio),

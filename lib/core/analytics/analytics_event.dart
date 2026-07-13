@@ -15,6 +15,13 @@ class AnalyticsEvent {
   // ----- Lifecycle / session -----
   factory AnalyticsEvent.appOpened() => const AnalyticsEvent._('app_opened');
 
+  // ----- Onboarding -----
+  factory AnalyticsEvent.onboardingStarted() =>
+      const AnalyticsEvent._('onboarding_started');
+
+  factory AnalyticsEvent.onboardingCompleted() =>
+      const AnalyticsEvent._('onboarding_completed');
+
   // ----- Run funnel -----
   factory AnalyticsEvent.runStarted({required String mode}) =>
       AnalyticsEvent._('run_started', <String, Object>{'mode': mode});

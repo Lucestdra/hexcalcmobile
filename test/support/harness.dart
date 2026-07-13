@@ -21,6 +21,8 @@ import 'package:hexcalc/core/settings/settings_repository.dart';
 import 'package:hexcalc/features/gameplay/domain/domain.dart';
 import 'package:hexcalc/features/gameplay/persistence/app_database.dart';
 import 'package:hexcalc/features/gameplay/persistence/run_history_repository.dart';
+import 'package:hexcalc/features/onboarding/application/onboarding_controller.dart';
+import 'package:hexcalc/features/onboarding/data/onboarding_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'fake_http_adapter.dart';
@@ -49,6 +51,9 @@ Future<Widget> testScope({
   // timer that flutter_test flags at teardown.
   RunStats? homeStats,
   List<RunSummary>? homeRecent,
+  // When set, overrides the onboarding store (e.g. InMemoryOnboardingStore(seen: false)
+  // to surface the first-launch overlay). Unset → the default "already seen" store.
+  OnboardingStore? onboardingStore,
 }) async {
   // Tests create several in-memory databases; each uses its own executor so the
   // multiple-instance warning is a false positive here.
@@ -96,6 +101,8 @@ Future<Widget> testScope({
         recentRunsProvider.overrideWith(
           (ref) => Stream<List<RunSummary>>.value(homeRecent),
         ),
+      if (onboardingStore != null)
+        onboardingStoreProvider.overrideWithValue(onboardingStore),
     ],
     child: child,
   );

@@ -1,0 +1,10 @@
+# Copy to android/key.properties and fill in for a signed release build.
+# NEVER commit key.properties or the keystore (.jks) — both are git-ignored.
+#
+# Create an upload keystore with:
+#   keytool -genkey -v -keystore upload-keystore.jks -keyalg RSA -keysize 2048 \
+#     -validity 10000 -alias upload
+storeFile=/absolute/path/to/upload-keystore.jks
+storePassword=change-me
+keyAlias=upload
+keyPassword=change-me

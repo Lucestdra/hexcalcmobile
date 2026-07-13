@@ -22,7 +22,7 @@ LeonidasStudio/Hexcalc/
 - Dart **3.10.7** (bundled with the pinned Flutter SDK).
 - Flame **1.35.1** (pinned in `pubspec.lock`; verified compatible with the SDK).
 
-## Current state (Phase 9)
+## Current state (Phase 12)
 
 - **Phase 1–2** — the deterministic gameplay core in pure Dart (`geometry`,
   `expression`, `drbg`, `board`, `board_generator_v1`, `ruleset`, `replay`),
@@ -74,6 +74,19 @@ LeonidasStudio/Hexcalc/
     a confirmed rank;
   - **normal** runs also enqueue an idempotent history sync. Ranked submit + normal
     result both carry a per-item `Idempotency-Key`.
+- **Phase 11** — the weekly **leaderboard** (top 100 + your ±5, Drift-cached with a
+  freshness stamp for offline, pending-verification marked distinctly) and the **daily
+  challenge** screen (riding the ranked pipeline), plus the Home rank teaser + entries.
+- **Phase 12** — release + CI hardening:
+  - a one-time **onboarding** overlay with a persisted flag
+    (`lib/features/onboarding/`), reduced-motion aware and analytics-instrumented;
+  - an **accessibility** pass — `Semantics` on Home/Profile/run-result, ≥48px onboarding
+    target — on top of the settings-driven reduced motion + color-independent cues;
+  - **Android release signing** from a git-ignored `android/key.properties` (template
+    committed), branded **launcher-icon/splash** source + config (`assets/branding/`),
+    and `docs/asset-licenses.md`;
+  - CI grows a **cross-repo fixture-parity guard** that diffs the synced fixtures against
+    the backend at the pinned `BACKEND_REF`. See `docs/release-readiness.md`.
 
 ## Generated API client (deviation)
 

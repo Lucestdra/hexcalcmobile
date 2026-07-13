@@ -7,6 +7,8 @@ import '../../core/design_system/design_system.dart';
 import '../gameplay/persistence/app_database.dart';
 import '../gameplay/persistence/run_history_repository.dart';
 import '../leaderboard/application/leaderboard_providers.dart';
+import '../onboarding/application/onboarding_controller.dart';
+import '../onboarding/presentation/onboarding_overlay.dart';
 
 /// Home: wordmark, personal best, Play, recent runs, and a settings entry.
 class HomeScreen extends ConsumerWidget {
@@ -17,86 +19,102 @@ class HomeScreen extends ConsumerWidget {
     final AsyncValue<RunStats> stats = ref.watch(runStatsProvider);
     final AsyncValue<List<RunSummary>> recent = ref.watch(recentRunsProvider);
     final int personalBest = stats.asData?.value.personalBest ?? 0;
+    final bool onboardingSeen = ref.watch(onboardingControllerProvider);
 
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+    return Stack(
+      children: <Widget>[
+        Scaffold(
+          backgroundColor: AppColors.background,
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  IconButton(
-                    icon: const Icon(
-                      Icons.person_rounded,
-                      color: AppColors.secondaryText,
-                    ),
-                    tooltip: 'Profile',
-                    onPressed: () => context.push('/profile'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      IconButton(
+                        icon: const Icon(
+                          Icons.person_rounded,
+                          color: AppColors.secondaryText,
+                        ),
+                        tooltip: 'Profile',
+                        onPressed: () => context.push('/profile'),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.settings_rounded,
+                          color: AppColors.secondaryText,
+                        ),
+                        tooltip: 'Settings',
+                        onPressed: () => context.push('/settings'),
+                      ),
+                    ],
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.settings_rounded,
-                      color: AppColors.secondaryText,
+                  const Spacer(),
+                  Center(
+                    child: Semantics(
+                      header: true,
+                      child: const Text(
+                        'HEX • CALC',
+                        style: AppTypography.title,
+                      ),
                     ),
-                    tooltip: 'Settings',
-                    onPressed: () => context.push('/settings'),
                   ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Center(
+                    child: Text(
+                      'swipe the math',
+                      style: AppTypography.body.copyWith(
+                        color: AppColors.neonBlue,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.xl),
+                  _PersonalBest(score: personalBest),
+                  const SizedBox(height: AppSpacing.sm),
+                  const _RankTeaser(),
+                  const Spacer(),
+                  FilledButton(
+                    onPressed: () => context.go('/play'),
+                    style: FilledButton.styleFrom(
+                      backgroundColor: AppColors.neonBlue,
+                      foregroundColor: AppColors.background,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: AppSpacing.md,
+                      ),
+                    ),
+                    child: const Text('PLAY'),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: _SecondaryButton(
+                          label: 'RANKED',
+                          onPressed: () => context.push('/ranked'),
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.sm),
+                      Expanded(
+                        child: _SecondaryButton(
+                          label: 'DAILY',
+                          onPressed: () => context.push('/daily'),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpacing.lg),
+                  _RecentRuns(recent: recent),
+                  const SizedBox(height: AppSpacing.lg),
                 ],
               ),
-              const Spacer(),
-              const Center(
-                child: Text('HEX • CALC', style: AppTypography.title),
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              Center(
-                child: Text(
-                  'swipe the math',
-                  style: AppTypography.body.copyWith(color: AppColors.neonBlue),
-                ),
-              ),
-              const SizedBox(height: AppSpacing.xl),
-              _PersonalBest(score: personalBest),
-              const SizedBox(height: AppSpacing.sm),
-              const _RankTeaser(),
-              const Spacer(),
-              FilledButton(
-                onPressed: () => context.go('/play'),
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.neonBlue,
-                  foregroundColor: AppColors.background,
-                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                ),
-                child: const Text('PLAY'),
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: _SecondaryButton(
-                      label: 'RANKED',
-                      onPressed: () => context.push('/ranked'),
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.sm),
-                  Expanded(
-                    child: _SecondaryButton(
-                      label: 'DAILY',
-                      onPressed: () => context.push('/daily'),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: AppSpacing.lg),
-              _RecentRuns(recent: recent),
-              const SizedBox(height: AppSpacing.lg),
-            ],
+            ),
           ),
         ),
-      ),
+        if (!onboardingSeen) const OnboardingOverlay(),
+      ],
     );
   }
 }
@@ -198,12 +216,17 @@ class _PersonalBest extends StatelessWidget {
           width: AppStroke.thin,
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          const Text('PERSONAL BEST', style: AppTypography.hudLabel),
-          Text('$score', style: AppTypography.hudNumeric),
-        ],
+      child: Semantics(
+        label: 'Personal best: $score',
+        child: ExcludeSemantics(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              const Text('PERSONAL BEST', style: AppTypography.hudLabel),
+              Text('$score', style: AppTypography.hudNumeric),
+            ],
+          ),
+        ),
       ),
     );
   }

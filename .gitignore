@@ -53,3 +53,8 @@ app.*.map.json
 **/google-services.json
 **/GoogleService-Info.plist
 lib/**/firebase_options.dart
+
+# Android release signing — never commit the keystore or its passwords.
+/android/key.properties
+**/*.jks
+**/*.keystore

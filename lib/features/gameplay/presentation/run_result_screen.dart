@@ -35,18 +35,36 @@ class RunResultScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Text(
-                  'RUN COMPLETE',
-                  style: AppTypography.hudLabel.copyWith(
-                    color: AppColors.neonBlue,
+                Semantics(
+                  header: true,
+                  child: Text(
+                    'RUN COMPLETE',
+                    style: AppTypography.hudLabel.copyWith(
+                      color: AppColors.neonBlue,
+                    ),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
-                Text(
-                  '${data.score}',
-                  style: AppTypography.hudNumeric.copyWith(fontSize: 72),
+                Semantics(
+                  label: 'Final score: ${data.score}',
+                  child: ExcludeSemantics(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          '${data.score}',
+                          style: AppTypography.hudNumeric.copyWith(
+                            fontSize: 72,
+                          ),
+                        ),
+                        const Text(
+                          'FINAL SCORE',
+                          style: AppTypography.hudLabel,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                const Text('FINAL SCORE', style: AppTypography.hudLabel),
                 const SizedBox(height: AppSpacing.xl),
                 _ResultRow(
                   label: 'Equations',

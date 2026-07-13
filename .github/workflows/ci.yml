@@ -28,5 +28,49 @@ jobs:
       - name: Analyze
         run: flutter analyze
 
+      # `flutter test` runs the unit, widget, golden (tolerant comparator), and
+      # contract suites — including the hand-authored API client's contract guard.
       - name: Test
         run: flutter test
+
+  # Cross-repo fixture parity: the deterministic gameplay fixtures must be a byte-for-byte
+  # copy of the backend's canonical set at the pinned SHA. Fails on a one-sided mutation.
+  # Requires a read token for the private backend repo (secrets.BACKEND_REPO_TOKEN); when
+  # it is not configured the guard is skipped with a warning rather than failing the build.
+  fixture-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout mobile
+        uses: actions/checkout@v4
+
+      - name: Read pinned backend ref
+        id: backend_ref
+        run: echo "sha=$(cat test/contract/fixtures/BACKEND_REF)" >> "$GITHUB_OUTPUT"
+
+      - name: Check backend token is configured
+        id: guard
+        env:
+          BACKEND_REPO_TOKEN: ${{ secrets.BACKEND_REPO_TOKEN }}
+        run: |
+          if [ -n "$BACKEND_REPO_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::BACKEND_REPO_TOKEN not set — skipping cross-repo fixture parity guard."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout backend at the pinned ref
+        if: steps.guard.outputs.enabled == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: Lucestdra/hexcalcbackend
+          ref: ${{ steps.backend_ref.outputs.sha }}
+          token: ${{ secrets.BACKEND_REPO_TOKEN }}
+          path: backend-pinned
+
+      - name: Diff fixture trees (must be byte-identical)
+        if: steps.guard.outputs.enabled == 'true'
+        run: |
+          diff -r --exclude=BACKEND_REF --exclude='README*' \
+            backend-pinned/docs/gameplay/fixtures \
+            test/contract/fixtures

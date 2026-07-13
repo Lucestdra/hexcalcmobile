@@ -151,26 +151,35 @@ class _ProfileHeader extends StatelessWidget {
           width: AppStroke.thin,
         ),
       ),
-      child: Row(
-        children: <Widget>[
-          const Icon(Icons.person_rounded, color: AppColors.neonBlue, size: 40),
-          const SizedBox(width: AppSpacing.md),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  name,
-                  style: AppTypography.body.copyWith(
-                    color: AppColors.primaryText,
-                    fontSize: 20,
-                  ),
+      child: Semantics(
+        label: '$label, $name',
+        child: ExcludeSemantics(
+          child: Row(
+            children: <Widget>[
+              const Icon(
+                Icons.person_rounded,
+                color: AppColors.neonBlue,
+                size: 40,
+              ),
+              const SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      name,
+                      style: AppTypography.body.copyWith(
+                        color: AppColors.primaryText,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(label, style: AppTypography.hudLabel),
+                  ],
                 ),
-                Text(label, style: AppTypography.hudLabel),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
