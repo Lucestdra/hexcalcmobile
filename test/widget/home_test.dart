@@ -68,7 +68,7 @@ void main() {
 
     expect(find.text('1840'), findsWidgets); // personal best + the run row
     expect(find.text('RECENT RUNS'), findsOneWidget);
-    expect(find.text('11 eq · x6'), findsOneWidget);
+    expect(find.text('Time Attack · 11 eq · x6'), findsOneWidget);
   });
 
   testWidgets('home has ranked, daily, and a rank teaser', (

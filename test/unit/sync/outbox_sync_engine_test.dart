@@ -313,11 +313,11 @@ void main() {
   });
 
   test('a normal-result sync is deleted on ack', () async {
-    fake.on(
-      'POST',
-      '/api/v1/game-runs/normal-results',
-      (_) => FakeResponse.json(200, <String, dynamic>{'status': 'recorded'}),
-    );
+    Map<String, dynamic>? sent;
+    fake.on('POST', '/api/v1/game-runs/normal-results', (options) {
+      sent = (options.data as Map<dynamic, dynamic>).cast<String, dynamic>();
+      return FakeResponse.json(200, <String, dynamic>{'status': 'recorded'});
+    });
     await store.enqueue(
       operationType: kOpNormalResult,
       payloadVersion: 1,
@@ -327,6 +327,13 @@ void main() {
         'seed': 'seed-1',
         'clientScore': 42,
         'playedAtUtc': '2026-01-01T00:00:00.000Z',
+        'protocolVersion': 'target-swipe-v2',
+        'payloadVersion': 2,
+        'mapCatalogVersion': 'maps-v1',
+        'mapId': 'open-hex',
+        'modeCatalogVersion': 'modes-v1',
+        'modeId': 'timeAttack',
+        'targetsSolved': 7,
       },
       idempotencyKey: 'n-1',
       nowMs: clock,
@@ -335,6 +342,10 @@ void main() {
     await makeEngine().drain();
 
     expect(fake.callsTo('POST', '/api/v1/game-runs/normal-results'), 1);
+    expect(sent!['protocolVersion'], 'target-swipe-v2');
+    expect(sent!['mapId'], 'open-hex');
+    expect(sent!['modeId'], 'timeAttack');
+    expect(sent!['targetsSolved'], 7);
     expect(await store.allItems(), isEmpty);
   });
 

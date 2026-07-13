@@ -8,6 +8,7 @@ import '../../../core/api/hexcalc_api.dart';
 import '../../../core/auth/auth_session.dart';
 import '../../../core/design_system/design_system.dart';
 import '../../../core/errors/app_error.dart';
+import '../application/game_session_config.dart';
 import '../domain/domain.dart';
 import 'ranked_run_config.dart';
 
@@ -34,12 +35,27 @@ class _RankedScreenState extends ConsumerState<RankedScreen> {
   Future<void> _load() async {
     setState(() => _state = const _Loading());
     final HexcalcApi api = ref.read(hexcalcApiProvider);
-    final String localRuleset = ref.read(rulesetProvider).rulesetVersion;
-    const String localGenerator = BoardGeneratorV1.generatorVersion;
+    final String localV1Ruleset = ref.read(rulesetProvider).rulesetVersion;
+    const String localV2Ruleset = BoardGeneratorV2.rulesetVersion;
+    final GameplayCatalogHashesV2 localHashes = ref.read(
+      gameplayCatalogHashesV2Provider,
+    );
     try {
       final MetaConfigResponse meta = await api.getMetaConfig();
-      if (meta.rulesetVersion != localRuleset ||
-          meta.generatorVersion != localGenerator) {
+      if (!_supportsProtocol(
+            protocolVersion: meta.protocolVersion,
+            rulesetVersion: meta.rulesetVersion,
+            generatorVersion: meta.generatorVersion,
+            payloadVersion: meta.payloadVersion,
+            mapCatalogVersion: meta.mapCatalogVersion,
+            modeCatalogVersion: meta.modeCatalogVersion,
+            localV1Ruleset: localV1Ruleset,
+            localV2Ruleset: localV2Ruleset,
+          ) ||
+          (meta.protocolVersion ==
+                  GameplayProtocolRef.targetSwipeV2.protocolVersion &&
+              (meta.mapCatalogHash != localHashes.mapCatalogHash ||
+                  meta.modeCatalogHash != localHashes.modeCatalogHash))) {
         _set(_Blocked(meta.rulesetVersion, meta.generatorVersion));
         return;
       }
@@ -48,8 +64,19 @@ class _RankedScreenState extends ConsumerState<RankedScreen> {
         const IssueGameRunRequest(mode: 'ranked'),
       );
       // Belt and suspenders: the issued run must match what we can play/replay.
-      if (challenge.rulesetVersion != localRuleset ||
-          challenge.generatorVersion != localGenerator) {
+      if (!_supportsProtocol(
+            protocolVersion: challenge.protocolVersion ?? 'equation-v1',
+            rulesetVersion: challenge.rulesetVersion,
+            generatorVersion: challenge.generatorVersion,
+            payloadVersion: challenge.payloadVersion ?? 1,
+            mapCatalogVersion: challenge.mapCatalogVersion,
+            modeCatalogVersion: challenge.modeCatalogVersion,
+            localV1Ruleset: localV1Ruleset,
+            localV2Ruleset: localV2Ruleset,
+          ) ||
+          (challenge.protocolVersion ==
+                  GameplayProtocolRef.targetSwipeV2.protocolVersion &&
+              (challenge.mapId == null || challenge.modeId != 'ranked'))) {
         _set(_Blocked(challenge.rulesetVersion, challenge.generatorVersion));
         return;
       }
@@ -63,6 +90,12 @@ class _RankedScreenState extends ConsumerState<RankedScreen> {
             generatorVersion: challenge.generatorVersion,
             challengeToken: challenge.challengeToken,
             runDurationMs: challenge.runDurationMs,
+            protocolVersion: challenge.protocolVersion ?? 'equation-v1',
+            payloadVersion: challenge.payloadVersion ?? 1,
+            mapCatalogVersion: challenge.mapCatalogVersion,
+            mapId: challenge.mapId,
+            modeCatalogVersion: challenge.modeCatalogVersion,
+            modeId: challenge.modeId,
           ),
         ),
       );
@@ -141,6 +174,31 @@ class _RankedScreenState extends ConsumerState<RankedScreen> {
       ),
     };
   }
+}
+
+bool _supportsProtocol({
+  required String protocolVersion,
+  required String rulesetVersion,
+  required String generatorVersion,
+  required int payloadVersion,
+  required String? mapCatalogVersion,
+  required String? modeCatalogVersion,
+  required String localV1Ruleset,
+  required String localV2Ruleset,
+}) {
+  if (protocolVersion == GameplayProtocolRef.targetSwipeV2.protocolVersion) {
+    return rulesetVersion == localV2Ruleset &&
+        generatorVersion == BoardGeneratorV2.generatorVersion &&
+        payloadVersion == GameplayProtocolRef.targetSwipeV2.payloadVersion &&
+        mapCatalogVersion ==
+            GameplayProtocolRef.targetSwipeV2.mapCatalogVersion &&
+        modeCatalogVersion ==
+            GameplayProtocolRef.targetSwipeV2.modeCatalogVersion;
+  }
+  return protocolVersion == 'equation-v1' &&
+      rulesetVersion == localV1Ruleset &&
+      generatorVersion == BoardGeneratorV1.generatorVersion &&
+      payloadVersion == 1;
 }
 
 sealed class _RankedState {

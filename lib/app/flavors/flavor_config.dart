@@ -31,8 +31,9 @@ class FlavorConfig {
   static const FlavorConfig development = FlavorConfig(
     flavor: AppFlavor.development,
     appName: 'HEX CALC Dev',
-    // Android emulator loopback to a locally-running backend.
-    apiBaseUrl: 'http://10.0.2.2:8080',
+    // Physical USB device via `adb reverse tcp:8080 tcp:8080` (device localhost
+    // tunnels to the host). For the Android emulator, use 'http://10.0.2.2:8080'.
+    apiBaseUrl: 'http://localhost:8080',
     showDebugBanner: true,
     verboseLogging: true,
     useDebugAnalytics: true,

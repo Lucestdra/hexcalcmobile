@@ -1880,6 +1880,45 @@
           },
           "challengeToken": {
             "type": "string"
+          },
+          "protocolVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payloadVersion": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "mapCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mapId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeId": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -1919,6 +1958,45 @@
           "asOfUtc": {
             "type": "string",
             "format": "date-time"
+          },
+          "protocolVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payloadVersion": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "mapCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mapId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeId": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -1985,6 +2063,45 @@
           },
           "challengeToken": {
             "type": "string"
+          },
+          "protocolVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payloadVersion": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "mapCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mapId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeId": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -2047,6 +2164,63 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "protocolVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payloadVersion": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "mapCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mapId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "targetsSolved": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "boardRevision": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int64"
           }
         }
       },
@@ -2213,6 +2387,34 @@
           },
           "ruleset": {
             "$ref": "#/components/schemas/JsonNode"
+          },
+          "protocolVersion": {
+            "type": "string",
+            "default": "equation-v1"
+          },
+          "mapCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mapCatalogHash": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeCatalogHash": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -2307,6 +2509,54 @@
           "playedAtUtc": {
             "type": "string",
             "format": "date-time"
+          },
+          "protocolVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payloadVersion": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "mapCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mapId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeCatalogVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modeId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "targetsSolved": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
           }
         }
       },

@@ -9,3 +9,4 @@ export 'expression.dart';
 export 'geometry.dart';
 export 'replay.dart';
 export 'ruleset.dart';
+export 'v2/v2.dart';

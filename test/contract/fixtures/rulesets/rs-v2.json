@@ -1,0 +1,27 @@
+{
+  "combo": {
+    "windowMs": 4000
+  },
+  "fever": {
+    "durationMs": 20000,
+    "multiplierPercent": 200,
+    "threshold": 8,
+    "wrongEnergyPenalty": 4
+  },
+  "rulesetVersion": "rs-v2",
+  "scoring": {
+    "baseChainScore": 100,
+    "comboBasePercent": 100,
+    "comboMaxPercent": 200,
+    "comboStepPercent": 10,
+    "lengthBonusPerAdditionalOperator": 20,
+    "operatorDifficultyBonus": {
+      "add": 0,
+      "divide": 15,
+      "multiply": 10,
+      "subtract": 5
+    },
+    "speedBonusMax": 50,
+    "speedBonusWindowMs": 3000
+  }
+}

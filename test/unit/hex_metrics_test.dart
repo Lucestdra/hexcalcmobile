@@ -29,6 +29,39 @@ void main() {
   });
 
   test(
+    'fits and hit-tests an irregular topology from its actual coordinates',
+    () {
+      const List<AxialCoordinate> topology = <AxialCoordinate>[
+        AxialCoordinate(2, -1),
+        AxialCoordinate(3, -1),
+        AxialCoordinate(2, 0),
+        AxialCoordinate(1, 0),
+      ];
+      final HexMetrics metrics = HexMetrics.fitCoordinates(
+        const Size(320, 480),
+        topology,
+      );
+
+      for (final AxialCoordinate coordinate in topology) {
+        final Offset center = metrics.centerOf(coordinate);
+        expect(center.dx, inInclusiveRange(0, 320));
+        expect(center.dy, inInclusiveRange(0, 480));
+        expect(metrics.roundToCell(center), coordinate);
+      }
+    },
+  );
+
+  test('rejects an empty authored topology', () {
+    expect(
+      () => HexMetrics.fitCoordinates(
+        const Size(320, 480),
+        const <AxialCoordinate>[],
+      ),
+      throwsArgumentError,
+    );
+  });
+
+  test(
     'line fills every cell between two coords (fast-swipe interpolation)',
     () {
       expect(

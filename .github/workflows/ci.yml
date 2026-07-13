@@ -22,6 +22,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Validate maps-v1 gameplay scenarios
+        run: dart run tool/validate_maps_v1.dart
+
       - name: Format check
         run: dart format --output=none --set-exit-if-changed .
 

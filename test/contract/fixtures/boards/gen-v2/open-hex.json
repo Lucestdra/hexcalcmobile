@@ -1,0 +1,563 @@
+{
+  "boards": [
+    {
+      "expressionCount": 398,
+      "revision": 0,
+      "target": 6,
+      "targetCandidate": {
+        "canonicalHintPath": [
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 2
+          }
+        ],
+        "difficulty": 100,
+        "result": 6,
+        "shortestChainCells": 3,
+        "solutionCount": 46
+      },
+      "targetCount": 31,
+      "tiles": [
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 0,
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": -2,
+          "r": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": -2,
+          "r": 2
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": -1,
+          "value": 4
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 1
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": 2,
+          "value": 5
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": -2,
+          "value": 9
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 0,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 1,
+          "value": 3
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 2,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply",
+          "q": 1,
+          "r": -2
+        },
+        {
+          "kind": "operator",
+          "operator": "divide",
+          "q": 1,
+          "r": -1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 1,
+          "r": 0
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": 1,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -2,
+          "value": 6
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -1,
+          "value": 2
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": 0,
+          "value": 4
+        }
+      ],
+      "transition": {
+        "attemptsUsed": 1,
+        "changedCoordinates": [
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -2,
+            "r": 2
+          },
+          {
+            "q": -1,
+            "r": -1
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 2
+          },
+          {
+            "q": 0,
+            "r": -2
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 2
+          },
+          {
+            "q": 1,
+            "r": -2
+          },
+          {
+            "q": 1,
+            "r": -1
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 1
+          },
+          {
+            "q": 2,
+            "r": -2
+          },
+          {
+            "q": 2,
+            "r": -1
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ],
+        "fromRevision": -1,
+        "kind": "initialGeneration",
+        "previousTarget": null,
+        "toRevision": 0
+      }
+    },
+    {
+      "expressionCount": 293,
+      "revision": 1,
+      "target": 3,
+      "targetCandidate": {
+        "canonicalHintPath": [
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": 0
+          }
+        ],
+        "difficulty": 101,
+        "result": 3,
+        "shortestChainCells": 3,
+        "solutionCount": 9
+      },
+      "targetCount": 29,
+      "tiles": [
+        {
+          "kind": "number",
+          "q": -2,
+          "r": 0,
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": -2,
+          "r": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": -2,
+          "r": 2
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": -1,
+          "value": 4
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 1
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": 2,
+          "value": 3
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": -2,
+          "value": 9
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 0,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 0,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 1,
+          "value": 3
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 2,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply",
+          "q": 1,
+          "r": -2
+        },
+        {
+          "kind": "operator",
+          "operator": "divide",
+          "q": 1,
+          "r": -1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 1,
+          "r": 0
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": 1,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -2,
+          "value": 6
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -1,
+          "value": 2
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": 0,
+          "value": 4
+        }
+      ],
+      "transition": {
+        "attemptsUsed": 1,
+        "changedCoordinates": [
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 2
+          }
+        ],
+        "fromRevision": 0,
+        "kind": "refill",
+        "previousTarget": 6,
+        "toRevision": 1
+      }
+    },
+    {
+      "expressionCount": 469,
+      "revision": 2,
+      "target": 13,
+      "targetCandidate": {
+        "canonicalHintPath": [
+          {
+            "q": -1,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -2
+          }
+        ],
+        "difficulty": 100,
+        "result": 13,
+        "shortestChainCells": 3,
+        "solutionCount": 16
+      },
+      "targetCount": 30,
+      "tiles": [
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -2,
+          "r": 0
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": -2,
+          "r": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract",
+          "q": -2,
+          "r": 2
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": -1,
+          "value": 4
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": 0,
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": -1,
+          "r": 1
+        },
+        {
+          "kind": "number",
+          "q": -1,
+          "r": 2,
+          "value": 3
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": -2,
+          "value": 9
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 0,
+          "r": -1
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 0,
+          "value": 2
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 1,
+          "value": 3
+        },
+        {
+          "kind": "number",
+          "q": 0,
+          "r": 2,
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply",
+          "q": 1,
+          "r": -2
+        },
+        {
+          "kind": "operator",
+          "operator": "divide",
+          "q": 1,
+          "r": -1
+        },
+        {
+          "kind": "operator",
+          "operator": "add",
+          "q": 1,
+          "r": 0
+        },
+        {
+          "kind": "number",
+          "q": 1,
+          "r": 1,
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -2,
+          "value": 6
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": -1,
+          "value": 2
+        },
+        {
+          "kind": "number",
+          "q": 2,
+          "r": 0,
+          "value": 4
+        }
+      ],
+      "transition": {
+        "attemptsUsed": 1,
+        "changedCoordinates": [
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": 0
+          }
+        ],
+        "fromRevision": 1,
+        "kind": "refill",
+        "previousTarget": 3,
+        "toRevision": 2
+      }
+    }
+  ],
+  "generatorVersion": "gen-v2",
+  "mapCatalogVersion": "maps-v1",
+  "mapId": "open-hex",
+  "protocolVersion": "target-swipe-v2",
+  "rulesetVersion": "rs-v2",
+  "seed": "fixture-board-v2"
+}

@@ -42,6 +42,9 @@ flutter:
   uses-material-design: true
   assets:
     - assets/gameplay/rs-v1.json
+    - assets/gameplay/rs-v2.json
+    - assets/gameplay/maps-v1.json
+    - assets/gameplay/modes-v1.json
     - assets/audio/
   fonts:
     - family: SpaceGrotesk

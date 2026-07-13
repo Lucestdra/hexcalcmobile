@@ -8,8 +8,10 @@ import '../core/haptics/haptics_service.dart';
 import '../core/push/push_service.dart';
 import '../core/remote_config/remote_config.dart';
 import '../core/sync/outbox_sync_engine.dart';
+import '../features/gameplay/application/game_session_config.dart';
 import '../features/gameplay/domain/domain.dart';
 import '../features/gameplay/persistence/app_database.dart';
+import '../features/gameplay/persistence/map_progress_repository.dart';
 import '../features/gameplay/persistence/run_history_repository.dart';
 import '../features/gameplay/persistence/sync_store.dart';
 import 'flavors/flavor_config.dart';
@@ -23,6 +25,32 @@ final flavorProvider = Provider<FlavorConfig>((ref) {
 /// bootstrap and injected here. Overridden in bootstrap.
 final rulesetProvider = Provider<Ruleset>((ref) {
   throw UnimplementedError('rulesetProvider must be overridden at bootstrap');
+});
+
+/// Target-swipe protocol assets. Kept beside the frozen v1 provider so queued
+/// and historical v1 runs continue to resolve their original implementation.
+final rulesetV2Provider = Provider<RulesetV2>((ref) {
+  throw UnimplementedError('rulesetV2Provider must be overridden at bootstrap');
+});
+
+final mapCatalogV1Provider = Provider<MapCatalogV1>((ref) {
+  throw UnimplementedError(
+    'mapCatalogV1Provider must be overridden at bootstrap',
+  );
+});
+
+final modeCatalogV1Provider = Provider<ModeCatalogV1>((ref) {
+  throw UnimplementedError(
+    'modeCatalogV1Provider must be overridden at bootstrap',
+  );
+});
+
+final gameplayCatalogHashesV2Provider = Provider<GameplayCatalogHashesV2>((
+  ref,
+) {
+  throw UnimplementedError(
+    'gameplayCatalogHashesV2Provider must be overridden at bootstrap',
+  );
 });
 
 /// Analytics/crash seams — overridden at bootstrap with debug or no-op impls
@@ -65,6 +93,20 @@ final runStatsProvider = StreamProvider<RunStats>((ref) {
 final recentRunsProvider = StreamProvider<List<RunSummary>>((ref) {
   return ref.watch(runHistoryRepositoryProvider).watchRecentRuns(limit: 5);
 });
+
+final mapProgressRepositoryProvider = Provider<MapProgressRepository>((ref) {
+  return MapProgressRepository(ref.watch(appDatabaseProvider));
+});
+
+final mapProgressProvider =
+    StreamProvider.family<Map<String, MapProgress>, String>((
+      ref,
+      String catalogVersion,
+    ) {
+      return ref
+          .watch(mapProgressRepositoryProvider)
+          .watchCatalog(catalogVersion);
+    });
 
 /// Haptics — a single stable instance; its `enabled` flag is synced from
 /// settings by the gameplay session.

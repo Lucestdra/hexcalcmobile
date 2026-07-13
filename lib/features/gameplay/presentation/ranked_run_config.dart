@@ -12,6 +12,12 @@ class RankedRunConfig {
     required this.challengeToken,
     required this.runDurationMs,
     this.mode = 'ranked',
+    this.protocolVersion = 'equation-v1',
+    this.payloadVersion = 1,
+    this.mapCatalogVersion,
+    this.mapId,
+    this.modeCatalogVersion,
+    this.modeId,
   });
 
   final String runId;
@@ -21,6 +27,13 @@ class RankedRunConfig {
   final String challengeToken;
   final int runDurationMs;
   final String mode;
+  final String protocolVersion;
+  final int payloadVersion;
+  final String? mapCatalogVersion;
+  final String? mapId;
+  final String? modeCatalogVersion;
+  final String? modeId;
 
   bool get isDaily => mode == 'daily';
+  bool get isTargetSwipeV2 => protocolVersion == 'target-swipe-v2';
 }

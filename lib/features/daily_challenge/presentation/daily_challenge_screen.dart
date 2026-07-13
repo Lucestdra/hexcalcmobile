@@ -10,6 +10,7 @@ import '../../../core/api/hexcalc_api.dart';
 import '../../../core/auth/auth_session.dart';
 import '../../../core/design_system/design_system.dart';
 import '../../../core/errors/app_error.dart';
+import '../../gameplay/application/game_session_config.dart';
 import '../../gameplay/domain/domain.dart';
 import '../../gameplay/presentation/ranked_run_config.dart';
 import '../application/daily_challenge_providers.dart';
@@ -37,8 +38,7 @@ class _DailyChallengeScreenState extends ConsumerState<DailyChallengeScreen> {
     // Read every provider BEFORE the network await so nothing touches `ref` after
     // an await (the widget may be disposed by then).
     final HexcalcApi api = ref.read(hexcalcApiProvider);
-    final String localRuleset = ref.read(rulesetProvider).rulesetVersion;
-    const String localGenerator = BoardGeneratorV1.generatorVersion;
+    final String localV1Ruleset = ref.read(rulesetProvider).rulesetVersion;
     final AnalyticsService analytics = ref.read(analyticsProvider);
     try {
       final DailyAttemptResponse attempt = await api.startDailyAttempt();
@@ -49,8 +49,17 @@ class _DailyChallengeScreenState extends ConsumerState<DailyChallengeScreen> {
       // Belt and suspenders: only play a challenge this client can replay. The
       // attempt was already consumed server-side, so refresh the card (it will
       // now read as attempted) rather than leave a stale "start" button.
-      if (attempt.rulesetVersion != localRuleset ||
-          attempt.generatorVersion != localGenerator) {
+      if (!_supportsDailyProtocol(
+        protocolVersion: attempt.protocolVersion ?? 'equation-v1',
+        rulesetVersion: attempt.rulesetVersion,
+        generatorVersion: attempt.generatorVersion,
+        payloadVersion: attempt.payloadVersion ?? 1,
+        mapCatalogVersion: attempt.mapCatalogVersion,
+        mapId: attempt.mapId,
+        modeCatalogVersion: attempt.modeCatalogVersion,
+        modeId: attempt.modeId,
+        localV1Ruleset: localV1Ruleset,
+      )) {
         ref.invalidate(dailyChallengeProvider);
         _showMessage('Update the app to play today\'s challenge.');
         return;
@@ -67,6 +76,12 @@ class _DailyChallengeScreenState extends ConsumerState<DailyChallengeScreen> {
           challengeToken: attempt.challengeToken,
           runDurationMs: attempt.runDurationMs,
           mode: 'daily',
+          protocolVersion: attempt.protocolVersion ?? 'equation-v1',
+          payloadVersion: attempt.payloadVersion ?? 1,
+          mapCatalogVersion: attempt.mapCatalogVersion,
+          mapId: attempt.mapId,
+          modeCatalogVersion: attempt.modeCatalogVersion,
+          modeId: attempt.modeId,
         ),
       );
     } on ConflictError {
@@ -137,7 +152,7 @@ class _DailyChallengeScreenState extends ConsumerState<DailyChallengeScreen> {
                 card: card,
                 starting: _starting,
                 onPlay: _startAttempt,
-                localRuleset: ref.read(rulesetProvider).rulesetVersion,
+                localV1Ruleset: ref.read(rulesetProvider).rulesetVersion,
               ),
             ),
           ),
@@ -152,17 +167,25 @@ class _Card extends StatelessWidget {
     required this.card,
     required this.starting,
     required this.onPlay,
-    required this.localRuleset,
+    required this.localV1Ruleset,
   });
 
   final DailyChallengeView card;
   final bool starting;
   final VoidCallback onPlay;
-  final String localRuleset;
+  final String localV1Ruleset;
 
-  bool get _supported =>
-      card.rulesetVersion == localRuleset &&
-      card.generatorVersion == BoardGeneratorV1.generatorVersion;
+  bool get _supported => _supportsDailyProtocol(
+    protocolVersion: card.protocolVersion ?? 'equation-v1',
+    rulesetVersion: card.rulesetVersion,
+    generatorVersion: card.generatorVersion,
+    payloadVersion: card.payloadVersion ?? 1,
+    mapCatalogVersion: card.mapCatalogVersion,
+    mapId: card.mapId,
+    modeCatalogVersion: card.modeCatalogVersion,
+    modeId: card.modeId,
+    localV1Ruleset: localV1Ruleset,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -185,8 +208,7 @@ class _Card extends StatelessWidget {
             'You\'ve made your one scored attempt for '
             '${_formatDate(card.challengeDateUtc)}. Come back tomorrow for a new '
             'challenge.',
-        action: _Action('View leaderboard', () => context.go('/leaderboard')),
-        secondary: _Action('Back to home', () => context.go('/')),
+        action: _Action('Back to home', () => context.go('/')),
       );
     }
 
@@ -239,6 +261,34 @@ class _Card extends StatelessWidget {
       ],
     );
   }
+}
+
+bool _supportsDailyProtocol({
+  required String protocolVersion,
+  required String rulesetVersion,
+  required String generatorVersion,
+  required int payloadVersion,
+  required String? mapCatalogVersion,
+  required String? mapId,
+  required String? modeCatalogVersion,
+  required String? modeId,
+  required String localV1Ruleset,
+}) {
+  if (protocolVersion == GameplayProtocolRef.targetSwipeV2.protocolVersion) {
+    return rulesetVersion == BoardGeneratorV2.rulesetVersion &&
+        generatorVersion == BoardGeneratorV2.generatorVersion &&
+        payloadVersion == GameplayProtocolRef.targetSwipeV2.payloadVersion &&
+        mapCatalogVersion ==
+            GameplayProtocolRef.targetSwipeV2.mapCatalogVersion &&
+        mapId != null &&
+        modeCatalogVersion ==
+            GameplayProtocolRef.targetSwipeV2.modeCatalogVersion &&
+        modeId == 'daily';
+  }
+  return protocolVersion == 'equation-v1' &&
+      rulesetVersion == localV1Ruleset &&
+      generatorVersion == BoardGeneratorV1.generatorVersion &&
+      payloadVersion == 1;
 }
 
 /// Formats a date-only UTC value as `YYYY-MM-DD` (locale-independent).

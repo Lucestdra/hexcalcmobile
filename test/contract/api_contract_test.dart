@@ -127,6 +127,15 @@ void main() {
       'clientScore',
       'playedAtUtc',
     ]);
+    expectProps('NormalRunResultRequest', <String>[
+      'protocolVersion',
+      'payloadVersion',
+      'mapCatalogVersion',
+      'mapId',
+      'modeCatalogVersion',
+      'modeId',
+      'targetsSolved',
+    ]);
   });
 
   test('response schemas expose the fields the client reads', () {
@@ -150,6 +159,11 @@ void main() {
       'generatorVersion',
       'payloadVersion',
       'runDurationMs',
+      'protocolVersion',
+      'mapCatalogVersion',
+      'mapCatalogHash',
+      'modeCatalogVersion',
+      'modeCatalogHash',
     ]);
     expectProps('GameRunChallengeResponse', <String>[
       'runId',
@@ -162,6 +176,12 @@ void main() {
       'issuedAtUtc',
       'expiresAtUtc',
       'challengeToken',
+      'protocolVersion',
+      'payloadVersion',
+      'mapCatalogVersion',
+      'mapId',
+      'modeCatalogVersion',
+      'modeId',
     ]);
     expectProps('GameRunResultResponse', <String>[
       'runId',
@@ -172,6 +192,14 @@ void main() {
       'anomalyFlags',
       'rejectionReason',
       'submittedAtUtc',
+      'protocolVersion',
+      'payloadVersion',
+      'mapCatalogVersion',
+      'mapId',
+      'modeCatalogVersion',
+      'modeId',
+      'targetsSolved',
+      'boardRevision',
     ]);
     expectProps('NormalRunAckResponse', <String>['status']);
     expectProps('WeeklyLeaderboardResponse', <String>[
@@ -205,6 +233,12 @@ void main() {
       'generatorVersion',
       'attempted',
       'asOfUtc',
+      'protocolVersion',
+      'payloadVersion',
+      'mapCatalogVersion',
+      'mapId',
+      'modeCatalogVersion',
+      'modeId',
     ]);
     expectProps('DailyAttemptResponse', <String>[
       'runId',
@@ -217,6 +251,12 @@ void main() {
       'issuedAtUtc',
       'expiresAtUtc',
       'challengeToken',
+      'protocolVersion',
+      'payloadVersion',
+      'mapCatalogVersion',
+      'mapId',
+      'modeCatalogVersion',
+      'modeId',
     ]);
   });
 
@@ -288,6 +328,12 @@ void main() {
     expectType('GameRunResultResponse', 'status', 'string');
     expectType('GameRunResultResponse', 'verifiedScore', 'integer');
     expectType('MetaConfigResponse', 'runDurationMs', 'integer');
+    expectType('MetaConfigResponse', 'protocolVersion', 'string');
+    expectType('MetaConfigResponse', 'mapCatalogHash', 'string');
+    expectType('GameRunChallengeResponse', 'payloadVersion', 'integer');
+    expectType('GameRunChallengeResponse', 'mapId', 'string');
+    expectType('GameRunResultResponse', 'boardRevision', 'integer');
+    expectType('NormalRunResultRequest', 'targetsSolved', 'integer');
     expectType('LeaderboardEntryView', 'playerId', 'string');
     expectType('LeaderboardEntryView', 'rank', 'integer');
     expectType('LeaderboardEntryView', 'score', 'integer');
@@ -297,5 +343,7 @@ void main() {
     expectType('DailyChallengeView', 'attempted', 'boolean');
     expectType('DailyAttemptResponse', 'runId', 'string');
     expectType('DailyAttemptResponse', 'challengeToken', 'string');
+    expectType('DailyAttemptResponse', 'payloadVersion', 'integer');
+    expectType('DailyAttemptResponse', 'mapId', 'string');
   });
 }

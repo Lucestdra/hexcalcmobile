@@ -10,7 +10,7 @@ class Runs extends Table {
   /// Epoch milliseconds when the run finished.
   IntColumn get playedAtMs => integer()();
 
-  /// 'normal' | 'ranked' | 'daily'.
+  /// Legacy `normal` or a stable modes-v1 ID.
   TextColumn get mode => text().withLength(min: 1, max: 16)();
 
   IntColumn get score => integer()();
@@ -20,6 +20,34 @@ class Runs extends Table {
   IntColumn get durationMs => integer()();
   TextColumn get rulesetVersion => text().withLength(min: 1, max: 32)();
   TextColumn get seed => text().withLength(min: 1, max: 128)();
+
+  /// Nullable for legacy v1 rows created before protocol-aware sessions.
+  TextColumn get protocolVersion =>
+      text().withLength(min: 1, max: 32).nullable()();
+  TextColumn get mapCatalogVersion =>
+      text().withLength(min: 1, max: 32).nullable()();
+  TextColumn get mapId => text().withLength(min: 1, max: 64).nullable()();
+  IntColumn get targetsSolved =>
+      integer().withDefault(const Constant<int>(0))();
+
+  /// Level rating (0..3); null for modes without ratings and for legacy rows.
+  IntColumn get rating => integer().nullable()();
+}
+
+/// Local, offline-first progression for authored v2 maps. Progress is keyed by
+/// catalog version as well as map ID so a future catalog can rebalance or replace
+/// maps without silently inheriting incompatible ratings.
+@DataClassName('MapProgressRow')
+class MapProgressEntries extends Table {
+  TextColumn get catalogVersion => text().withLength(min: 1, max: 32)();
+  TextColumn get mapId => text().withLength(min: 1, max: 64)();
+  IntColumn get bestRating => integer().withDefault(const Constant<int>(0))();
+  IntColumn get bestScore => integer().withDefault(const Constant<int>(0))();
+  IntColumn get attempts => integer().withDefault(const Constant<int>(0))();
+  IntColumn get completedAtMs => integer().nullable()();
+
+  @override
+  Set<Column<Object>> get primaryKey => <Column<Object>>{catalogVersion, mapId};
 }
 
 /// A durable outbox item for a server operation that must survive app kill and be
@@ -102,7 +130,15 @@ class RunStats {
   );
 }
 
-@DriftDatabase(tables: <Type>[Runs, Outbox, RankedRuns, LeaderboardCache])
+@DriftDatabase(
+  tables: <Type>[
+    Runs,
+    Outbox,
+    RankedRuns,
+    LeaderboardCache,
+    MapProgressEntries,
+  ],
+)
 class AppDatabase extends _$AppDatabase {
   /// Takes a [QueryExecutor] so this file depends only on `package:drift`. The
   /// native/on-device connection is built in `database_connection.dart` (which
@@ -110,7 +146,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase(super.executor);
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -123,10 +159,39 @@ class AppDatabase extends _$AppDatabase {
       if (from < 3) {
         await m.createTable(leaderboardCache);
       }
+      if (from < 4) {
+        await m.addColumn(runs, runs.protocolVersion);
+        await m.addColumn(runs, runs.mapCatalogVersion);
+        await m.addColumn(runs, runs.mapId);
+        await m.addColumn(runs, runs.targetsSolved);
+        await m.addColumn(runs, runs.rating);
+        await m.createTable(mapProgressEntries);
+      }
     },
   );
 
   Future<int> insertRun(RunsCompanion run) => into(runs).insert(run);
+
+  // ── Map progression ─────────────────────────────────────────────────────────
+
+  Future<MapProgressRow?> mapProgress(String catalogVersion, String mapId) {
+    return (select(mapProgressEntries)..where(
+          ($MapProgressEntriesTable t) =>
+              t.catalogVersion.equals(catalogVersion) & t.mapId.equals(mapId),
+        ))
+        .getSingleOrNull();
+  }
+
+  Stream<List<MapProgressRow>> watchMapProgress(String catalogVersion) {
+    return (select(mapProgressEntries)..where(
+          ($MapProgressEntriesTable t) =>
+              t.catalogVersion.equals(catalogVersion),
+        ))
+        .watch();
+  }
+
+  Future<void> upsertMapProgress(MapProgressEntriesCompanion row) =>
+      into(mapProgressEntries).insertOnConflictUpdate(row);
 
   // ── Outbox ────────────────────────────────────────────────────────────────
 
@@ -277,7 +342,16 @@ class AppDatabase extends _$AppDatabase {
     final Expression<int> maxCombo = runs.bestCombo.max();
     final Expression<int> count = runs.id.count();
     final JoinedSelectStatement<$RunsTable, Run> query = selectOnly(runs)
-      ..addColumns(<Expression<Object>>[maxScore, maxCombo, count]);
+      ..addColumns(<Expression<Object>>[maxScore, maxCombo, count])
+      ..where(
+        runs.mode.isIn(<String>[
+          'normal',
+          'time-attack',
+          'timeAttack',
+          'ranked',
+          'daily',
+        ]),
+      );
     final TypedResult row = await query.getSingle();
     return RunStats(
       personalBest: row.read(maxScore) ?? 0,
@@ -292,7 +366,16 @@ class AppDatabase extends _$AppDatabase {
     final Expression<int> maxCombo = runs.bestCombo.max();
     final Expression<int> count = runs.id.count();
     final JoinedSelectStatement<$RunsTable, Run> query = selectOnly(runs)
-      ..addColumns(<Expression<Object>>[maxScore, maxCombo, count]);
+      ..addColumns(<Expression<Object>>[maxScore, maxCombo, count])
+      ..where(
+        runs.mode.isIn(<String>[
+          'normal',
+          'time-attack',
+          'timeAttack',
+          'ranked',
+          'daily',
+        ]),
+      );
     return query.watchSingle().map(
       (TypedResult row) => RunStats(
         personalBest: row.read(maxScore) ?? 0,

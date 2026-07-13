@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:crypto/crypto.dart';
 import 'package:drift/drift.dart' show driftRuntimeOptions;
 import 'package:drift/native.dart';
 import 'package:flutter/widgets.dart';
@@ -18,8 +19,10 @@ import 'package:hexcalc/core/networking/api_client.dart';
 import 'package:hexcalc/core/settings/app_settings.dart';
 import 'package:hexcalc/core/settings/settings_controller.dart';
 import 'package:hexcalc/core/settings/settings_repository.dart';
+import 'package:hexcalc/features/gameplay/application/game_session_config.dart';
 import 'package:hexcalc/features/gameplay/domain/domain.dart';
 import 'package:hexcalc/features/gameplay/persistence/app_database.dart';
+import 'package:hexcalc/features/gameplay/persistence/map_progress_repository.dart';
 import 'package:hexcalc/features/gameplay/persistence/run_history_repository.dart';
 import 'package:hexcalc/features/onboarding/application/onboarding_controller.dart';
 import 'package:hexcalc/features/onboarding/data/onboarding_store.dart';
@@ -35,6 +38,30 @@ Ruleset loadTestRuleset() => Ruleset.fromJson(
       as Map<String, dynamic>,
 );
 
+RulesetV2 loadTestRulesetV2() => RulesetV2.fromJson(
+  jsonDecode(File('assets/gameplay/rs-v2.json').readAsStringSync())
+      as Map<String, dynamic>,
+);
+
+MapCatalogV1 loadTestMapCatalogV1() => MapCatalogV1.fromJson(
+  jsonDecode(File('assets/gameplay/maps-v1.json').readAsStringSync())
+      as Map<String, dynamic>,
+);
+
+ModeCatalogV1 loadTestModeCatalogV1() => ModeCatalogV1.fromJson(
+  jsonDecode(File('assets/gameplay/modes-v1.json').readAsStringSync())
+      as Map<String, dynamic>,
+);
+
+GameplayCatalogHashesV2 loadTestGameplayCatalogHashesV2() {
+  final String maps = File('assets/gameplay/maps-v1.json').readAsStringSync();
+  final String modes = File('assets/gameplay/modes-v1.json').readAsStringSync();
+  return GameplayCatalogHashesV2(
+    mapCatalogHash: sha256.convert(utf8.encode(maps)).toString(),
+    modeCatalogHash: sha256.convert(utf8.encode(modes)).toString(),
+  );
+}
+
 /// Wraps [child] in a [ProviderScope] with the full bootstrap-provider graph
 /// stubbed with test-safe implementations (no audio device, in-memory DB, no-op
 /// analytics/haptics). Async because SharedPreferences needs a mock. The override
@@ -42,6 +69,9 @@ Ruleset loadTestRuleset() => Ruleset.fromJson(
 Future<Widget> testScope({
   required Widget child,
   Ruleset? ruleset,
+  RulesetV2? rulesetV2,
+  MapCatalogV1? mapCatalogV1,
+  ModeCatalogV1? modeCatalogV1,
   AnalyticsService? analytics,
   AppSettings? settings,
   AppDatabase? db,
@@ -51,6 +81,7 @@ Future<Widget> testScope({
   // timer that flutter_test flags at teardown.
   RunStats? homeStats,
   List<RunSummary>? homeRecent,
+  Map<String, MapProgress>? mapProgress,
   // When set, overrides the onboarding store (e.g. InMemoryOnboardingStore(seen: false)
   // to surface the first-launch overlay). Unset → the default "already seen" store.
   OnboardingStore? onboardingStore,
@@ -70,6 +101,16 @@ Future<Widget> testScope({
     overrides: [
       flavorProvider.overrideWithValue(FlavorConfig.development),
       rulesetProvider.overrideWithValue(ruleset ?? loadTestRuleset()),
+      rulesetV2Provider.overrideWithValue(rulesetV2 ?? loadTestRulesetV2()),
+      mapCatalogV1Provider.overrideWithValue(
+        mapCatalogV1 ?? loadTestMapCatalogV1(),
+      ),
+      modeCatalogV1Provider.overrideWithValue(
+        modeCatalogV1 ?? loadTestModeCatalogV1(),
+      ),
+      gameplayCatalogHashesV2Provider.overrideWithValue(
+        loadTestGameplayCatalogHashesV2(),
+      ),
       settingsRepositoryProvider.overrideWithValue(repo),
       analyticsProvider.overrideWithValue(analytics ?? const NoopAnalytics()),
       crashReporterProvider.overrideWithValue(const NoopCrashReporter()),
@@ -100,6 +141,11 @@ Future<Widget> testScope({
       if (homeRecent != null)
         recentRunsProvider.overrideWith(
           (ref) => Stream<List<RunSummary>>.value(homeRecent),
+        ),
+      if (mapProgress != null)
+        mapProgressProvider.overrideWith(
+          (ref, String catalogVersion) =>
+              Stream<Map<String, MapProgress>>.value(mapProgress),
         ),
       if (onboardingStore != null)
         onboardingStoreProvider.overrideWithValue(onboardingStore),

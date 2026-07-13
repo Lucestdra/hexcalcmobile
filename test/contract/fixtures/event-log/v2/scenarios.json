@@ -1,0 +1,86 @@
+{
+  "clientTotalScore": 231,
+  "events": [
+    {
+      "boardRevision": 0,
+      "path": [
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": -1
+        }
+      ],
+      "tMs": 0,
+      "type": "chain"
+    },
+    {
+      "boardRevision": 1,
+      "path": [
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 1
+        }
+      ],
+      "tMs": 1000,
+      "type": "chain"
+    },
+    {
+      "boardRevision": 1,
+      "path": [
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": 1
+        }
+      ],
+      "tMs": 2000,
+      "type": "chain"
+    }
+  ],
+  "expected": {
+    "comboCount": 1,
+    "feverActive": false,
+    "feverEnergy": 1,
+    "finalBoardRevision": 2,
+    "finalTarget": 12,
+    "targetsSolved": 2,
+    "totalScore": 231
+  },
+  "generatorVersion": "gen-v2",
+  "mapCatalogVersion": "maps-v1",
+  "mapId": "open-hex",
+  "payloadVersion": 2,
+  "protocolVersion": "target-swipe-v2",
+  "rulesetVersion": "rs-v2",
+  "seed": "fixture-replay-v2"
+}

@@ -1,0 +1,80 @@
+{
+  "catalogVersion": "modes-v1",
+  "modes": [
+    {
+      "attemptLimit": null,
+      "durationMs": 60000,
+      "id": "timeAttack",
+      "leaderboardEligible": false,
+      "manualFinish": false,
+      "mapSelection": "catalogDeterministic",
+      "name": "Time Attack",
+      "order": 0,
+      "performanceRating": false,
+      "refillAfterSolve": true,
+      "requiresServerChallenge": false,
+      "targetQuota": null,
+      "usesMapLevelGoal": false
+    },
+    {
+      "attemptLimit": null,
+      "durationMs": 60000,
+      "id": "ranked",
+      "leaderboardEligible": true,
+      "manualFinish": false,
+      "mapSelection": "serverFixed",
+      "name": "Ranked",
+      "order": 1,
+      "performanceRating": false,
+      "refillAfterSolve": true,
+      "requiresServerChallenge": true,
+      "targetQuota": null,
+      "usesMapLevelGoal": false
+    },
+    {
+      "attemptLimit": null,
+      "durationMs": null,
+      "id": "level",
+      "leaderboardEligible": false,
+      "manualFinish": false,
+      "mapSelection": "sequential",
+      "name": "Level",
+      "order": 2,
+      "performanceRating": true,
+      "refillAfterSolve": true,
+      "requiresServerChallenge": false,
+      "targetQuota": null,
+      "usesMapLevelGoal": true
+    },
+    {
+      "attemptLimit": null,
+      "durationMs": null,
+      "id": "endless",
+      "leaderboardEligible": false,
+      "manualFinish": true,
+      "mapSelection": "playerUnlocked",
+      "name": "Endless / Zen",
+      "order": 3,
+      "performanceRating": false,
+      "refillAfterSolve": true,
+      "requiresServerChallenge": false,
+      "targetQuota": null,
+      "usesMapLevelGoal": false
+    },
+    {
+      "attemptLimit": 1,
+      "durationMs": 60000,
+      "id": "daily",
+      "leaderboardEligible": false,
+      "manualFinish": false,
+      "mapSelection": "serverDaily",
+      "name": "Daily Challenge",
+      "order": 4,
+      "performanceRating": false,
+      "refillAfterSolve": true,
+      "requiresServerChallenge": true,
+      "targetQuota": null,
+      "usesMapLevelGoal": false
+    }
+  ]
+}

@@ -6,7 +6,11 @@ import '../../features/authentication/login_screen.dart';
 import '../../features/authentication/register_screen.dart';
 import '../../features/authentication/reset_password_screen.dart';
 import '../../features/daily_challenge/presentation/daily_challenge_screen.dart';
+import '../../features/gameplay/application/game_session_config.dart';
 import '../../features/gameplay/presentation/gameplay_screen.dart';
+import '../../features/gameplay/presentation/gameplay_screen_v2.dart';
+import '../../features/gameplay/presentation/map_selection_screen.dart';
+import '../../features/gameplay/presentation/mode_selection_screen.dart';
 import '../../features/gameplay/presentation/ranked_result_screen.dart';
 import '../../features/gameplay/presentation/ranked_run_config.dart';
 import '../../features/gameplay/presentation/ranked_screen.dart';
@@ -24,7 +28,30 @@ GoRouter createRouter({String initialLocation = '/'}) {
     initialLocation: initialLocation,
     routes: <RouteBase>[
       GoRoute(path: '/', builder: (_, _) => const HomeScreen()),
+      GoRoute(path: '/modes', builder: (_, _) => const ModeSelectionScreen()),
       GoRoute(path: '/play', builder: (_, _) => const GameplayScreen()),
+      GoRoute(
+        path: '/play-v2',
+        builder: (_, GoRouterState state) {
+          final Object? extra = state.extra;
+          final GameSessionConfig config = extra is GameSessionConfig
+              ? extra
+              : GameSessionConfig(
+                  protocol: GameplayProtocolRef.targetSwipeV2,
+                  mode: V2GameMode.timeAttack,
+                  seed: 'timeAttack-${DateTime.now().microsecondsSinceEpoch}',
+                );
+          return GameplayScreenV2(config: config);
+        },
+      ),
+      GoRoute(
+        path: '/levels',
+        builder: (_, _) => const MapSelectionScreen(mode: V2GameMode.level),
+      ),
+      GoRoute(
+        path: '/endless-maps',
+        builder: (_, _) => const MapSelectionScreen(mode: V2GameMode.endless),
+      ),
       GoRoute(path: '/ranked', builder: (_, _) => const RankedScreen()),
       GoRoute(
         path: '/leaderboard',
@@ -37,9 +64,29 @@ GoRouter createRouter({String initialLocation = '/'}) {
           final Object? extra = state.extra;
           // Without a server-issued config a ranked run cannot start: fall back
           // to the ranked entry to fetch a fresh challenge.
-          return extra is RankedRunConfig
-              ? GameplayScreen(ranked: extra)
-              : const RankedScreen();
+          if (extra is! RankedRunConfig) {
+            return const RankedScreen();
+          }
+          if (!extra.isTargetSwipeV2) {
+            return GameplayScreen(ranked: extra);
+          }
+          final String? mapId = extra.mapId;
+          if (mapId == null) {
+            return const RankedScreen();
+          }
+          return GameplayScreenV2(
+            config: GameSessionConfig(
+              protocol: GameplayProtocolRef.targetSwipeV2,
+              mode: extra.isDaily ? V2GameMode.daily : V2GameMode.ranked,
+              seed: extra.seed,
+              mapId: mapId,
+              durationMs: extra.runDurationMs,
+              competitiveRun: CompetitiveRunEnvelope(
+                runId: extra.runId,
+                challengeToken: extra.challengeToken,
+              ),
+            ),
+          );
         },
       ),
       GoRoute(

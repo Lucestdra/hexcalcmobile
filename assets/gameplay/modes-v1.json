@@ -1,0 +1,80 @@
+{
+  "catalogVersion": "modes-v1",
+  "modes": [
+    {
+      "id": "timeAttack",
+      "order": 0,
+      "name": "Time Attack",
+      "durationMs": 60000,
+      "usesMapLevelGoal": false,
+      "targetQuota": null,
+      "refillAfterSolve": true,
+      "requiresServerChallenge": false,
+      "leaderboardEligible": false,
+      "manualFinish": false,
+      "performanceRating": false,
+      "attemptLimit": null,
+      "mapSelection": "catalogDeterministic"
+    },
+    {
+      "id": "ranked",
+      "order": 1,
+      "name": "Ranked",
+      "durationMs": 60000,
+      "usesMapLevelGoal": false,
+      "targetQuota": null,
+      "refillAfterSolve": true,
+      "requiresServerChallenge": true,
+      "leaderboardEligible": true,
+      "manualFinish": false,
+      "performanceRating": false,
+      "attemptLimit": null,
+      "mapSelection": "serverFixed"
+    },
+    {
+      "id": "level",
+      "order": 2,
+      "name": "Level",
+      "durationMs": null,
+      "usesMapLevelGoal": true,
+      "targetQuota": null,
+      "refillAfterSolve": true,
+      "requiresServerChallenge": false,
+      "leaderboardEligible": false,
+      "manualFinish": false,
+      "performanceRating": true,
+      "attemptLimit": null,
+      "mapSelection": "sequential"
+    },
+    {
+      "id": "endless",
+      "order": 3,
+      "name": "Endless / Zen",
+      "durationMs": null,
+      "usesMapLevelGoal": false,
+      "targetQuota": null,
+      "refillAfterSolve": true,
+      "requiresServerChallenge": false,
+      "leaderboardEligible": false,
+      "manualFinish": true,
+      "performanceRating": false,
+      "attemptLimit": null,
+      "mapSelection": "playerUnlocked"
+    },
+    {
+      "id": "daily",
+      "order": 4,
+      "name": "Daily Challenge",
+      "durationMs": 60000,
+      "usesMapLevelGoal": false,
+      "targetQuota": null,
+      "refillAfterSolve": true,
+      "requiresServerChallenge": true,
+      "leaderboardEligible": false,
+      "manualFinish": false,
+      "performanceRating": false,
+      "attemptLimit": 1,
+      "mapSelection": "serverDaily"
+    }
+  ]
+}

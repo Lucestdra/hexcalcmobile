@@ -233,12 +233,14 @@ class PauseOverlay extends StatelessWidget {
     required this.onResume,
     required this.onQuit,
     this.onSettings,
+    this.quitLabel = 'Quit run',
     super.key,
   });
 
   final VoidCallback onResume;
   final VoidCallback onQuit;
   final VoidCallback? onSettings;
+  final String quitLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +264,7 @@ class PauseOverlay extends StatelessWidget {
                   onPressed: onSettings,
                   child: const Text('Settings'),
                 ),
-              TextButton(onPressed: onQuit, child: const Text('Quit run')),
+              TextButton(onPressed: onQuit, child: Text(quitLabel)),
             ],
           ),
         ),

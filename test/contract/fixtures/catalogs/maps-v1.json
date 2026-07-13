@@ -1,0 +1,2216 @@
+{
+  "catalogVersion": "maps-v1",
+  "maps": [
+    {
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 6,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 4
+          },
+          {
+            "value": 2,
+            "weight": 4
+          },
+          {
+            "value": 3,
+            "weight": 4
+          },
+          {
+            "value": 4,
+            "weight": 3
+          },
+          {
+            "value": 5,
+            "weight": 3
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 1
+          },
+          {
+            "value": 9,
+            "weight": 1
+          }
+        ],
+        "operatorWeight": 4,
+        "operators": {
+          "add": 5,
+          "divide": 1,
+          "multiply": 1,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "open-hex",
+      "levelGoal": {
+        "durationMs": 60000,
+        "starScoreThresholds": [
+          600,
+          900,
+          1350
+        ],
+        "targetQuota": 6
+      },
+      "name": "Open Hex",
+      "order": 0,
+      "playableCoordinates": [
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "tier": "beginner"
+    },
+    {
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 7,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 5
+          },
+          {
+            "value": 2,
+            "weight": 5
+          },
+          {
+            "value": 3,
+            "weight": 4
+          },
+          {
+            "value": 4,
+            "weight": 3
+          },
+          {
+            "value": 5,
+            "weight": 3
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 1
+          },
+          {
+            "value": 8,
+            "weight": 1
+          },
+          {
+            "value": 9,
+            "weight": 1
+          }
+        ],
+        "operatorWeight": 4,
+        "operators": {
+          "add": 6,
+          "divide": 1,
+          "multiply": 1,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "center-ring",
+      "levelGoal": {
+        "durationMs": 60000,
+        "starScoreThresholds": [
+          600,
+          900,
+          1350
+        ],
+        "targetQuota": 6
+      },
+      "name": "Center Ring",
+      "order": 1,
+      "playableCoordinates": [
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "tier": "beginner"
+    },
+    {
+      "blockedCoordinates": [
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": -1
+        }
+      ],
+      "distribution": {
+        "numberWeight": 6,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 4
+          },
+          {
+            "value": 2,
+            "weight": 4
+          },
+          {
+            "value": 3,
+            "weight": 4
+          },
+          {
+            "value": 4,
+            "weight": 3
+          },
+          {
+            "value": 5,
+            "weight": 3
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 1
+          },
+          {
+            "value": 9,
+            "weight": 1
+          }
+        ],
+        "operatorWeight": 5,
+        "operators": {
+          "add": 5,
+          "divide": 1,
+          "multiply": 1,
+          "subtract": 4
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "twin-gates",
+      "levelGoal": {
+        "durationMs": 60000,
+        "starScoreThresholds": [
+          600,
+          900,
+          1350
+        ],
+        "targetQuota": 6
+      },
+      "name": "Twin Gates",
+      "order": 2,
+      "playableCoordinates": [
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "tier": "beginner"
+    },
+    {
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 7,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 4
+          },
+          {
+            "value": 2,
+            "weight": 4
+          },
+          {
+            "value": 3,
+            "weight": 4
+          },
+          {
+            "value": 4,
+            "weight": 3
+          },
+          {
+            "value": 5,
+            "weight": 3
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 1
+          },
+          {
+            "value": 9,
+            "weight": 1
+          }
+        ],
+        "operatorWeight": 5,
+        "operators": {
+          "add": 5,
+          "divide": 1,
+          "multiply": 2,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "diamond",
+      "levelGoal": {
+        "durationMs": 60000,
+        "starScoreThresholds": [
+          600,
+          900,
+          1350
+        ],
+        "targetQuota": 6
+      },
+      "name": "Diamond",
+      "order": 3,
+      "playableCoordinates": [
+        {
+          "q": -2,
+          "r": -2
+        },
+        {
+          "q": -2,
+          "r": -1
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": -2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 2
+        }
+      ],
+      "tier": "beginner"
+    },
+    {
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 6,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 3
+          },
+          {
+            "value": 2,
+            "weight": 3
+          },
+          {
+            "value": 3,
+            "weight": 3
+          },
+          {
+            "value": 4,
+            "weight": 3
+          },
+          {
+            "value": 5,
+            "weight": 3
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 2
+          },
+          {
+            "value": 9,
+            "weight": 1
+          }
+        ],
+        "operatorWeight": 5,
+        "operators": {
+          "add": 3,
+          "divide": 2,
+          "multiply": 2,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "crescent",
+      "levelGoal": {
+        "durationMs": 75000,
+        "starScoreThresholds": [
+          800,
+          1200,
+          1800
+        ],
+        "targetQuota": 8
+      },
+      "name": "Crescent",
+      "order": 4,
+      "playableCoordinates": [
+        {
+          "q": -3,
+          "r": 0
+        },
+        {
+          "q": -3,
+          "r": 1
+        },
+        {
+          "q": -3,
+          "r": 2
+        },
+        {
+          "q": -3,
+          "r": 3
+        },
+        {
+          "q": -2,
+          "r": -1
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -2,
+          "r": 3
+        },
+        {
+          "q": -1,
+          "r": -2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": 3
+        },
+        {
+          "q": 0,
+          "r": -3
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": -3
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "tier": "intermediate"
+    },
+    {
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 6,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 3
+          },
+          {
+            "value": 2,
+            "weight": 3
+          },
+          {
+            "value": 3,
+            "weight": 3
+          },
+          {
+            "value": 4,
+            "weight": 3
+          },
+          {
+            "value": 5,
+            "weight": 3
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 2
+          },
+          {
+            "value": 9,
+            "weight": 1
+          }
+        ],
+        "operatorWeight": 5,
+        "operators": {
+          "add": 4,
+          "divide": 2,
+          "multiply": 2,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "crossroads",
+      "levelGoal": {
+        "durationMs": 75000,
+        "starScoreThresholds": [
+          800,
+          1200,
+          1800
+        ],
+        "targetQuota": 8
+      },
+      "name": "Crossroads",
+      "order": 5,
+      "playableCoordinates": [
+        {
+          "q": -3,
+          "r": 0
+        },
+        {
+          "q": -3,
+          "r": 3
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": -3
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 3,
+          "r": -3
+        },
+        {
+          "q": 3,
+          "r": 0
+        }
+      ],
+      "tier": "intermediate"
+    },
+    {
+      "blockedCoordinates": [
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        }
+      ],
+      "distribution": {
+        "numberWeight": 6,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 3
+          },
+          {
+            "value": 2,
+            "weight": 3
+          },
+          {
+            "value": 3,
+            "weight": 3
+          },
+          {
+            "value": 4,
+            "weight": 3
+          },
+          {
+            "value": 5,
+            "weight": 3
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 2
+          },
+          {
+            "value": 9,
+            "weight": 1
+          }
+        ],
+        "operatorWeight": 6,
+        "operators": {
+          "add": 3,
+          "divide": 2,
+          "multiply": 3,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "inner-wall",
+      "levelGoal": {
+        "durationMs": 75000,
+        "starScoreThresholds": [
+          800,
+          1200,
+          1800
+        ],
+        "targetQuota": 8
+      },
+      "name": "Inner Wall",
+      "order": 6,
+      "playableCoordinates": [
+        {
+          "q": -3,
+          "r": 0
+        },
+        {
+          "q": -3,
+          "r": 1
+        },
+        {
+          "q": -3,
+          "r": 2
+        },
+        {
+          "q": -3,
+          "r": 3
+        },
+        {
+          "q": -2,
+          "r": -1
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -2,
+          "r": 3
+        },
+        {
+          "q": -1,
+          "r": -2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": 3
+        },
+        {
+          "q": 0,
+          "r": -3
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": -3
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": -3
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 3,
+          "r": -3
+        },
+        {
+          "q": 3,
+          "r": -2
+        },
+        {
+          "q": 3,
+          "r": -1
+        },
+        {
+          "q": 3,
+          "r": 0
+        }
+      ],
+      "tier": "intermediate"
+    },
+    {
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 6,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 3
+          },
+          {
+            "value": 2,
+            "weight": 3
+          },
+          {
+            "value": 3,
+            "weight": 3
+          },
+          {
+            "value": 4,
+            "weight": 3
+          },
+          {
+            "value": 5,
+            "weight": 3
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 2
+          },
+          {
+            "value": 9,
+            "weight": 1
+          }
+        ],
+        "operatorWeight": 5,
+        "operators": {
+          "add": 3,
+          "divide": 2,
+          "multiply": 2,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "split-ring",
+      "levelGoal": {
+        "durationMs": 75000,
+        "starScoreThresholds": [
+          800,
+          1200,
+          1800
+        ],
+        "targetQuota": 8
+      },
+      "name": "Split Ring",
+      "order": 7,
+      "playableCoordinates": [
+        {
+          "q": -3,
+          "r": 0
+        },
+        {
+          "q": -3,
+          "r": 1
+        },
+        {
+          "q": -3,
+          "r": 2
+        },
+        {
+          "q": -3,
+          "r": 3
+        },
+        {
+          "q": -2,
+          "r": -1
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 3
+        },
+        {
+          "q": -1,
+          "r": -2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 3
+        },
+        {
+          "q": 0,
+          "r": -3
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": -3
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": -3
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 3,
+          "r": -3
+        },
+        {
+          "q": 3,
+          "r": -2
+        },
+        {
+          "q": 3,
+          "r": -1
+        },
+        {
+          "q": 3,
+          "r": 0
+        }
+      ],
+      "tier": "intermediate"
+    },
+    {
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 5,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 2
+          },
+          {
+            "value": 2,
+            "weight": 2
+          },
+          {
+            "value": 3,
+            "weight": 2
+          },
+          {
+            "value": 4,
+            "weight": 2
+          },
+          {
+            "value": 5,
+            "weight": 2
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 2
+          },
+          {
+            "value": 9,
+            "weight": 2
+          }
+        ],
+        "operatorWeight": 5,
+        "operators": {
+          "add": 2,
+          "divide": 3,
+          "multiply": 3,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "narrow-bridge",
+      "levelGoal": {
+        "durationMs": 90000,
+        "starScoreThresholds": [
+          1000,
+          1500,
+          2250
+        ],
+        "targetQuota": 10
+      },
+      "name": "Narrow Bridge",
+      "order": 8,
+      "playableCoordinates": [
+        {
+          "q": -3,
+          "r": 0
+        },
+        {
+          "q": -3,
+          "r": 1
+        },
+        {
+          "q": -3,
+          "r": 2
+        },
+        {
+          "q": -2,
+          "r": -1
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": -2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 3,
+          "r": -2
+        },
+        {
+          "q": 3,
+          "r": -1
+        },
+        {
+          "q": 3,
+          "r": 0
+        },
+        {
+          "q": 3,
+          "r": 1
+        }
+      ],
+      "tier": "advanced"
+    },
+    {
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 5,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 2
+          },
+          {
+            "value": 2,
+            "weight": 2
+          },
+          {
+            "value": 3,
+            "weight": 2
+          },
+          {
+            "value": 4,
+            "weight": 2
+          },
+          {
+            "value": 5,
+            "weight": 2
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 2
+          },
+          {
+            "value": 9,
+            "weight": 2
+          }
+        ],
+        "operatorWeight": 6,
+        "operators": {
+          "add": 2,
+          "divide": 3,
+          "multiply": 3,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "broken-crown",
+      "levelGoal": {
+        "durationMs": 90000,
+        "starScoreThresholds": [
+          1000,
+          1500,
+          2250
+        ],
+        "targetQuota": 10
+      },
+      "name": "Broken Crown",
+      "order": 9,
+      "playableCoordinates": [
+        {
+          "q": -3,
+          "r": 0
+        },
+        {
+          "q": -3,
+          "r": 1
+        },
+        {
+          "q": -3,
+          "r": 3
+        },
+        {
+          "q": -2,
+          "r": -1
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -2,
+          "r": 3
+        },
+        {
+          "q": -1,
+          "r": -2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": 3
+        },
+        {
+          "q": 0,
+          "r": -3
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": -3
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": -3
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 3,
+          "r": -3
+        },
+        {
+          "q": 3,
+          "r": -1
+        },
+        {
+          "q": 3,
+          "r": 0
+        }
+      ],
+      "tier": "advanced"
+    },
+    {
+      "blockedCoordinates": [
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 1
+        }
+      ],
+      "distribution": {
+        "numberWeight": 5,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 2
+          },
+          {
+            "value": 2,
+            "weight": 2
+          },
+          {
+            "value": 3,
+            "weight": 2
+          },
+          {
+            "value": 4,
+            "weight": 2
+          },
+          {
+            "value": 5,
+            "weight": 2
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 2
+          },
+          {
+            "value": 9,
+            "weight": 2
+          }
+        ],
+        "operatorWeight": 6,
+        "operators": {
+          "add": 2,
+          "divide": 4,
+          "multiply": 3,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "labyrinth",
+      "levelGoal": {
+        "durationMs": 90000,
+        "starScoreThresholds": [
+          1000,
+          1500,
+          2250
+        ],
+        "targetQuota": 10
+      },
+      "name": "Labyrinth",
+      "order": 10,
+      "playableCoordinates": [
+        {
+          "q": -3,
+          "r": 0
+        },
+        {
+          "q": -3,
+          "r": 1
+        },
+        {
+          "q": -3,
+          "r": 2
+        },
+        {
+          "q": -3,
+          "r": 3
+        },
+        {
+          "q": -2,
+          "r": -1
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -2,
+          "r": 3
+        },
+        {
+          "q": -1,
+          "r": -2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": 3
+        },
+        {
+          "q": 0,
+          "r": -3
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": -3
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": -3
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 3,
+          "r": -3
+        },
+        {
+          "q": 3,
+          "r": -2
+        },
+        {
+          "q": 3,
+          "r": -1
+        },
+        {
+          "q": 3,
+          "r": 0
+        }
+      ],
+      "tier": "advanced"
+    },
+    {
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 5,
+        "numbers": [
+          {
+            "value": 1,
+            "weight": 2
+          },
+          {
+            "value": 2,
+            "weight": 2
+          },
+          {
+            "value": 3,
+            "weight": 2
+          },
+          {
+            "value": 4,
+            "weight": 2
+          },
+          {
+            "value": 5,
+            "weight": 2
+          },
+          {
+            "value": 6,
+            "weight": 2
+          },
+          {
+            "value": 7,
+            "weight": 2
+          },
+          {
+            "value": 8,
+            "weight": 2
+          },
+          {
+            "value": 9,
+            "weight": 2
+          },
+          {
+            "value": 10,
+            "weight": 1
+          },
+          {
+            "value": 11,
+            "weight": 1
+          },
+          {
+            "value": 12,
+            "weight": 1
+          }
+        ],
+        "operatorWeight": 7,
+        "operators": {
+          "add": 2,
+          "divide": 4,
+          "multiply": 4,
+          "subtract": 3
+        }
+      },
+      "eligibleModes": [
+        "timeAttack",
+        "ranked",
+        "level",
+        "endless",
+        "daily"
+      ],
+      "id": "operator-forge",
+      "levelGoal": {
+        "durationMs": 90000,
+        "starScoreThresholds": [
+          1000,
+          1500,
+          2250
+        ],
+        "targetQuota": 10
+      },
+      "name": "Operator Forge",
+      "order": 11,
+      "playableCoordinates": [
+        {
+          "q": -3,
+          "r": 0
+        },
+        {
+          "q": -3,
+          "r": 1
+        },
+        {
+          "q": -3,
+          "r": 2
+        },
+        {
+          "q": -3,
+          "r": 3
+        },
+        {
+          "q": -2,
+          "r": -1
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -2,
+          "r": 3
+        },
+        {
+          "q": -1,
+          "r": -2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": 3
+        },
+        {
+          "q": 0,
+          "r": -3
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": -3
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": -3
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 3,
+          "r": -3
+        },
+        {
+          "q": 3,
+          "r": -2
+        },
+        {
+          "q": 3,
+          "r": -1
+        },
+        {
+          "q": 3,
+          "r": 0
+        }
+      ],
+      "tier": "advanced"
+    }
+  ]
+}

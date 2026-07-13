@@ -3,11 +3,19 @@
   "contracts": {
     "adjacency": "v1",
     "boards": "gen-v1",
+    "boardsV2": "gen-v2",
     "evaluator": "v1",
+    "evaluatorV2": "target-swipe-v2",
     "event-log": "v1",
+    "eventLogV2": "v2",
     "grammar": "v1",
+    "mapCatalog": "maps-v1",
+    "modeCatalog": "modes-v1",
     "replay": "rs-v1",
-    "rulesets": "rs-v1"
+    "replayV2": "rs-v2",
+    "rulesetV2": "rs-v2",
+    "rulesets": "rs-v1",
+    "targets": "targets-v1"
   },
   "files": {
     "adjacency/v1/basic.json": "b5cf5f0c4b699f3f49c3537ad4e6c0c6919709fc0aef5da13a4bee46aacceefe",
@@ -21,6 +29,9 @@
     "boards/gen-v1/foxtrot.json": "e4f765d0f4b047fa718ad0fbfba100b5b41d0e464f8d6f65ee097ce765748062",
     "boards/gen-v1/golf.json": "faa8f3a760dc760fd22bb6125e9bb3ca7170158d8e57b9716039a621f0446512",
     "boards/gen-v1/hotel.json": "167c4199b98378a518e6970eb36d03a1155af8b2ef78cfa66accd7dfba9ce063",
+    "boards/gen-v2/open-hex.json": "3bc8f6d76f4449bac8f765c6630be5590eaff86adaae64cb961bb8d85aa4b8b5",
+    "catalogs/maps-v1.json": "0518fa39d8b466839518b58682cc594988d26ffd54ed18cb66f1b25872cc7818",
+    "catalogs/modes-v1.json": "8c417103109918db110e6460528ed0a8f54934098c8a96e176abd7a22ac1ef6f",
     "evaluator/v1/basic.json": "3297cc225150d6dedb20103b977e8880318d3909c578ede8196ce2a657164921",
     "evaluator/v1/division.json": "e10aaa3729ce3d1b54e42be51da954b5fb9e9f8596ee296625b12970eb052440",
     "evaluator/v1/grammar-status.json": "3733a9550bb29e9fd663326a67d0525f8e76771e41344571c92f065d4aa7ab1b",
@@ -28,11 +39,16 @@
     "evaluator/v1/negative-intermediate.json": "dd6ddbc42cb8ef4285494d4d518c28a7a02aebc2cd6274d0779410205de9322f",
     "evaluator/v1/overflow.json": "0d8f64ff690b67dc882629d70f19634afd4592ea3397e1222b4fb04f01359ba6",
     "evaluator/v1/precedence.json": "bb92cb325d56102862e3dd76a0302f4949f9c4fa2d72e9682f14b3d4066c399a",
+    "evaluator/v2/cases.json": "b9a2f8212ad8ede57685f2dfd12f26089cc45c29768e7289a8dd18a8bf4e09a6",
     "event-log/v1/scenarios.json": "1510615dc96ba563654fc7b92d911712b2f8f0a42f76ecc7d87bc40f0aa7b739",
+    "event-log/v2/scenarios.json": "c4aeb4e08930e3644207e614cff26c10aefb0652d0292b67a980d63f545347f7",
     "grammar/v1/invalid.json": "abdb99b76c81b8427c6899b92b10632e88656140d41846e7e2244dd8560b6e3a",
     "grammar/v1/valid.json": "590e0358354029bc027ddcb3a24bd1205733c59aee2ae69bf79fce8ef341de11",
     "replay/rs-v1/scenarios.json": "474efa8e241f03afc4b562448381fa76142bb5653333807dab4ce3526726d9c8",
-    "rulesets/rs-v1.json": "43f5b69230b68421de5b4a82a533a5e0e57f51eefbbd284aecf622569efc1e76"
+    "replay/rs-v2/target-swipe.json": "9f20570fb6cd7b9895100ffda90c6d612d303f01366b13a741f546c39266939c",
+    "rulesets/rs-v1.json": "43f5b69230b68421de5b4a82a533a5e0e57f51eefbbd284aecf622569efc1e76",
+    "rulesets/rs-v2.json": "3466cc53e102e0d53b0b4805131f48e0745576159ebce2f34d1b7af4fba95999",
+    "targets/v1/open-hex.json": "5662918e3255326d367c93e165b5a953921cc7d83bacb36d5b1daee3e4bfeaf5"
   },
   "generatedBy": "HexCalc.Tools.FixtureGen"
 }

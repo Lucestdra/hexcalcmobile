@@ -77,7 +77,7 @@ class HomeScreen extends ConsumerWidget {
                   const _RankTeaser(),
                   const Spacer(),
                   FilledButton(
-                    onPressed: () => context.go('/play'),
+                    onPressed: () => context.go('/modes'),
                     style: FilledButton.styleFrom(
                       backgroundColor: AppColors.neonBlue,
                       foregroundColor: AppColors.background,
@@ -259,7 +259,9 @@ class _RecentRuns extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  '${r.equations} eq · x${r.bestCombo}',
+                  '${_modeLabel(r.mode)} · '
+                  '${r.targetsSolved > 0 ? '${r.targetsSolved} targets' : '${r.equations} eq'} '
+                  '· x${r.bestCombo}',
                   style: AppTypography.body.copyWith(
                     color: AppColors.secondaryText,
                     fontSize: 14,
@@ -278,4 +280,13 @@ class _RecentRuns extends StatelessWidget {
       ],
     );
   }
+
+  static String _modeLabel(String mode) => switch (mode) {
+    'timeAttack' || 'time-attack' || 'normal' => 'Time Attack',
+    'ranked' => 'Ranked',
+    'daily' => 'Daily',
+    'level' => 'Level',
+    'endless' => 'Endless',
+    _ => mode,
+  };
 }

@@ -1,0 +1,243 @@
+{
+  "cases": [
+    {
+      "expected": {
+        "errorCode": null,
+        "status": "valid",
+        "value": 13
+      },
+      "id": "precedence",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "expected": {
+        "errorCode": null,
+        "status": "valid",
+        "value": 14
+      },
+      "id": "seven-cells-exact-division",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 18
+        },
+        {
+          "kind": "operator",
+          "operator": "divide"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "multiply"
+        },
+        {
+          "kind": "number",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "expected": {
+        "errorCode": "DIVISION_NOT_EXACT",
+        "status": "arithmeticError",
+        "value": null
+      },
+      "id": "division-not-exact",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 5
+        },
+        {
+          "kind": "operator",
+          "operator": "divide"
+        },
+        {
+          "kind": "number",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "expected": {
+        "errorCode": "NEGATIVE_INTERMEDIATE",
+        "status": "arithmeticError",
+        "value": null
+      },
+      "id": "negative-intermediate",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "subtract"
+        },
+        {
+          "kind": "number",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "expected": {
+        "errorCode": "OVERFLOW",
+        "status": "arithmeticError",
+        "value": null
+      },
+      "id": "overflow",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 9223372036854775807
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "expected": {
+        "errorCode": "TOO_SHORT",
+        "status": "grammarError",
+        "value": null
+      },
+      "id": "too-short",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "expected": {
+        "errorCode": "TOO_LONG",
+        "status": "grammarError",
+        "value": null
+      },
+      "id": "too-long",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "expected": {
+        "errorCode": "EQUALS_NOT_ALLOWED",
+        "status": "grammarError",
+        "value": null
+      },
+      "id": "equals-not-allowed",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "equals"
+        },
+        {
+          "kind": "number",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "expected": {
+        "errorCode": "EXPECTED_OPERATOR",
+        "status": "grammarError",
+        "value": null
+      },
+      "id": "first-alternation-error-wins",
+      "tokens": [
+        {
+          "kind": "number",
+          "value": 1
+        },
+        {
+          "kind": "number",
+          "value": 2
+        },
+        {
+          "kind": "operator",
+          "operator": "add"
+        }
+      ]
+    }
+  ],
+  "maximumCells": 7,
+  "protocolVersion": "target-swipe-v2"
+}

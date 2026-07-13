@@ -133,7 +133,10 @@ class AdjacencyFixtureCase {
 
 List<EvaluatorFixtureCase> loadEvaluatorCases() {
   final List<EvaluatorFixtureCase> out = <EvaluatorFixtureCase>[];
-  for (final File f in _jsonFilesUnder('evaluator')) {
+  // v1 and target-swipe v2 intentionally have different result schemas.
+  // Keep this frozen-equation loader scoped to its protocol directory; v2 is
+  // asserted independently by v2_gameplay_fixture_test.dart.
+  for (final File f in _jsonFilesUnder('evaluator/v1')) {
     for (final Map<String, dynamic> c in _cases(f)) {
       final Map<String, dynamic> exp = c['expected'] as Map<String, dynamic>;
       out.add(

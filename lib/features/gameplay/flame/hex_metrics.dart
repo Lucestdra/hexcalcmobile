@@ -22,6 +22,25 @@ class HexMetrics {
   /// Fits a hexagon of [radius] into [size] with a little padding.
   factory HexMetrics.fit(Size size, int radius, {double usable = 0.9}) {
     final List<AxialCoordinate> cells = BoardGeneratorV1.enumerateCells(radius);
+    return HexMetrics.fitCoordinates(size, cells, usable: usable);
+  }
+
+  /// Fits an arbitrary authored topology into [size]. The coordinates include
+  /// playable and visible blocked cells; omitted coordinates remain real holes
+  /// and therefore do not distort centering or hit testing.
+  factory HexMetrics.fitCoordinates(
+    Size size,
+    Iterable<AxialCoordinate> coordinates, {
+    double usable = 0.9,
+  }) {
+    final List<AxialCoordinate> cells = coordinates.toList(growable: false);
+    if (cells.isEmpty) {
+      throw ArgumentError.value(
+        coordinates,
+        'coordinates',
+        'must contain at least one visible cell',
+      );
+    }
 
     // Unit centers (hexSize == 1) and their bounding box (corner reach == 1).
     double minX = double.infinity, maxX = -double.infinity;

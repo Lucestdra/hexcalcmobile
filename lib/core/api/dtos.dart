@@ -242,6 +242,13 @@ class NormalRunResultRequest {
     this.seed,
     required this.clientScore,
     required this.playedAtUtc,
+    this.protocolVersion,
+    this.payloadVersion,
+    this.mapCatalogVersion,
+    this.mapId,
+    this.modeCatalogVersion,
+    this.modeId,
+    this.targetsSolved,
   });
 
   final String rulesetVersion;
@@ -249,6 +256,13 @@ class NormalRunResultRequest {
   final String? seed;
   final int clientScore;
   final DateTime playedAtUtc;
+  final String? protocolVersion;
+  final int? payloadVersion;
+  final String? mapCatalogVersion;
+  final String? mapId;
+  final String? modeCatalogVersion;
+  final String? modeId;
+  final int? targetsSolved;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
     'rulesetVersion': rulesetVersion,
@@ -256,6 +270,13 @@ class NormalRunResultRequest {
     if (seed != null) 'seed': seed,
     'clientScore': clientScore,
     'playedAtUtc': playedAtUtc.toUtc().toIso8601String(),
+    if (protocolVersion != null) 'protocolVersion': protocolVersion,
+    if (payloadVersion != null) 'payloadVersion': payloadVersion,
+    if (mapCatalogVersion != null) 'mapCatalogVersion': mapCatalogVersion,
+    if (mapId != null) 'mapId': mapId,
+    if (modeCatalogVersion != null) 'modeCatalogVersion': modeCatalogVersion,
+    if (modeId != null) 'modeId': modeId,
+    if (targetsSolved != null) 'targetsSolved': targetsSolved,
   };
 }
 
@@ -266,12 +287,22 @@ class MetaConfigResponse {
     required this.generatorVersion,
     required this.payloadVersion,
     required this.runDurationMs,
+    this.protocolVersion = 'equation-v1',
+    this.mapCatalogVersion,
+    this.mapCatalogHash,
+    this.modeCatalogVersion,
+    this.modeCatalogHash,
   });
 
   final String rulesetVersion;
   final String generatorVersion;
   final int payloadVersion;
   final int runDurationMs;
+  final String protocolVersion;
+  final String? mapCatalogVersion;
+  final String? mapCatalogHash;
+  final String? modeCatalogVersion;
+  final String? modeCatalogHash;
 
   static MetaConfigResponse fromJson(Map<String, dynamic> json) =>
       MetaConfigResponse(
@@ -279,6 +310,11 @@ class MetaConfigResponse {
         generatorVersion: json['generatorVersion'] as String,
         payloadVersion: ProblemDetails.asInt(json['payloadVersion']) ?? 1,
         runDurationMs: ProblemDetails.asInt(json['runDurationMs']) ?? 0,
+        protocolVersion: json['protocolVersion'] as String? ?? 'equation-v1',
+        mapCatalogVersion: json['mapCatalogVersion'] as String?,
+        mapCatalogHash: json['mapCatalogHash'] as String?,
+        modeCatalogVersion: json['modeCatalogVersion'] as String?,
+        modeCatalogHash: json['modeCatalogHash'] as String?,
       );
 }
 
@@ -295,6 +331,12 @@ class GameRunChallengeResponse {
     required this.issuedAtUtc,
     required this.expiresAtUtc,
     required this.challengeToken,
+    this.protocolVersion,
+    this.payloadVersion,
+    this.mapCatalogVersion,
+    this.mapId,
+    this.modeCatalogVersion,
+    this.modeId,
   });
 
   final String runId;
@@ -307,6 +349,12 @@ class GameRunChallengeResponse {
   final DateTime issuedAtUtc;
   final DateTime expiresAtUtc;
   final String challengeToken;
+  final String? protocolVersion;
+  final int? payloadVersion;
+  final String? mapCatalogVersion;
+  final String? mapId;
+  final String? modeCatalogVersion;
+  final String? modeId;
 
   static GameRunChallengeResponse fromJson(Map<String, dynamic> json) =>
       GameRunChallengeResponse(
@@ -324,6 +372,12 @@ class GameRunChallengeResponse {
             DateTime.tryParse(json['expiresAtUtc'] as String? ?? '')?.toUtc() ??
             DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
         challengeToken: json['challengeToken'] as String,
+        protocolVersion: json['protocolVersion'] as String?,
+        payloadVersion: ProblemDetails.asInt(json['payloadVersion']),
+        mapCatalogVersion: json['mapCatalogVersion'] as String?,
+        mapId: json['mapId'] as String?,
+        modeCatalogVersion: json['modeCatalogVersion'] as String?,
+        modeId: json['modeId'] as String?,
       );
 }
 
@@ -339,6 +393,14 @@ class GameRunResultResponse {
     this.anomalyFlags = const <String>[],
     this.rejectionReason,
     this.submittedAtUtc,
+    this.protocolVersion,
+    this.payloadVersion,
+    this.mapCatalogVersion,
+    this.mapId,
+    this.modeCatalogVersion,
+    this.modeId,
+    this.targetsSolved,
+    this.boardRevision,
   });
 
   final String runId;
@@ -351,6 +413,14 @@ class GameRunResultResponse {
   final List<String> anomalyFlags;
   final String? rejectionReason;
   final DateTime? submittedAtUtc;
+  final String? protocolVersion;
+  final int? payloadVersion;
+  final String? mapCatalogVersion;
+  final String? mapId;
+  final String? modeCatalogVersion;
+  final String? modeId;
+  final int? targetsSolved;
+  final int? boardRevision;
 
   static GameRunResultResponse fromJson(Map<String, dynamic> json) =>
       GameRunResultResponse(
@@ -368,6 +438,14 @@ class GameRunResultResponse {
         submittedAtUtc: DateTime.tryParse(
           json['submittedAtUtc'] as String? ?? '',
         )?.toUtc(),
+        protocolVersion: json['protocolVersion'] as String?,
+        payloadVersion: ProblemDetails.asInt(json['payloadVersion']),
+        mapCatalogVersion: json['mapCatalogVersion'] as String?,
+        mapId: json['mapId'] as String?,
+        modeCatalogVersion: json['modeCatalogVersion'] as String?,
+        modeId: json['modeId'] as String?,
+        targetsSolved: ProblemDetails.asInt(json['targetsSolved']),
+        boardRevision: ProblemDetails.asInt(json['boardRevision']),
       );
 }
 
@@ -516,6 +594,12 @@ class DailyChallengeView {
     required this.generatorVersion,
     required this.attempted,
     required this.asOfUtc,
+    this.protocolVersion,
+    this.payloadVersion,
+    this.mapCatalogVersion,
+    this.mapId,
+    this.modeCatalogVersion,
+    this.modeId,
   });
 
   /// The UTC calendar date (date-only) the challenge belongs to.
@@ -526,6 +610,12 @@ class DailyChallengeView {
   final String generatorVersion;
   final bool attempted;
   final DateTime asOfUtc;
+  final String? protocolVersion;
+  final int? payloadVersion;
+  final String? mapCatalogVersion;
+  final String? mapId;
+  final String? modeCatalogVersion;
+  final String? modeId;
 
   static DailyChallengeView fromJson(Map<String, dynamic> json) =>
       DailyChallengeView(
@@ -536,6 +626,12 @@ class DailyChallengeView {
         generatorVersion: json['generatorVersion'] as String? ?? '',
         attempted: json['attempted'] as bool? ?? false,
         asOfUtc: _utc(json['asOfUtc']),
+        protocolVersion: json['protocolVersion'] as String?,
+        payloadVersion: ProblemDetails.asInt(json['payloadVersion']),
+        mapCatalogVersion: json['mapCatalogVersion'] as String?,
+        mapId: json['mapId'] as String?,
+        modeCatalogVersion: json['modeCatalogVersion'] as String?,
+        modeId: json['modeId'] as String?,
       );
 }
 
@@ -554,6 +650,12 @@ class DailyAttemptResponse {
     required this.issuedAtUtc,
     required this.expiresAtUtc,
     required this.challengeToken,
+    this.protocolVersion,
+    this.payloadVersion,
+    this.mapCatalogVersion,
+    this.mapId,
+    this.modeCatalogVersion,
+    this.modeId,
   });
 
   final String runId;
@@ -566,6 +668,12 @@ class DailyAttemptResponse {
   final DateTime issuedAtUtc;
   final DateTime expiresAtUtc;
   final String challengeToken;
+  final String? protocolVersion;
+  final int? payloadVersion;
+  final String? mapCatalogVersion;
+  final String? mapId;
+  final String? modeCatalogVersion;
+  final String? modeId;
 
   static DailyAttemptResponse fromJson(Map<String, dynamic> json) =>
       DailyAttemptResponse(
@@ -579,6 +687,12 @@ class DailyAttemptResponse {
         issuedAtUtc: _utc(json['issuedAtUtc']),
         expiresAtUtc: _utc(json['expiresAtUtc']),
         challengeToken: json['challengeToken'] as String,
+        protocolVersion: json['protocolVersion'] as String?,
+        payloadVersion: ProblemDetails.asInt(json['payloadVersion']),
+        mapCatalogVersion: json['mapCatalogVersion'] as String?,
+        mapId: json['mapId'] as String?,
+        modeCatalogVersion: json['modeCatalogVersion'] as String?,
+        modeId: json['modeId'] as String?,
       );
 }
 

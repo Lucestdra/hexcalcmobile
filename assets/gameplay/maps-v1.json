@@ -1,0 +1,197 @@
+{
+  "catalogVersion": "maps-v1",
+  "maps": [
+    {
+      "id": "open-hex",
+      "order": 0,
+      "name": "Open Hex",
+      "tier": "beginner",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-2,"r":0},{"q":-2,"r":1},{"q":-2,"r":2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":-1,"r":2},{"q":0,"r":-2},{"q":0,"r":-1},{"q":0,"r":0},{"q":0,"r":1},{"q":0,"r":2},{"q":1,"r":-2},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":2,"r":-2},{"q":2,"r":-1},{"q":2,"r":0}],
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 6,
+        "operatorWeight": 4,
+        "numbers": [{"value":1,"weight":4},{"value":2,"weight":4},{"value":3,"weight":4},{"value":4,"weight":3},{"value":5,"weight":3},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":1},{"value":9,"weight":1}],
+        "operators": {"add":5,"subtract":3,"multiply":1,"divide":1}
+      },
+      "levelGoal": {"durationMs":60000,"targetQuota":6,"starScoreThresholds":[600,900,1350]}
+    },
+    {
+      "id": "center-ring",
+      "order": 1,
+      "name": "Center Ring",
+      "tier": "beginner",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-2,"r":0},{"q":-2,"r":1},{"q":-2,"r":2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":-1,"r":2},{"q":0,"r":-2},{"q":0,"r":-1},{"q":0,"r":1},{"q":0,"r":2},{"q":1,"r":-2},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":2,"r":-2},{"q":2,"r":-1},{"q":2,"r":0}],
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 7,
+        "operatorWeight": 4,
+        "numbers": [{"value":1,"weight":5},{"value":2,"weight":5},{"value":3,"weight":4},{"value":4,"weight":3},{"value":5,"weight":3},{"value":6,"weight":2},{"value":7,"weight":1},{"value":8,"weight":1},{"value":9,"weight":1}],
+        "operators": {"add":6,"subtract":3,"multiply":1,"divide":1}
+      },
+      "levelGoal": {"durationMs":60000,"targetQuota":6,"starScoreThresholds":[600,900,1350]}
+    },
+    {
+      "id": "twin-gates",
+      "order": 2,
+      "name": "Twin Gates",
+      "tier": "beginner",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-2,"r":0},{"q":-2,"r":2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":-1,"r":2},{"q":0,"r":-2},{"q":0,"r":-1},{"q":0,"r":0},{"q":0,"r":1},{"q":0,"r":2},{"q":1,"r":-2},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":2,"r":-2},{"q":2,"r":0}],
+      "blockedCoordinates": [{"q":-2,"r":1},{"q":2,"r":-1}],
+      "distribution": {
+        "numberWeight": 6,
+        "operatorWeight": 5,
+        "numbers": [{"value":1,"weight":4},{"value":2,"weight":4},{"value":3,"weight":4},{"value":4,"weight":3},{"value":5,"weight":3},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":1},{"value":9,"weight":1}],
+        "operators": {"add":5,"subtract":4,"multiply":1,"divide":1}
+      },
+      "levelGoal": {"durationMs":60000,"targetQuota":6,"starScoreThresholds":[600,900,1350]}
+    },
+    {
+      "id": "diamond",
+      "order": 3,
+      "name": "Diamond",
+      "tier": "beginner",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-2,"r":-2},{"q":-2,"r":-1},{"q":-2,"r":0},{"q":-2,"r":1},{"q":-2,"r":2},{"q":-1,"r":-2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":-1,"r":2},{"q":0,"r":-2},{"q":0,"r":-1},{"q":0,"r":0},{"q":0,"r":1},{"q":0,"r":2},{"q":1,"r":-2},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":1,"r":2},{"q":2,"r":-2},{"q":2,"r":-1},{"q":2,"r":0},{"q":2,"r":1},{"q":2,"r":2}],
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 7,
+        "operatorWeight": 5,
+        "numbers": [{"value":1,"weight":4},{"value":2,"weight":4},{"value":3,"weight":4},{"value":4,"weight":3},{"value":5,"weight":3},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":1},{"value":9,"weight":1}],
+        "operators": {"add":5,"subtract":3,"multiply":2,"divide":1}
+      },
+      "levelGoal": {"durationMs":60000,"targetQuota":6,"starScoreThresholds":[600,900,1350]}
+    },
+    {
+      "id": "crescent",
+      "order": 4,
+      "name": "Crescent",
+      "tier": "intermediate",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-3,"r":0},{"q":-3,"r":1},{"q":-3,"r":2},{"q":-3,"r":3},{"q":-2,"r":-1},{"q":-2,"r":0},{"q":-2,"r":1},{"q":-2,"r":2},{"q":-2,"r":3},{"q":-1,"r":-2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":-1,"r":2},{"q":-1,"r":3},{"q":0,"r":-3},{"q":0,"r":-2},{"q":0,"r":-1},{"q":0,"r":0},{"q":0,"r":1},{"q":0,"r":2},{"q":0,"r":3},{"q":1,"r":-3},{"q":1,"r":-2},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":1,"r":2}],
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 6,
+        "operatorWeight": 5,
+        "numbers": [{"value":1,"weight":3},{"value":2,"weight":3},{"value":3,"weight":3},{"value":4,"weight":3},{"value":5,"weight":3},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":2},{"value":9,"weight":1}],
+        "operators": {"add":3,"subtract":3,"multiply":2,"divide":2}
+      },
+      "levelGoal": {"durationMs":75000,"targetQuota":8,"starScoreThresholds":[800,1200,1800]}
+    },
+    {
+      "id": "crossroads",
+      "order": 5,
+      "name": "Crossroads",
+      "tier": "intermediate",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-3,"r":0},{"q":-3,"r":3},{"q":-2,"r":0},{"q":-2,"r":1},{"q":-2,"r":2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":-1,"r":2},{"q":0,"r":-3},{"q":0,"r":-2},{"q":0,"r":-1},{"q":0,"r":0},{"q":0,"r":1},{"q":0,"r":2},{"q":0,"r":3},{"q":1,"r":-2},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":2,"r":-2},{"q":2,"r":-1},{"q":2,"r":0},{"q":3,"r":-3},{"q":3,"r":0}],
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 6,
+        "operatorWeight": 5,
+        "numbers": [{"value":1,"weight":3},{"value":2,"weight":3},{"value":3,"weight":3},{"value":4,"weight":3},{"value":5,"weight":3},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":2},{"value":9,"weight":1}],
+        "operators": {"add":4,"subtract":3,"multiply":2,"divide":2}
+      },
+      "levelGoal": {"durationMs":75000,"targetQuota":8,"starScoreThresholds":[800,1200,1800]}
+    },
+    {
+      "id": "inner-wall",
+      "order": 6,
+      "name": "Inner Wall",
+      "tier": "intermediate",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-3,"r":0},{"q":-3,"r":1},{"q":-3,"r":2},{"q":-3,"r":3},{"q":-2,"r":-1},{"q":-2,"r":0},{"q":-2,"r":1},{"q":-2,"r":2},{"q":-2,"r":3},{"q":-1,"r":-2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":-1,"r":2},{"q":-1,"r":3},{"q":0,"r":-3},{"q":0,"r":-2},{"q":0,"r":2},{"q":0,"r":3},{"q":1,"r":-3},{"q":1,"r":-2},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":1,"r":2},{"q":2,"r":-3},{"q":2,"r":-2},{"q":2,"r":-1},{"q":2,"r":0},{"q":2,"r":1},{"q":3,"r":-3},{"q":3,"r":-2},{"q":3,"r":-1},{"q":3,"r":0}],
+      "blockedCoordinates": [{"q":0,"r":-1},{"q":0,"r":0},{"q":0,"r":1}],
+      "distribution": {
+        "numberWeight": 6,
+        "operatorWeight": 6,
+        "numbers": [{"value":1,"weight":3},{"value":2,"weight":3},{"value":3,"weight":3},{"value":4,"weight":3},{"value":5,"weight":3},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":2},{"value":9,"weight":1}],
+        "operators": {"add":3,"subtract":3,"multiply":3,"divide":2}
+      },
+      "levelGoal": {"durationMs":75000,"targetQuota":8,"starScoreThresholds":[800,1200,1800]}
+    },
+    {
+      "id": "split-ring",
+      "order": 7,
+      "name": "Split Ring",
+      "tier": "intermediate",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-3,"r":0},{"q":-3,"r":1},{"q":-3,"r":2},{"q":-3,"r":3},{"q":-2,"r":-1},{"q":-2,"r":0},{"q":-2,"r":3},{"q":-1,"r":-2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":-1,"r":3},{"q":0,"r":-3},{"q":0,"r":-1},{"q":0,"r":0},{"q":0,"r":1},{"q":0,"r":3},{"q":1,"r":-3},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":1,"r":2},{"q":2,"r":-3},{"q":2,"r":0},{"q":2,"r":1},{"q":3,"r":-3},{"q":3,"r":-2},{"q":3,"r":-1},{"q":3,"r":0}],
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 6,
+        "operatorWeight": 5,
+        "numbers": [{"value":1,"weight":3},{"value":2,"weight":3},{"value":3,"weight":3},{"value":4,"weight":3},{"value":5,"weight":3},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":2},{"value":9,"weight":1}],
+        "operators": {"add":3,"subtract":3,"multiply":2,"divide":2}
+      },
+      "levelGoal": {"durationMs":75000,"targetQuota":8,"starScoreThresholds":[800,1200,1800]}
+    },
+    {
+      "id": "narrow-bridge",
+      "order": 8,
+      "name": "Narrow Bridge",
+      "tier": "advanced",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-3,"r":0},{"q":-3,"r":1},{"q":-3,"r":2},{"q":-2,"r":-1},{"q":-2,"r":0},{"q":-2,"r":1},{"q":-2,"r":2},{"q":-1,"r":-2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":0,"r":0},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":2,"r":-2},{"q":2,"r":-1},{"q":2,"r":0},{"q":2,"r":1},{"q":3,"r":-2},{"q":3,"r":-1},{"q":3,"r":0},{"q":3,"r":1}],
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 5,
+        "operatorWeight": 5,
+        "numbers": [{"value":1,"weight":2},{"value":2,"weight":2},{"value":3,"weight":2},{"value":4,"weight":2},{"value":5,"weight":2},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":2},{"value":9,"weight":2}],
+        "operators": {"add":2,"subtract":3,"multiply":3,"divide":3}
+      },
+      "levelGoal": {"durationMs":90000,"targetQuota":10,"starScoreThresholds":[1000,1500,2250]}
+    },
+    {
+      "id": "broken-crown",
+      "order": 9,
+      "name": "Broken Crown",
+      "tier": "advanced",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-3,"r":0},{"q":-3,"r":1},{"q":-3,"r":3},{"q":-2,"r":-1},{"q":-2,"r":0},{"q":-2,"r":1},{"q":-2,"r":2},{"q":-2,"r":3},{"q":-1,"r":-2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":-1,"r":2},{"q":-1,"r":3},{"q":0,"r":-3},{"q":0,"r":-2},{"q":0,"r":-1},{"q":0,"r":1},{"q":0,"r":2},{"q":1,"r":-3},{"q":1,"r":-2},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":1,"r":2},{"q":2,"r":-3},{"q":2,"r":-2},{"q":2,"r":-1},{"q":2,"r":0},{"q":2,"r":1},{"q":3,"r":-3},{"q":3,"r":-1},{"q":3,"r":0}],
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 5,
+        "operatorWeight": 6,
+        "numbers": [{"value":1,"weight":2},{"value":2,"weight":2},{"value":3,"weight":2},{"value":4,"weight":2},{"value":5,"weight":2},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":2},{"value":9,"weight":2}],
+        "operators": {"add":2,"subtract":3,"multiply":3,"divide":3}
+      },
+      "levelGoal": {"durationMs":90000,"targetQuota":10,"starScoreThresholds":[1000,1500,2250]}
+    },
+    {
+      "id": "labyrinth",
+      "order": 10,
+      "name": "Labyrinth",
+      "tier": "advanced",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-3,"r":0},{"q":-3,"r":1},{"q":-3,"r":2},{"q":-3,"r":3},{"q":-2,"r":-1},{"q":-2,"r":0},{"q":-2,"r":1},{"q":-2,"r":2},{"q":-2,"r":3},{"q":-1,"r":-2},{"q":-1,"r":-1},{"q":-1,"r":1},{"q":-1,"r":2},{"q":-1,"r":3},{"q":0,"r":-3},{"q":0,"r":-2},{"q":0,"r":0},{"q":0,"r":2},{"q":0,"r":3},{"q":1,"r":-3},{"q":1,"r":-2},{"q":1,"r":0},{"q":1,"r":2},{"q":2,"r":-3},{"q":2,"r":-2},{"q":2,"r":-1},{"q":2,"r":0},{"q":2,"r":1},{"q":3,"r":-3},{"q":3,"r":-2},{"q":3,"r":-1},{"q":3,"r":0}],
+      "blockedCoordinates": [{"q":-1,"r":0},{"q":0,"r":-1},{"q":0,"r":1},{"q":1,"r":-1},{"q":1,"r":1}],
+      "distribution": {
+        "numberWeight": 5,
+        "operatorWeight": 6,
+        "numbers": [{"value":1,"weight":2},{"value":2,"weight":2},{"value":3,"weight":2},{"value":4,"weight":2},{"value":5,"weight":2},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":2},{"value":9,"weight":2}],
+        "operators": {"add":2,"subtract":3,"multiply":3,"divide":4}
+      },
+      "levelGoal": {"durationMs":90000,"targetQuota":10,"starScoreThresholds":[1000,1500,2250]}
+    },
+    {
+      "id": "operator-forge",
+      "order": 11,
+      "name": "Operator Forge",
+      "tier": "advanced",
+      "eligibleModes": ["timeAttack", "ranked", "level", "endless", "daily"],
+      "playableCoordinates": [{"q":-3,"r":0},{"q":-3,"r":1},{"q":-3,"r":2},{"q":-3,"r":3},{"q":-2,"r":-1},{"q":-2,"r":0},{"q":-2,"r":1},{"q":-2,"r":2},{"q":-2,"r":3},{"q":-1,"r":-2},{"q":-1,"r":-1},{"q":-1,"r":0},{"q":-1,"r":1},{"q":-1,"r":2},{"q":-1,"r":3},{"q":0,"r":-3},{"q":0,"r":-2},{"q":0,"r":-1},{"q":0,"r":0},{"q":0,"r":1},{"q":0,"r":2},{"q":0,"r":3},{"q":1,"r":-3},{"q":1,"r":-2},{"q":1,"r":-1},{"q":1,"r":0},{"q":1,"r":1},{"q":1,"r":2},{"q":2,"r":-3},{"q":2,"r":-2},{"q":2,"r":-1},{"q":2,"r":0},{"q":2,"r":1},{"q":3,"r":-3},{"q":3,"r":-2},{"q":3,"r":-1},{"q":3,"r":0}],
+      "blockedCoordinates": [],
+      "distribution": {
+        "numberWeight": 5,
+        "operatorWeight": 7,
+        "numbers": [{"value":1,"weight":2},{"value":2,"weight":2},{"value":3,"weight":2},{"value":4,"weight":2},{"value":5,"weight":2},{"value":6,"weight":2},{"value":7,"weight":2},{"value":8,"weight":2},{"value":9,"weight":2},{"value":10,"weight":1},{"value":11,"weight":1},{"value":12,"weight":1}],
+        "operators": {"add":2,"subtract":3,"multiply":4,"divide":4}
+      },
+      "levelGoal": {"durationMs":90000,"targetQuota":10,"starScoreThresholds":[1000,1500,2250]}
+    }
+  ]
+}

@@ -10,12 +10,22 @@ class RunResultData {
     required this.equationsSolved,
     required this.bestCombo,
     required this.level,
+    this.targetsSolved,
+    this.rating,
+    this.mapName,
+    this.modeId,
+    this.replayLocation = '/play',
   });
 
   final int score;
   final int equationsSolved;
   final int bestCombo;
   final int level;
+  final int? targetsSolved;
+  final int? rating;
+  final String? mapName;
+  final String? modeId;
+  final String replayLocation;
 }
 
 /// The end-of-run summary.
@@ -67,14 +77,27 @@ class RunResultScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.xl),
                 _ResultRow(
-                  label: 'Equations',
-                  value: '${data.equationsSolved}',
+                  label: data.targetsSolved == null ? 'Equations' : 'Targets',
+                  value: '${data.targetsSolved ?? data.equationsSolved}',
                 ),
                 _ResultRow(label: 'Best combo', value: 'x${data.bestCombo}'),
-                _ResultRow(label: 'Level reached', value: '${data.level + 1}'),
+                if (data.mapName != null)
+                  _ResultRow(label: 'Map', value: data.mapName!),
+                if (data.rating != null)
+                  _ResultRow(
+                    label: 'Rating',
+                    value: data.rating == 0
+                        ? 'Not completed'
+                        : '★' * data.rating!,
+                  )
+                else
+                  _ResultRow(
+                    label: 'Level reached',
+                    value: '${data.level + 1}',
+                  ),
                 const SizedBox(height: AppSpacing.xxl),
                 FilledButton(
-                  onPressed: () => context.go('/play'),
+                  onPressed: () => context.go(data.replayLocation),
                   child: const Text('Play again'),
                 ),
                 const SizedBox(height: AppSpacing.sm),

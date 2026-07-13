@@ -114,6 +114,13 @@ class OutboxSyncEngine {
             seed: item.payload['seed'] as String?,
             clientScore: item.payload['clientScore'] as int,
             playedAtUtc: DateTime.parse(item.payload['playedAtUtc'] as String),
+            protocolVersion: item.payload['protocolVersion'] as String?,
+            payloadVersion: item.payload['payloadVersion'] as int?,
+            mapCatalogVersion: item.payload['mapCatalogVersion'] as String?,
+            mapId: item.payload['mapId'] as String?,
+            modeCatalogVersion: item.payload['modeCatalogVersion'] as String?,
+            modeId: item.payload['modeId'] as String?,
+            targetsSolved: item.payload['targetsSolved'] as int?,
           ),
           idempotencyKey: item.idempotencyKey,
         );

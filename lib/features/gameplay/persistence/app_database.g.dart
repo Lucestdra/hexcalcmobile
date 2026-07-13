@@ -126,6 +126,71 @@ class $RunsTable extends Runs with TableInfo<$RunsTable, Run> {
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _protocolVersionMeta = const VerificationMeta(
+    'protocolVersion',
+  );
+  @override
+  late final GeneratedColumn<String> protocolVersion = GeneratedColumn<String>(
+    'protocol_version',
+    aliasedName,
+    true,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 32,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _mapCatalogVersionMeta = const VerificationMeta(
+    'mapCatalogVersion',
+  );
+  @override
+  late final GeneratedColumn<String> mapCatalogVersion =
+      GeneratedColumn<String>(
+        'map_catalog_version',
+        aliasedName,
+        true,
+        additionalChecks: GeneratedColumn.checkTextLength(
+          minTextLength: 1,
+          maxTextLength: 32,
+        ),
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const VerificationMeta _mapIdMeta = const VerificationMeta('mapId');
+  @override
+  late final GeneratedColumn<String> mapId = GeneratedColumn<String>(
+    'map_id',
+    aliasedName,
+    true,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 64,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _targetsSolvedMeta = const VerificationMeta(
+    'targetsSolved',
+  );
+  @override
+  late final GeneratedColumn<int> targetsSolved = GeneratedColumn<int>(
+    'targets_solved',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant<int>(0),
+  );
+  static const VerificationMeta _ratingMeta = const VerificationMeta('rating');
+  @override
+  late final GeneratedColumn<int> rating = GeneratedColumn<int>(
+    'rating',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -138,6 +203,11 @@ class $RunsTable extends Runs with TableInfo<$RunsTable, Run> {
     durationMs,
     rulesetVersion,
     seed,
+    protocolVersion,
+    mapCatalogVersion,
+    mapId,
+    targetsSolved,
+    rating,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -235,6 +305,45 @@ class $RunsTable extends Runs with TableInfo<$RunsTable, Run> {
     } else if (isInserting) {
       context.missing(_seedMeta);
     }
+    if (data.containsKey('protocol_version')) {
+      context.handle(
+        _protocolVersionMeta,
+        protocolVersion.isAcceptableOrUnknown(
+          data['protocol_version']!,
+          _protocolVersionMeta,
+        ),
+      );
+    }
+    if (data.containsKey('map_catalog_version')) {
+      context.handle(
+        _mapCatalogVersionMeta,
+        mapCatalogVersion.isAcceptableOrUnknown(
+          data['map_catalog_version']!,
+          _mapCatalogVersionMeta,
+        ),
+      );
+    }
+    if (data.containsKey('map_id')) {
+      context.handle(
+        _mapIdMeta,
+        mapId.isAcceptableOrUnknown(data['map_id']!, _mapIdMeta),
+      );
+    }
+    if (data.containsKey('targets_solved')) {
+      context.handle(
+        _targetsSolvedMeta,
+        targetsSolved.isAcceptableOrUnknown(
+          data['targets_solved']!,
+          _targetsSolvedMeta,
+        ),
+      );
+    }
+    if (data.containsKey('rating')) {
+      context.handle(
+        _ratingMeta,
+        rating.isAcceptableOrUnknown(data['rating']!, _ratingMeta),
+      );
+    }
     return context;
   }
 
@@ -284,6 +393,26 @@ class $RunsTable extends Runs with TableInfo<$RunsTable, Run> {
         DriftSqlType.string,
         data['${effectivePrefix}seed'],
       )!,
+      protocolVersion: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}protocol_version'],
+      ),
+      mapCatalogVersion: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}map_catalog_version'],
+      ),
+      mapId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}map_id'],
+      ),
+      targetsSolved: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}targets_solved'],
+      )!,
+      rating: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}rating'],
+      ),
     );
   }
 
@@ -308,6 +437,15 @@ class Run extends DataClass implements Insertable<Run> {
   final int durationMs;
   final String rulesetVersion;
   final String seed;
+
+  /// Nullable for legacy v1 rows created before protocol-aware sessions.
+  final String? protocolVersion;
+  final String? mapCatalogVersion;
+  final String? mapId;
+  final int targetsSolved;
+
+  /// Level rating (0..3); null for modes without ratings and for legacy rows.
+  final int? rating;
   const Run({
     required this.id,
     required this.playedAtMs,
@@ -319,6 +457,11 @@ class Run extends DataClass implements Insertable<Run> {
     required this.durationMs,
     required this.rulesetVersion,
     required this.seed,
+    this.protocolVersion,
+    this.mapCatalogVersion,
+    this.mapId,
+    required this.targetsSolved,
+    this.rating,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -333,6 +476,19 @@ class Run extends DataClass implements Insertable<Run> {
     map['duration_ms'] = Variable<int>(durationMs);
     map['ruleset_version'] = Variable<String>(rulesetVersion);
     map['seed'] = Variable<String>(seed);
+    if (!nullToAbsent || protocolVersion != null) {
+      map['protocol_version'] = Variable<String>(protocolVersion);
+    }
+    if (!nullToAbsent || mapCatalogVersion != null) {
+      map['map_catalog_version'] = Variable<String>(mapCatalogVersion);
+    }
+    if (!nullToAbsent || mapId != null) {
+      map['map_id'] = Variable<String>(mapId);
+    }
+    map['targets_solved'] = Variable<int>(targetsSolved);
+    if (!nullToAbsent || rating != null) {
+      map['rating'] = Variable<int>(rating);
+    }
     return map;
   }
 
@@ -348,6 +504,19 @@ class Run extends DataClass implements Insertable<Run> {
       durationMs: Value(durationMs),
       rulesetVersion: Value(rulesetVersion),
       seed: Value(seed),
+      protocolVersion: protocolVersion == null && nullToAbsent
+          ? const Value.absent()
+          : Value(protocolVersion),
+      mapCatalogVersion: mapCatalogVersion == null && nullToAbsent
+          ? const Value.absent()
+          : Value(mapCatalogVersion),
+      mapId: mapId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(mapId),
+      targetsSolved: Value(targetsSolved),
+      rating: rating == null && nullToAbsent
+          ? const Value.absent()
+          : Value(rating),
     );
   }
 
@@ -367,6 +536,13 @@ class Run extends DataClass implements Insertable<Run> {
       durationMs: serializer.fromJson<int>(json['durationMs']),
       rulesetVersion: serializer.fromJson<String>(json['rulesetVersion']),
       seed: serializer.fromJson<String>(json['seed']),
+      protocolVersion: serializer.fromJson<String?>(json['protocolVersion']),
+      mapCatalogVersion: serializer.fromJson<String?>(
+        json['mapCatalogVersion'],
+      ),
+      mapId: serializer.fromJson<String?>(json['mapId']),
+      targetsSolved: serializer.fromJson<int>(json['targetsSolved']),
+      rating: serializer.fromJson<int?>(json['rating']),
     );
   }
   @override
@@ -383,6 +559,11 @@ class Run extends DataClass implements Insertable<Run> {
       'durationMs': serializer.toJson<int>(durationMs),
       'rulesetVersion': serializer.toJson<String>(rulesetVersion),
       'seed': serializer.toJson<String>(seed),
+      'protocolVersion': serializer.toJson<String?>(protocolVersion),
+      'mapCatalogVersion': serializer.toJson<String?>(mapCatalogVersion),
+      'mapId': serializer.toJson<String?>(mapId),
+      'targetsSolved': serializer.toJson<int>(targetsSolved),
+      'rating': serializer.toJson<int?>(rating),
     };
   }
 
@@ -397,6 +578,11 @@ class Run extends DataClass implements Insertable<Run> {
     int? durationMs,
     String? rulesetVersion,
     String? seed,
+    Value<String?> protocolVersion = const Value.absent(),
+    Value<String?> mapCatalogVersion = const Value.absent(),
+    Value<String?> mapId = const Value.absent(),
+    int? targetsSolved,
+    Value<int?> rating = const Value.absent(),
   }) => Run(
     id: id ?? this.id,
     playedAtMs: playedAtMs ?? this.playedAtMs,
@@ -408,6 +594,15 @@ class Run extends DataClass implements Insertable<Run> {
     durationMs: durationMs ?? this.durationMs,
     rulesetVersion: rulesetVersion ?? this.rulesetVersion,
     seed: seed ?? this.seed,
+    protocolVersion: protocolVersion.present
+        ? protocolVersion.value
+        : this.protocolVersion,
+    mapCatalogVersion: mapCatalogVersion.present
+        ? mapCatalogVersion.value
+        : this.mapCatalogVersion,
+    mapId: mapId.present ? mapId.value : this.mapId,
+    targetsSolved: targetsSolved ?? this.targetsSolved,
+    rating: rating.present ? rating.value : this.rating,
   );
   Run copyWithCompanion(RunsCompanion data) {
     return Run(
@@ -429,6 +624,17 @@ class Run extends DataClass implements Insertable<Run> {
           ? data.rulesetVersion.value
           : this.rulesetVersion,
       seed: data.seed.present ? data.seed.value : this.seed,
+      protocolVersion: data.protocolVersion.present
+          ? data.protocolVersion.value
+          : this.protocolVersion,
+      mapCatalogVersion: data.mapCatalogVersion.present
+          ? data.mapCatalogVersion.value
+          : this.mapCatalogVersion,
+      mapId: data.mapId.present ? data.mapId.value : this.mapId,
+      targetsSolved: data.targetsSolved.present
+          ? data.targetsSolved.value
+          : this.targetsSolved,
+      rating: data.rating.present ? data.rating.value : this.rating,
     );
   }
 
@@ -444,7 +650,12 @@ class Run extends DataClass implements Insertable<Run> {
           ..write('levelReached: $levelReached, ')
           ..write('durationMs: $durationMs, ')
           ..write('rulesetVersion: $rulesetVersion, ')
-          ..write('seed: $seed')
+          ..write('seed: $seed, ')
+          ..write('protocolVersion: $protocolVersion, ')
+          ..write('mapCatalogVersion: $mapCatalogVersion, ')
+          ..write('mapId: $mapId, ')
+          ..write('targetsSolved: $targetsSolved, ')
+          ..write('rating: $rating')
           ..write(')'))
         .toString();
   }
@@ -461,6 +672,11 @@ class Run extends DataClass implements Insertable<Run> {
     durationMs,
     rulesetVersion,
     seed,
+    protocolVersion,
+    mapCatalogVersion,
+    mapId,
+    targetsSolved,
+    rating,
   );
   @override
   bool operator ==(Object other) =>
@@ -475,7 +691,12 @@ class Run extends DataClass implements Insertable<Run> {
           other.levelReached == this.levelReached &&
           other.durationMs == this.durationMs &&
           other.rulesetVersion == this.rulesetVersion &&
-          other.seed == this.seed);
+          other.seed == this.seed &&
+          other.protocolVersion == this.protocolVersion &&
+          other.mapCatalogVersion == this.mapCatalogVersion &&
+          other.mapId == this.mapId &&
+          other.targetsSolved == this.targetsSolved &&
+          other.rating == this.rating);
 }
 
 class RunsCompanion extends UpdateCompanion<Run> {
@@ -489,6 +710,11 @@ class RunsCompanion extends UpdateCompanion<Run> {
   final Value<int> durationMs;
   final Value<String> rulesetVersion;
   final Value<String> seed;
+  final Value<String?> protocolVersion;
+  final Value<String?> mapCatalogVersion;
+  final Value<String?> mapId;
+  final Value<int> targetsSolved;
+  final Value<int?> rating;
   const RunsCompanion({
     this.id = const Value.absent(),
     this.playedAtMs = const Value.absent(),
@@ -500,6 +726,11 @@ class RunsCompanion extends UpdateCompanion<Run> {
     this.durationMs = const Value.absent(),
     this.rulesetVersion = const Value.absent(),
     this.seed = const Value.absent(),
+    this.protocolVersion = const Value.absent(),
+    this.mapCatalogVersion = const Value.absent(),
+    this.mapId = const Value.absent(),
+    this.targetsSolved = const Value.absent(),
+    this.rating = const Value.absent(),
   });
   RunsCompanion.insert({
     this.id = const Value.absent(),
@@ -512,6 +743,11 @@ class RunsCompanion extends UpdateCompanion<Run> {
     required int durationMs,
     required String rulesetVersion,
     required String seed,
+    this.protocolVersion = const Value.absent(),
+    this.mapCatalogVersion = const Value.absent(),
+    this.mapId = const Value.absent(),
+    this.targetsSolved = const Value.absent(),
+    this.rating = const Value.absent(),
   }) : playedAtMs = Value(playedAtMs),
        mode = Value(mode),
        score = Value(score),
@@ -532,6 +768,11 @@ class RunsCompanion extends UpdateCompanion<Run> {
     Expression<int>? durationMs,
     Expression<String>? rulesetVersion,
     Expression<String>? seed,
+    Expression<String>? protocolVersion,
+    Expression<String>? mapCatalogVersion,
+    Expression<String>? mapId,
+    Expression<int>? targetsSolved,
+    Expression<int>? rating,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -544,6 +785,11 @@ class RunsCompanion extends UpdateCompanion<Run> {
       if (durationMs != null) 'duration_ms': durationMs,
       if (rulesetVersion != null) 'ruleset_version': rulesetVersion,
       if (seed != null) 'seed': seed,
+      if (protocolVersion != null) 'protocol_version': protocolVersion,
+      if (mapCatalogVersion != null) 'map_catalog_version': mapCatalogVersion,
+      if (mapId != null) 'map_id': mapId,
+      if (targetsSolved != null) 'targets_solved': targetsSolved,
+      if (rating != null) 'rating': rating,
     });
   }
 
@@ -558,6 +804,11 @@ class RunsCompanion extends UpdateCompanion<Run> {
     Value<int>? durationMs,
     Value<String>? rulesetVersion,
     Value<String>? seed,
+    Value<String?>? protocolVersion,
+    Value<String?>? mapCatalogVersion,
+    Value<String?>? mapId,
+    Value<int>? targetsSolved,
+    Value<int?>? rating,
   }) {
     return RunsCompanion(
       id: id ?? this.id,
@@ -570,6 +821,11 @@ class RunsCompanion extends UpdateCompanion<Run> {
       durationMs: durationMs ?? this.durationMs,
       rulesetVersion: rulesetVersion ?? this.rulesetVersion,
       seed: seed ?? this.seed,
+      protocolVersion: protocolVersion ?? this.protocolVersion,
+      mapCatalogVersion: mapCatalogVersion ?? this.mapCatalogVersion,
+      mapId: mapId ?? this.mapId,
+      targetsSolved: targetsSolved ?? this.targetsSolved,
+      rating: rating ?? this.rating,
     );
   }
 
@@ -606,6 +862,21 @@ class RunsCompanion extends UpdateCompanion<Run> {
     if (seed.present) {
       map['seed'] = Variable<String>(seed.value);
     }
+    if (protocolVersion.present) {
+      map['protocol_version'] = Variable<String>(protocolVersion.value);
+    }
+    if (mapCatalogVersion.present) {
+      map['map_catalog_version'] = Variable<String>(mapCatalogVersion.value);
+    }
+    if (mapId.present) {
+      map['map_id'] = Variable<String>(mapId.value);
+    }
+    if (targetsSolved.present) {
+      map['targets_solved'] = Variable<int>(targetsSolved.value);
+    }
+    if (rating.present) {
+      map['rating'] = Variable<int>(rating.value);
+    }
     return map;
   }
 
@@ -621,7 +892,12 @@ class RunsCompanion extends UpdateCompanion<Run> {
           ..write('levelReached: $levelReached, ')
           ..write('durationMs: $durationMs, ')
           ..write('rulesetVersion: $rulesetVersion, ')
-          ..write('seed: $seed')
+          ..write('seed: $seed, ')
+          ..write('protocolVersion: $protocolVersion, ')
+          ..write('mapCatalogVersion: $mapCatalogVersion, ')
+          ..write('mapId: $mapId, ')
+          ..write('targetsSolved: $targetsSolved, ')
+          ..write('rating: $rating')
           ..write(')'))
         .toString();
   }
@@ -2170,6 +2446,442 @@ class LeaderboardCacheCompanion extends UpdateCompanion<LeaderboardCacheRow> {
   }
 }
 
+class $MapProgressEntriesTable extends MapProgressEntries
+    with TableInfo<$MapProgressEntriesTable, MapProgressRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $MapProgressEntriesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _catalogVersionMeta = const VerificationMeta(
+    'catalogVersion',
+  );
+  @override
+  late final GeneratedColumn<String> catalogVersion = GeneratedColumn<String>(
+    'catalog_version',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 32,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _mapIdMeta = const VerificationMeta('mapId');
+  @override
+  late final GeneratedColumn<String> mapId = GeneratedColumn<String>(
+    'map_id',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 64,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _bestRatingMeta = const VerificationMeta(
+    'bestRating',
+  );
+  @override
+  late final GeneratedColumn<int> bestRating = GeneratedColumn<int>(
+    'best_rating',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant<int>(0),
+  );
+  static const VerificationMeta _bestScoreMeta = const VerificationMeta(
+    'bestScore',
+  );
+  @override
+  late final GeneratedColumn<int> bestScore = GeneratedColumn<int>(
+    'best_score',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant<int>(0),
+  );
+  static const VerificationMeta _attemptsMeta = const VerificationMeta(
+    'attempts',
+  );
+  @override
+  late final GeneratedColumn<int> attempts = GeneratedColumn<int>(
+    'attempts',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant<int>(0),
+  );
+  static const VerificationMeta _completedAtMsMeta = const VerificationMeta(
+    'completedAtMs',
+  );
+  @override
+  late final GeneratedColumn<int> completedAtMs = GeneratedColumn<int>(
+    'completed_at_ms',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    catalogVersion,
+    mapId,
+    bestRating,
+    bestScore,
+    attempts,
+    completedAtMs,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'map_progress_entries';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<MapProgressRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('catalog_version')) {
+      context.handle(
+        _catalogVersionMeta,
+        catalogVersion.isAcceptableOrUnknown(
+          data['catalog_version']!,
+          _catalogVersionMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_catalogVersionMeta);
+    }
+    if (data.containsKey('map_id')) {
+      context.handle(
+        _mapIdMeta,
+        mapId.isAcceptableOrUnknown(data['map_id']!, _mapIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_mapIdMeta);
+    }
+    if (data.containsKey('best_rating')) {
+      context.handle(
+        _bestRatingMeta,
+        bestRating.isAcceptableOrUnknown(data['best_rating']!, _bestRatingMeta),
+      );
+    }
+    if (data.containsKey('best_score')) {
+      context.handle(
+        _bestScoreMeta,
+        bestScore.isAcceptableOrUnknown(data['best_score']!, _bestScoreMeta),
+      );
+    }
+    if (data.containsKey('attempts')) {
+      context.handle(
+        _attemptsMeta,
+        attempts.isAcceptableOrUnknown(data['attempts']!, _attemptsMeta),
+      );
+    }
+    if (data.containsKey('completed_at_ms')) {
+      context.handle(
+        _completedAtMsMeta,
+        completedAtMs.isAcceptableOrUnknown(
+          data['completed_at_ms']!,
+          _completedAtMsMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {catalogVersion, mapId};
+  @override
+  MapProgressRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MapProgressRow(
+      catalogVersion: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}catalog_version'],
+      )!,
+      mapId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}map_id'],
+      )!,
+      bestRating: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}best_rating'],
+      )!,
+      bestScore: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}best_score'],
+      )!,
+      attempts: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}attempts'],
+      )!,
+      completedAtMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}completed_at_ms'],
+      ),
+    );
+  }
+
+  @override
+  $MapProgressEntriesTable createAlias(String alias) {
+    return $MapProgressEntriesTable(attachedDatabase, alias);
+  }
+}
+
+class MapProgressRow extends DataClass implements Insertable<MapProgressRow> {
+  final String catalogVersion;
+  final String mapId;
+  final int bestRating;
+  final int bestScore;
+  final int attempts;
+  final int? completedAtMs;
+  const MapProgressRow({
+    required this.catalogVersion,
+    required this.mapId,
+    required this.bestRating,
+    required this.bestScore,
+    required this.attempts,
+    this.completedAtMs,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['catalog_version'] = Variable<String>(catalogVersion);
+    map['map_id'] = Variable<String>(mapId);
+    map['best_rating'] = Variable<int>(bestRating);
+    map['best_score'] = Variable<int>(bestScore);
+    map['attempts'] = Variable<int>(attempts);
+    if (!nullToAbsent || completedAtMs != null) {
+      map['completed_at_ms'] = Variable<int>(completedAtMs);
+    }
+    return map;
+  }
+
+  MapProgressEntriesCompanion toCompanion(bool nullToAbsent) {
+    return MapProgressEntriesCompanion(
+      catalogVersion: Value(catalogVersion),
+      mapId: Value(mapId),
+      bestRating: Value(bestRating),
+      bestScore: Value(bestScore),
+      attempts: Value(attempts),
+      completedAtMs: completedAtMs == null && nullToAbsent
+          ? const Value.absent()
+          : Value(completedAtMs),
+    );
+  }
+
+  factory MapProgressRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return MapProgressRow(
+      catalogVersion: serializer.fromJson<String>(json['catalogVersion']),
+      mapId: serializer.fromJson<String>(json['mapId']),
+      bestRating: serializer.fromJson<int>(json['bestRating']),
+      bestScore: serializer.fromJson<int>(json['bestScore']),
+      attempts: serializer.fromJson<int>(json['attempts']),
+      completedAtMs: serializer.fromJson<int?>(json['completedAtMs']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'catalogVersion': serializer.toJson<String>(catalogVersion),
+      'mapId': serializer.toJson<String>(mapId),
+      'bestRating': serializer.toJson<int>(bestRating),
+      'bestScore': serializer.toJson<int>(bestScore),
+      'attempts': serializer.toJson<int>(attempts),
+      'completedAtMs': serializer.toJson<int?>(completedAtMs),
+    };
+  }
+
+  MapProgressRow copyWith({
+    String? catalogVersion,
+    String? mapId,
+    int? bestRating,
+    int? bestScore,
+    int? attempts,
+    Value<int?> completedAtMs = const Value.absent(),
+  }) => MapProgressRow(
+    catalogVersion: catalogVersion ?? this.catalogVersion,
+    mapId: mapId ?? this.mapId,
+    bestRating: bestRating ?? this.bestRating,
+    bestScore: bestScore ?? this.bestScore,
+    attempts: attempts ?? this.attempts,
+    completedAtMs: completedAtMs.present
+        ? completedAtMs.value
+        : this.completedAtMs,
+  );
+  MapProgressRow copyWithCompanion(MapProgressEntriesCompanion data) {
+    return MapProgressRow(
+      catalogVersion: data.catalogVersion.present
+          ? data.catalogVersion.value
+          : this.catalogVersion,
+      mapId: data.mapId.present ? data.mapId.value : this.mapId,
+      bestRating: data.bestRating.present
+          ? data.bestRating.value
+          : this.bestRating,
+      bestScore: data.bestScore.present ? data.bestScore.value : this.bestScore,
+      attempts: data.attempts.present ? data.attempts.value : this.attempts,
+      completedAtMs: data.completedAtMs.present
+          ? data.completedAtMs.value
+          : this.completedAtMs,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MapProgressRow(')
+          ..write('catalogVersion: $catalogVersion, ')
+          ..write('mapId: $mapId, ')
+          ..write('bestRating: $bestRating, ')
+          ..write('bestScore: $bestScore, ')
+          ..write('attempts: $attempts, ')
+          ..write('completedAtMs: $completedAtMs')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    catalogVersion,
+    mapId,
+    bestRating,
+    bestScore,
+    attempts,
+    completedAtMs,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is MapProgressRow &&
+          other.catalogVersion == this.catalogVersion &&
+          other.mapId == this.mapId &&
+          other.bestRating == this.bestRating &&
+          other.bestScore == this.bestScore &&
+          other.attempts == this.attempts &&
+          other.completedAtMs == this.completedAtMs);
+}
+
+class MapProgressEntriesCompanion extends UpdateCompanion<MapProgressRow> {
+  final Value<String> catalogVersion;
+  final Value<String> mapId;
+  final Value<int> bestRating;
+  final Value<int> bestScore;
+  final Value<int> attempts;
+  final Value<int?> completedAtMs;
+  final Value<int> rowid;
+  const MapProgressEntriesCompanion({
+    this.catalogVersion = const Value.absent(),
+    this.mapId = const Value.absent(),
+    this.bestRating = const Value.absent(),
+    this.bestScore = const Value.absent(),
+    this.attempts = const Value.absent(),
+    this.completedAtMs = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  MapProgressEntriesCompanion.insert({
+    required String catalogVersion,
+    required String mapId,
+    this.bestRating = const Value.absent(),
+    this.bestScore = const Value.absent(),
+    this.attempts = const Value.absent(),
+    this.completedAtMs = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : catalogVersion = Value(catalogVersion),
+       mapId = Value(mapId);
+  static Insertable<MapProgressRow> custom({
+    Expression<String>? catalogVersion,
+    Expression<String>? mapId,
+    Expression<int>? bestRating,
+    Expression<int>? bestScore,
+    Expression<int>? attempts,
+    Expression<int>? completedAtMs,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (catalogVersion != null) 'catalog_version': catalogVersion,
+      if (mapId != null) 'map_id': mapId,
+      if (bestRating != null) 'best_rating': bestRating,
+      if (bestScore != null) 'best_score': bestScore,
+      if (attempts != null) 'attempts': attempts,
+      if (completedAtMs != null) 'completed_at_ms': completedAtMs,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  MapProgressEntriesCompanion copyWith({
+    Value<String>? catalogVersion,
+    Value<String>? mapId,
+    Value<int>? bestRating,
+    Value<int>? bestScore,
+    Value<int>? attempts,
+    Value<int?>? completedAtMs,
+    Value<int>? rowid,
+  }) {
+    return MapProgressEntriesCompanion(
+      catalogVersion: catalogVersion ?? this.catalogVersion,
+      mapId: mapId ?? this.mapId,
+      bestRating: bestRating ?? this.bestRating,
+      bestScore: bestScore ?? this.bestScore,
+      attempts: attempts ?? this.attempts,
+      completedAtMs: completedAtMs ?? this.completedAtMs,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (catalogVersion.present) {
+      map['catalog_version'] = Variable<String>(catalogVersion.value);
+    }
+    if (mapId.present) {
+      map['map_id'] = Variable<String>(mapId.value);
+    }
+    if (bestRating.present) {
+      map['best_rating'] = Variable<int>(bestRating.value);
+    }
+    if (bestScore.present) {
+      map['best_score'] = Variable<int>(bestScore.value);
+    }
+    if (attempts.present) {
+      map['attempts'] = Variable<int>(attempts.value);
+    }
+    if (completedAtMs.present) {
+      map['completed_at_ms'] = Variable<int>(completedAtMs.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MapProgressEntriesCompanion(')
+          ..write('catalogVersion: $catalogVersion, ')
+          ..write('mapId: $mapId, ')
+          ..write('bestRating: $bestRating, ')
+          ..write('bestScore: $bestScore, ')
+          ..write('attempts: $attempts, ')
+          ..write('completedAtMs: $completedAtMs, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2179,6 +2891,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $LeaderboardCacheTable leaderboardCache = $LeaderboardCacheTable(
     this,
   );
+  late final $MapProgressEntriesTable mapProgressEntries =
+      $MapProgressEntriesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2188,6 +2902,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     outbox,
     rankedRuns,
     leaderboardCache,
+    mapProgressEntries,
   ];
 }
 
@@ -2203,6 +2918,11 @@ typedef $$RunsTableCreateCompanionBuilder =
       required int durationMs,
       required String rulesetVersion,
       required String seed,
+      Value<String?> protocolVersion,
+      Value<String?> mapCatalogVersion,
+      Value<String?> mapId,
+      Value<int> targetsSolved,
+      Value<int?> rating,
     });
 typedef $$RunsTableUpdateCompanionBuilder =
     RunsCompanion Function({
@@ -2216,6 +2936,11 @@ typedef $$RunsTableUpdateCompanionBuilder =
       Value<int> durationMs,
       Value<String> rulesetVersion,
       Value<String> seed,
+      Value<String?> protocolVersion,
+      Value<String?> mapCatalogVersion,
+      Value<String?> mapId,
+      Value<int> targetsSolved,
+      Value<int?> rating,
     });
 
 class $$RunsTableFilterComposer extends Composer<_$AppDatabase, $RunsTable> {
@@ -2273,6 +2998,31 @@ class $$RunsTableFilterComposer extends Composer<_$AppDatabase, $RunsTable> {
 
   ColumnFilters<String> get seed => $composableBuilder(
     column: $table.seed,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get protocolVersion => $composableBuilder(
+    column: $table.protocolVersion,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mapCatalogVersion => $composableBuilder(
+    column: $table.mapCatalogVersion,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mapId => $composableBuilder(
+    column: $table.mapId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get targetsSolved => $composableBuilder(
+    column: $table.targetsSolved,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get rating => $composableBuilder(
+    column: $table.rating,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -2334,6 +3084,31 @@ class $$RunsTableOrderingComposer extends Composer<_$AppDatabase, $RunsTable> {
     column: $table.seed,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get protocolVersion => $composableBuilder(
+    column: $table.protocolVersion,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mapCatalogVersion => $composableBuilder(
+    column: $table.mapCatalogVersion,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mapId => $composableBuilder(
+    column: $table.mapId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get targetsSolved => $composableBuilder(
+    column: $table.targetsSolved,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get rating => $composableBuilder(
+    column: $table.rating,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$RunsTableAnnotationComposer
@@ -2382,6 +3157,27 @@ class $$RunsTableAnnotationComposer
 
   GeneratedColumn<String> get seed =>
       $composableBuilder(column: $table.seed, builder: (column) => column);
+
+  GeneratedColumn<String> get protocolVersion => $composableBuilder(
+    column: $table.protocolVersion,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get mapCatalogVersion => $composableBuilder(
+    column: $table.mapCatalogVersion,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get mapId =>
+      $composableBuilder(column: $table.mapId, builder: (column) => column);
+
+  GeneratedColumn<int> get targetsSolved => $composableBuilder(
+    column: $table.targetsSolved,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get rating =>
+      $composableBuilder(column: $table.rating, builder: (column) => column);
 }
 
 class $$RunsTableTableManager
@@ -2422,6 +3218,11 @@ class $$RunsTableTableManager
                 Value<int> durationMs = const Value.absent(),
                 Value<String> rulesetVersion = const Value.absent(),
                 Value<String> seed = const Value.absent(),
+                Value<String?> protocolVersion = const Value.absent(),
+                Value<String?> mapCatalogVersion = const Value.absent(),
+                Value<String?> mapId = const Value.absent(),
+                Value<int> targetsSolved = const Value.absent(),
+                Value<int?> rating = const Value.absent(),
               }) => RunsCompanion(
                 id: id,
                 playedAtMs: playedAtMs,
@@ -2433,6 +3234,11 @@ class $$RunsTableTableManager
                 durationMs: durationMs,
                 rulesetVersion: rulesetVersion,
                 seed: seed,
+                protocolVersion: protocolVersion,
+                mapCatalogVersion: mapCatalogVersion,
+                mapId: mapId,
+                targetsSolved: targetsSolved,
+                rating: rating,
               ),
           createCompanionCallback:
               ({
@@ -2446,6 +3252,11 @@ class $$RunsTableTableManager
                 required int durationMs,
                 required String rulesetVersion,
                 required String seed,
+                Value<String?> protocolVersion = const Value.absent(),
+                Value<String?> mapCatalogVersion = const Value.absent(),
+                Value<String?> mapId = const Value.absent(),
+                Value<int> targetsSolved = const Value.absent(),
+                Value<int?> rating = const Value.absent(),
               }) => RunsCompanion.insert(
                 id: id,
                 playedAtMs: playedAtMs,
@@ -2457,6 +3268,11 @@ class $$RunsTableTableManager
                 durationMs: durationMs,
                 rulesetVersion: rulesetVersion,
                 seed: seed,
+                protocolVersion: protocolVersion,
+                mapCatalogVersion: mapCatalogVersion,
+                mapId: mapId,
+                targetsSolved: targetsSolved,
+                rating: rating,
               ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -3243,6 +4059,240 @@ typedef $$LeaderboardCacheTableProcessedTableManager =
       LeaderboardCacheRow,
       PrefetchHooks Function()
     >;
+typedef $$MapProgressEntriesTableCreateCompanionBuilder =
+    MapProgressEntriesCompanion Function({
+      required String catalogVersion,
+      required String mapId,
+      Value<int> bestRating,
+      Value<int> bestScore,
+      Value<int> attempts,
+      Value<int?> completedAtMs,
+      Value<int> rowid,
+    });
+typedef $$MapProgressEntriesTableUpdateCompanionBuilder =
+    MapProgressEntriesCompanion Function({
+      Value<String> catalogVersion,
+      Value<String> mapId,
+      Value<int> bestRating,
+      Value<int> bestScore,
+      Value<int> attempts,
+      Value<int?> completedAtMs,
+      Value<int> rowid,
+    });
+
+class $$MapProgressEntriesTableFilterComposer
+    extends Composer<_$AppDatabase, $MapProgressEntriesTable> {
+  $$MapProgressEntriesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get catalogVersion => $composableBuilder(
+    column: $table.catalogVersion,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mapId => $composableBuilder(
+    column: $table.mapId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get bestRating => $composableBuilder(
+    column: $table.bestRating,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get bestScore => $composableBuilder(
+    column: $table.bestScore,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get attempts => $composableBuilder(
+    column: $table.attempts,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get completedAtMs => $composableBuilder(
+    column: $table.completedAtMs,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$MapProgressEntriesTableOrderingComposer
+    extends Composer<_$AppDatabase, $MapProgressEntriesTable> {
+  $$MapProgressEntriesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get catalogVersion => $composableBuilder(
+    column: $table.catalogVersion,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mapId => $composableBuilder(
+    column: $table.mapId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get bestRating => $composableBuilder(
+    column: $table.bestRating,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get bestScore => $composableBuilder(
+    column: $table.bestScore,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get attempts => $composableBuilder(
+    column: $table.attempts,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get completedAtMs => $composableBuilder(
+    column: $table.completedAtMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$MapProgressEntriesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $MapProgressEntriesTable> {
+  $$MapProgressEntriesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get catalogVersion => $composableBuilder(
+    column: $table.catalogVersion,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get mapId =>
+      $composableBuilder(column: $table.mapId, builder: (column) => column);
+
+  GeneratedColumn<int> get bestRating => $composableBuilder(
+    column: $table.bestRating,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get bestScore =>
+      $composableBuilder(column: $table.bestScore, builder: (column) => column);
+
+  GeneratedColumn<int> get attempts =>
+      $composableBuilder(column: $table.attempts, builder: (column) => column);
+
+  GeneratedColumn<int> get completedAtMs => $composableBuilder(
+    column: $table.completedAtMs,
+    builder: (column) => column,
+  );
+}
+
+class $$MapProgressEntriesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $MapProgressEntriesTable,
+          MapProgressRow,
+          $$MapProgressEntriesTableFilterComposer,
+          $$MapProgressEntriesTableOrderingComposer,
+          $$MapProgressEntriesTableAnnotationComposer,
+          $$MapProgressEntriesTableCreateCompanionBuilder,
+          $$MapProgressEntriesTableUpdateCompanionBuilder,
+          (
+            MapProgressRow,
+            BaseReferences<
+              _$AppDatabase,
+              $MapProgressEntriesTable,
+              MapProgressRow
+            >,
+          ),
+          MapProgressRow,
+          PrefetchHooks Function()
+        > {
+  $$MapProgressEntriesTableTableManager(
+    _$AppDatabase db,
+    $MapProgressEntriesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$MapProgressEntriesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MapProgressEntriesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$MapProgressEntriesTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> catalogVersion = const Value.absent(),
+                Value<String> mapId = const Value.absent(),
+                Value<int> bestRating = const Value.absent(),
+                Value<int> bestScore = const Value.absent(),
+                Value<int> attempts = const Value.absent(),
+                Value<int?> completedAtMs = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => MapProgressEntriesCompanion(
+                catalogVersion: catalogVersion,
+                mapId: mapId,
+                bestRating: bestRating,
+                bestScore: bestScore,
+                attempts: attempts,
+                completedAtMs: completedAtMs,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String catalogVersion,
+                required String mapId,
+                Value<int> bestRating = const Value.absent(),
+                Value<int> bestScore = const Value.absent(),
+                Value<int> attempts = const Value.absent(),
+                Value<int?> completedAtMs = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => MapProgressEntriesCompanion.insert(
+                catalogVersion: catalogVersion,
+                mapId: mapId,
+                bestRating: bestRating,
+                bestScore: bestScore,
+                attempts: attempts,
+                completedAtMs: completedAtMs,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$MapProgressEntriesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $MapProgressEntriesTable,
+      MapProgressRow,
+      $$MapProgressEntriesTableFilterComposer,
+      $$MapProgressEntriesTableOrderingComposer,
+      $$MapProgressEntriesTableAnnotationComposer,
+      $$MapProgressEntriesTableCreateCompanionBuilder,
+      $$MapProgressEntriesTableUpdateCompanionBuilder,
+      (
+        MapProgressRow,
+        BaseReferences<_$AppDatabase, $MapProgressEntriesTable, MapProgressRow>,
+      ),
+      MapProgressRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -3254,4 +4304,6 @@ class $AppDatabaseManager {
       $$RankedRunsTableTableManager(_db, _db.rankedRuns);
   $$LeaderboardCacheTableTableManager get leaderboardCache =>
       $$LeaderboardCacheTableTableManager(_db, _db.leaderboardCache);
+  $$MapProgressEntriesTableTableManager get mapProgressEntries =>
+      $$MapProgressEntriesTableTableManager(_db, _db.mapProgressEntries);
 }

@@ -1,0 +1,2585 @@
+{
+  "analyzerVersion": "targets-v1",
+  "generatorVersion": "gen-v2",
+  "mapCatalogVersion": "maps-v1",
+  "mapId": "open-hex",
+  "revisions": [
+    {
+      "candidates": [
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "difficulty": 218,
+          "result": 0,
+          "shortestChainCells": 5,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "difficulty": 115,
+          "result": 1,
+          "shortestChainCells": 3,
+          "solutionCount": 5
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "difficulty": 100,
+          "result": 2,
+          "shortestChainCells": 3,
+          "solutionCount": 12
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 100,
+          "result": 3,
+          "shortestChainCells": 3,
+          "solutionCount": 21
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "difficulty": 100,
+          "result": 4,
+          "shortestChainCells": 3,
+          "solutionCount": 24
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "difficulty": 100,
+          "result": 5,
+          "shortestChainCells": 3,
+          "solutionCount": 40
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 2
+            }
+          ],
+          "difficulty": 100,
+          "result": 6,
+          "shortestChainCells": 3,
+          "solutionCount": 46
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 100,
+          "result": 7,
+          "shortestChainCells": 3,
+          "solutionCount": 31
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "difficulty": 100,
+          "result": 8,
+          "shortestChainCells": 3,
+          "solutionCount": 26
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 200,
+          "result": 9,
+          "shortestChainCells": 5,
+          "solutionCount": 33
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 100,
+          "result": 10,
+          "shortestChainCells": 3,
+          "solutionCount": 32
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 200,
+          "result": 11,
+          "shortestChainCells": 5,
+          "solutionCount": 15
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 200,
+          "result": 12,
+          "shortestChainCells": 5,
+          "solutionCount": 13
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 100,
+          "result": 13,
+          "shortestChainCells": 3,
+          "solutionCount": 14
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 200,
+          "result": 14,
+          "shortestChainCells": 5,
+          "solutionCount": 14
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 200,
+          "result": 15,
+          "shortestChainCells": 5,
+          "solutionCount": 12
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 339,
+          "result": 16,
+          "shortestChainCells": 7,
+          "solutionCount": 1
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 306,
+          "result": 17,
+          "shortestChainCells": 7,
+          "solutionCount": 4
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 308,
+          "result": 18,
+          "shortestChainCells": 7,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 259,
+          "result": 27,
+          "shortestChainCells": 5,
+          "solutionCount": 1
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 356,
+          "result": 28,
+          "shortestChainCells": 7,
+          "solutionCount": 4
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "difficulty": 359,
+          "result": 30,
+          "shortestChainCells": 7,
+          "solutionCount": 1
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 358,
+          "result": 31,
+          "shortestChainCells": 7,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "difficulty": 339,
+          "result": 53,
+          "shortestChainCells": 7,
+          "solutionCount": 1
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 127,
+          "result": 54,
+          "shortestChainCells": 3,
+          "solutionCount": 3
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 221,
+          "result": 55,
+          "shortestChainCells": 5,
+          "solutionCount": 9
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 322,
+          "result": 56,
+          "shortestChainCells": 7,
+          "solutionCount": 8
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 326,
+          "result": 57,
+          "shortestChainCells": 7,
+          "solutionCount": 4
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 220,
+          "result": 58,
+          "shortestChainCells": 5,
+          "solutionCount": 11
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 327,
+          "result": 59,
+          "shortestChainCells": 7,
+          "solutionCount": 3
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 326,
+          "result": 60,
+          "shortestChainCells": 7,
+          "solutionCount": 4
+        }
+      ],
+      "expressionCount": 398,
+      "revision": 0,
+      "selectedTarget": 6,
+      "targetCount": 31
+    },
+    {
+      "candidates": [
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "difficulty": 107,
+          "result": 2,
+          "shortestChainCells": 3,
+          "solutionCount": 3
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "difficulty": 101,
+          "result": 3,
+          "shortestChainCells": 3,
+          "solutionCount": 9
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "difficulty": 100,
+          "result": 4,
+          "shortestChainCells": 3,
+          "solutionCount": 13
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "difficulty": 100,
+          "result": 5,
+          "shortestChainCells": 3,
+          "solutionCount": 23
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            }
+          ],
+          "difficulty": 100,
+          "result": 6,
+          "shortestChainCells": 3,
+          "solutionCount": 32
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 100,
+          "result": 7,
+          "shortestChainCells": 3,
+          "solutionCount": 28
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "difficulty": 200,
+          "result": 8,
+          "shortestChainCells": 5,
+          "solutionCount": 33
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 200,
+          "result": 9,
+          "shortestChainCells": 5,
+          "solutionCount": 21
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "difficulty": 100,
+          "result": 10,
+          "shortestChainCells": 3,
+          "solutionCount": 22
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "difficulty": 200,
+          "result": 11,
+          "shortestChainCells": 5,
+          "solutionCount": 10
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 200,
+          "result": 12,
+          "shortestChainCells": 5,
+          "solutionCount": 11
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 100,
+          "result": 13,
+          "shortestChainCells": 3,
+          "solutionCount": 10
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 201,
+          "result": 14,
+          "shortestChainCells": 5,
+          "solutionCount": 9
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 201,
+          "result": 15,
+          "shortestChainCells": 5,
+          "solutionCount": 9
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 306,
+          "result": 16,
+          "shortestChainCells": 7,
+          "solutionCount": 4
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 302,
+          "result": 17,
+          "shortestChainCells": 7,
+          "solutionCount": 8
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 308,
+          "result": 18,
+          "shortestChainCells": 7,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 339,
+          "result": 19,
+          "shortestChainCells": 7,
+          "solutionCount": 1
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 259,
+          "result": 27,
+          "shortestChainCells": 5,
+          "solutionCount": 1
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "difficulty": 357,
+          "result": 28,
+          "shortestChainCells": 7,
+          "solutionCount": 3
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "difficulty": 359,
+          "result": 30,
+          "shortestChainCells": 7,
+          "solutionCount": 1
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 358,
+          "result": 31,
+          "shortestChainCells": 7,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 127,
+          "result": 54,
+          "shortestChainCells": 3,
+          "solutionCount": 3
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 227,
+          "result": 55,
+          "shortestChainCells": 5,
+          "solutionCount": 3
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 325,
+          "result": 56,
+          "shortestChainCells": 7,
+          "solutionCount": 5
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 323,
+          "result": 57,
+          "shortestChainCells": 7,
+          "solutionCount": 7
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 220,
+          "result": 58,
+          "shortestChainCells": 5,
+          "solutionCount": 12
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 324,
+          "result": 59,
+          "shortestChainCells": 7,
+          "solutionCount": 6
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 328,
+          "result": 60,
+          "shortestChainCells": 7,
+          "solutionCount": 2
+        }
+      ],
+      "expressionCount": 293,
+      "revision": 1,
+      "selectedTarget": 3,
+      "targetCount": 29
+    },
+    {
+      "candidates": [
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 138,
+          "result": 1,
+          "shortestChainCells": 3,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "difficulty": 236,
+          "result": 2,
+          "shortestChainCells": 5,
+          "solutionCount": 4
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "difficulty": 100,
+          "result": 3,
+          "shortestChainCells": 3,
+          "solutionCount": 10
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "difficulty": 100,
+          "result": 4,
+          "shortestChainCells": 3,
+          "solutionCount": 22
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "difficulty": 100,
+          "result": 5,
+          "shortestChainCells": 3,
+          "solutionCount": 34
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "difficulty": 100,
+          "result": 6,
+          "shortestChainCells": 3,
+          "solutionCount": 42
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 100,
+          "result": 7,
+          "shortestChainCells": 3,
+          "solutionCount": 52
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "difficulty": 200,
+          "result": 8,
+          "shortestChainCells": 5,
+          "solutionCount": 46
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "difficulty": 200,
+          "result": 9,
+          "shortestChainCells": 5,
+          "solutionCount": 47
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "difficulty": 200,
+          "result": 10,
+          "shortestChainCells": 5,
+          "solutionCount": 25
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 100,
+          "result": 11,
+          "shortestChainCells": 3,
+          "solutionCount": 46
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "difficulty": 200,
+          "result": 12,
+          "shortestChainCells": 5,
+          "solutionCount": 15
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 100,
+          "result": 13,
+          "shortestChainCells": 3,
+          "solutionCount": 16
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 200,
+          "result": 14,
+          "shortestChainCells": 5,
+          "solutionCount": 16
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 200,
+          "result": 15,
+          "shortestChainCells": 5,
+          "solutionCount": 12
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 300,
+          "result": 16,
+          "shortestChainCells": 7,
+          "solutionCount": 10
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 302,
+          "result": 17,
+          "shortestChainCells": 7,
+          "solutionCount": 8
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "difficulty": 302,
+          "result": 18,
+          "shortestChainCells": 7,
+          "solutionCount": 8
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 258,
+          "result": 27,
+          "shortestChainCells": 5,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "difficulty": 358,
+          "result": 28,
+          "shortestChainCells": 7,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 353,
+          "result": 29,
+          "shortestChainCells": 7,
+          "solutionCount": 7
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "difficulty": 356,
+          "result": 30,
+          "shortestChainCells": 7,
+          "solutionCount": 4
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 355,
+          "result": 31,
+          "shortestChainCells": 7,
+          "solutionCount": 5
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 128,
+          "result": 54,
+          "shortestChainCells": 3,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "difficulty": 358,
+          "result": 55,
+          "shortestChainCells": 7,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 226,
+          "result": 56,
+          "shortestChainCells": 5,
+          "solutionCount": 4
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 328,
+          "result": 57,
+          "shortestChainCells": 7,
+          "solutionCount": 2
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 222,
+          "result": 58,
+          "shortestChainCells": 5,
+          "solutionCount": 8
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 320,
+          "result": 59,
+          "shortestChainCells": 7,
+          "solutionCount": 10
+        },
+        {
+          "canonicalHintPath": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "difficulty": 324,
+          "result": 60,
+          "shortestChainCells": 7,
+          "solutionCount": 6
+        }
+      ],
+      "expressionCount": 469,
+      "revision": 2,
+      "selectedTarget": 13,
+      "targetCount": 30
+    }
+  ],
+  "seed": "fixture-board-v2"
+}

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:crypto/crypto.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +17,7 @@ import '../core/networking/connectivity_monitor.dart';
 import '../core/settings/app_settings.dart';
 import '../core/settings/settings_controller.dart';
 import '../core/settings/settings_repository.dart';
+import '../features/gameplay/application/game_session_config.dart';
 import '../features/gameplay/domain/domain.dart';
 import '../features/gameplay/persistence/database_connection.dart';
 import '../features/onboarding/application/onboarding_controller.dart';
@@ -56,6 +58,30 @@ Future<void> bootstrap(FlavorConfig config) async {
       final Ruleset ruleset = Ruleset.fromJson(
         jsonDecode(rulesetJson) as Map<String, dynamic>,
       );
+      final String rulesetV2Json = await rootBundle.loadString(
+        'assets/gameplay/rs-v2.json',
+      );
+      final RulesetV2 rulesetV2 = RulesetV2.fromJson(
+        jsonDecode(rulesetV2Json) as Map<String, dynamic>,
+      );
+      final String mapCatalogJson = await rootBundle.loadString(
+        'assets/gameplay/maps-v1.json',
+      );
+      final MapCatalogV1 mapCatalog = MapCatalogV1.fromJson(
+        jsonDecode(mapCatalogJson) as Map<String, dynamic>,
+      );
+      final String modeCatalogJson = await rootBundle.loadString(
+        'assets/gameplay/modes-v1.json',
+      );
+      final ModeCatalogV1 modeCatalog = ModeCatalogV1.fromJson(
+        jsonDecode(modeCatalogJson) as Map<String, dynamic>,
+      );
+      final GameplayCatalogHashesV2 catalogHashes = GameplayCatalogHashesV2(
+        mapCatalogHash: sha256.convert(utf8.encode(mapCatalogJson)).toString(),
+        modeCatalogHash: sha256
+            .convert(utf8.encode(modeCatalogJson))
+            .toString(),
+      );
 
       final FlameAudioService audio = FlameAudioService()
         ..applySettings(settings);
@@ -72,6 +98,10 @@ Future<void> bootstrap(FlavorConfig config) async {
           overrides: [
             flavorProvider.overrideWithValue(config),
             rulesetProvider.overrideWithValue(ruleset),
+            rulesetV2Provider.overrideWithValue(rulesetV2),
+            mapCatalogV1Provider.overrideWithValue(mapCatalog),
+            modeCatalogV1Provider.overrideWithValue(modeCatalog),
+            gameplayCatalogHashesV2Provider.overrideWithValue(catalogHashes),
             settingsRepositoryProvider.overrideWithValue(settingsRepo),
             onboardingStoreProvider.overrideWithValue(
               PrefsOnboardingStore(prefs),

@@ -1,3 +1,5 @@
+import 'package:drift/drift.dart' show Value;
+
 import 'app_database.dart';
 
 /// A UI-facing view of one stored run (no Drift types leak past this layer).
@@ -9,6 +11,11 @@ class RunSummary {
     required this.equations,
     required this.bestCombo,
     required this.levelReached,
+    this.targetsSolved = 0,
+    this.protocolVersion,
+    this.mapCatalogVersion,
+    this.mapId,
+    this.rating,
   });
 
   final int playedAtMs;
@@ -17,6 +24,11 @@ class RunSummary {
   final int equations;
   final int bestCombo;
   final int levelReached;
+  final int targetsSolved;
+  final String? protocolVersion;
+  final String? mapCatalogVersion;
+  final String? mapId;
+  final int? rating;
 }
 
 /// The only gateway between the app and the run-history [AppDatabase]. Widgets,
@@ -36,6 +48,11 @@ class RunHistoryRepository {
     required int durationMs,
     required String rulesetVersion,
     required String seed,
+    String? protocolVersion,
+    String? mapCatalogVersion,
+    String? mapId,
+    int targetsSolved = 0,
+    int? rating,
   }) {
     return _db.insertRun(
       RunsCompanion.insert(
@@ -48,6 +65,11 @@ class RunHistoryRepository {
         durationMs: durationMs,
         rulesetVersion: rulesetVersion,
         seed: seed,
+        protocolVersion: Value<String?>(protocolVersion),
+        mapCatalogVersion: Value<String?>(mapCatalogVersion),
+        mapId: Value<String?>(mapId),
+        targetsSolved: Value<int>(targetsSolved),
+        rating: Value<int?>(rating),
       ),
     );
   }
@@ -76,5 +98,10 @@ class RunHistoryRepository {
     equations: r.equations,
     bestCombo: r.bestCombo,
     levelReached: r.levelReached,
+    targetsSolved: r.targetsSolved,
+    protocolVersion: r.protocolVersion,
+    mapCatalogVersion: r.mapCatalogVersion,
+    mapId: r.mapId,
+    rating: r.rating,
   );
 }

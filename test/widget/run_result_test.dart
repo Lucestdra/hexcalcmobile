@@ -42,4 +42,32 @@ void main() {
     expect(find.text('Play again'), findsOneWidget);
     expect(find.text('Home'), findsOneWidget);
   });
+
+  testWidgets('v2 Level result shows targets, map, and stars', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: RunResultScreen(
+          data: RunResultData(
+            score: 1420,
+            equationsSolved: 0,
+            targetsSolved: 8,
+            bestCombo: 5,
+            level: 4,
+            rating: 2,
+            mapName: 'Crescent',
+            modeId: 'level',
+            replayLocation: '/levels',
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Targets'), findsOneWidget);
+    expect(find.text('8'), findsOneWidget);
+    expect(find.text('Crescent'), findsOneWidget);
+    expect(find.text('★★'), findsOneWidget);
+  });
 }

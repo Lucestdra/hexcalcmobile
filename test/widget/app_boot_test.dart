@@ -27,6 +27,10 @@ void main() {
     expect(find.text('PLAY'), findsOneWidget);
 
     await tester.tap(find.text('PLAY'));
+    await tester.pumpAndSettle();
+    expect(find.text('CHOOSE MODE'), findsOneWidget);
+
+    await tester.tap(find.text('Time Attack'));
     // Do NOT pumpAndSettle: the Flame game loop schedules frames forever.
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 50));
