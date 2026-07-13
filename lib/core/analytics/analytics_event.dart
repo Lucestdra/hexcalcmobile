@@ -51,6 +51,16 @@ class AnalyticsEvent {
     'level': level,
   });
 
+  // ----- Ranked -----
+  factory AnalyticsEvent.rankedSubmissionQueued() =>
+      const AnalyticsEvent._('ranked_submission_queued');
+
+  factory AnalyticsEvent.rankedSubmissionVerified() =>
+      const AnalyticsEvent._('ranked_submission_verified');
+
+  factory AnalyticsEvent.rankedSubmissionRejected() =>
+      const AnalyticsEvent._('ranked_submission_rejected');
+
   // ----- Navigation / settings -----
   factory AnalyticsEvent.settingsOpened() =>
       const AnalyticsEvent._('settings_opened');

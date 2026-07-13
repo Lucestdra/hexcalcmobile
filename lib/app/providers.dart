@@ -2,13 +2,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/analytics/analytics_service.dart';
 import '../core/audio/audio_service.dart';
+import '../core/auth/auth_session.dart';
 import '../core/crash/crash_reporter.dart';
 import '../core/haptics/haptics_service.dart';
 import '../core/push/push_service.dart';
 import '../core/remote_config/remote_config.dart';
+import '../core/sync/outbox_sync_engine.dart';
 import '../features/gameplay/domain/domain.dart';
 import '../features/gameplay/persistence/app_database.dart';
 import '../features/gameplay/persistence/run_history_repository.dart';
+import '../features/gameplay/persistence/sync_store.dart';
 import 'flavors/flavor_config.dart';
 
 /// The active build flavor. Overridden at bootstrap by each flavor entrypoint.
@@ -76,4 +79,27 @@ final remoteConfigProvider = Provider<RemoteConfig>((ref) {
 
 final pushServiceProvider = Provider<PushService>((ref) {
   return const NoopPushService();
+});
+
+/// The offline outbox + ranked-run gateway, built on the injected database.
+final syncStoreProvider = Provider<SyncStore>((ref) {
+  return SyncStore(ref.watch(appDatabaseProvider));
+});
+
+/// The outbox drain engine (pure logic; the periodic timer + connectivity
+/// subscription live in the sync controller). Depends on the authenticated API.
+final outboxSyncEngineProvider = Provider<OutboxSyncEngine>((ref) {
+  return OutboxSyncEngine(
+    store: ref.watch(syncStoreProvider),
+    api: ref.watch(hexcalcApiProvider),
+    connectivity: ref.watch(connectivityMonitorProvider),
+  );
+});
+
+/// Watches a ranked run's verification status for the ranked-result screen.
+final rankedRunViewProvider = StreamProvider.family<RankedRunView?, String>((
+  ref,
+  String runId,
+) {
+  return ref.watch(syncStoreProvider).watchRankedRun(runId);
 });

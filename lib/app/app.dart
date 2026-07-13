@@ -6,6 +6,7 @@ import '../core/auth/auth_session.dart';
 import '../core/design_system/design_system.dart';
 import 'providers.dart';
 import 'routing/app_router.dart';
+import 'sync_controller.dart';
 
 /// The app shell. Flavor-aware (title + debug banner) and dark/neon themed.
 class HexCalcApp extends ConsumerStatefulWidget {
@@ -24,6 +25,8 @@ class _HexCalcAppState extends ConsumerState<HexCalcApp> {
     // Start the non-blocking guest bootstrap at app launch; gameplay never waits
     // on it. Reading the provider instantiates the notifier and runs build().
     ref.read(authSessionProvider);
+    // Start the outbox sync engine (initial drain + reconnect + periodic retries).
+    ref.read(outboxSyncControllerProvider);
   }
 
   @override

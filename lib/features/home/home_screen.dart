@@ -69,6 +69,19 @@ class HomeScreen extends ConsumerWidget {
                 ),
                 child: const Text('PLAY'),
               ),
+              const SizedBox(height: AppSpacing.sm),
+              OutlinedButton(
+                onPressed: () => context.push('/ranked'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.neonBlue,
+                  side: BorderSide(
+                    color: AppColors.neonBlue.withValues(alpha: 0.5),
+                    width: AppStroke.thin,
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                ),
+                child: const Text('RANKED'),
+              ),
               const SizedBox(height: AppSpacing.lg),
               _RecentRuns(recent: recent),
               const SizedBox(height: AppSpacing.lg),

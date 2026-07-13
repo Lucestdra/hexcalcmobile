@@ -22,7 +22,7 @@ LeonidasStudio/Hexcalc/
 - Dart **3.10.7** (bundled with the pinned Flutter SDK).
 - Flame **1.35.1** (pinned in `pubspec.lock`; verified compatible with the SDK).
 
-## Current state (Phase 7)
+## Current state (Phase 9)
 
 - **Phase 1–2** — the deterministic gameplay core in pure Dart (`geometry`,
   `expression`, `drbg`, `board`, `board_generator_v1`, `ruleset`, `replay`),
@@ -59,6 +59,21 @@ LeonidasStudio/Hexcalc/
     is retried when connectivity returns);
   - **auth screens** — sign in, register, forgot/reset password, and guest→account
     **link** — plus a **profile** screen, all with loading/error/offline states.
+- **Phase 9** — offline outbox + ranked flow (`lib/core/sync/`, `lib/features/gameplay/`):
+  - a durable **Drift outbox** (`outbox` table) + a **sync engine** that drains it
+    with exponential backoff + jitter, pauses while offline and resumes on the
+    reconnect edge, treats permanent 4xx as terminal (kept visible, never retried),
+    is single-flight, and reconciles server state transactionally on ack;
+  - the gameplay controller now records a **payloadVersion-1 event log** (equation
+    cell paths + level + pause/resume), mapped to the backend contract and
+    cross-checked against the shared `event-log/v1` fixtures by a Dart verifier twin;
+  - **ranked**: request a server challenge (with a ruleset/generator **version gate**
+    that blocks ranked — never normal — play on a mismatch), play the server seed,
+    then queue a submit; a **ranked-result** screen shows the live verification state
+    (pending → verified / rejected / failed) and never presents an unverified run as
+    a confirmed rank;
+  - **normal** runs also enqueue an idempotent history sync. Ranked submit + normal
+    result both carry a per-item `Idempotency-Key`.
 
 ## Generated API client (deviation)
 
@@ -96,6 +111,15 @@ With the backend running (`dotnet run --project src/HexCalc.Api` in the sibling
    in"); local run history is preserved.
 5. **Refresh** — leave the app until the 15-minute access token expires, then open
    Profile; the profile still loads (the interceptor silently refreshed).
+6. **Normal outbox** — play a normal run offline (airplane mode). The result screen
+   shows immediately; a `normal_result` outbox item is queued. Turn networking back
+   on — it syncs in the background (idempotent).
+7. **Ranked** — Home → RANKED. It requests a server challenge (blocks with "update
+   required" if the client ruleset/generator is stale), you play the server board,
+   and the ranked-result screen shows **Verifying…** then **Verified** with the
+   server score. Kill the app mid-verification and relaunch — the queued submit
+   survives and completes. Force a reject (tamper) or an expiry to see the distinct
+   non-ranked outcomes; an unverified run is never shown as a confirmed rank.
 
 ## Assets
 

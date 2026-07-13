@@ -4,6 +4,7 @@ import '../domain/domain.dart';
 import 'game_event.dart';
 import 'game_phase.dart';
 import 'game_snapshot.dart';
+import 'run_event_log.dart';
 
 /// The pure-Dart gameplay controller: owns the board, the current selection path,
 /// the run clock, and the authoritative event log. Scoring/combo/Fever come from
@@ -37,6 +38,11 @@ class GameController {
       <AxialCoordinate, BoardCell>{};
   final List<AxialCoordinate> _path = <AxialCoordinate>[];
   final List<RunEvent> _events = <RunEvent>[];
+
+  /// The captured payloadVersion-1 event log (equation paths + pause/resume), used
+  /// by the ranked flow to build the submit payload. Distinct from [_events], which
+  /// is the scoring input to the [ReplayEngine].
+  final List<LoggedRunEvent> _loggedEvents = <LoggedRunEvent>[];
 
   GamePhase _phase = GamePhase.idle;
   int _phaseUntilMs = 0;
@@ -75,6 +81,17 @@ class GameController {
   GamePhase get phase => _phase;
   int get runDurationMs => ruleset.run.durationMs;
 
+  /// The captured event log for this run (equation attempts + pause/resume).
+  List<LoggedRunEvent> get loggedEvents =>
+      List<LoggedRunEvent>.unmodifiable(_loggedEvents);
+
+  /// The payloadVersion-1 event-log map for submitting this run (client score is
+  /// the current authoritative replay total).
+  Map<String, dynamic> buildEventLog() => buildEventLogPayload(
+    clientTotalScore: _replay.finalState.totalScore,
+    events: _loggedEvents,
+  );
+
   BoardCell? cellAt(AxialCoordinate c) => _cellByCoord[c];
 
   /// (Re)starts a run from level 0.
@@ -84,6 +101,7 @@ class GameController {
     _rebuildCellMap();
     _path.clear();
     _events.clear();
+    _loggedEvents.clear();
     _elapsedMs = 0;
     _paused = false;
     _feverDisplay = false;
@@ -225,6 +243,17 @@ class GameController {
       ),
     );
 
+    // Capture the raw event log entry for ranked submission. The level is the one
+    // this equation was played on (before a level-completing correct advances it),
+    // matching the backend verifier's per-equation level assertion.
+    _loggedEvents.add(
+      LoggedRunEvent.equation(
+        tMs: _elapsedMs,
+        levelIndex: _levelIndex,
+        path: committed,
+      ),
+    );
+
     final int prevLevel = _replay.finalState.level;
     _replay = ReplayEngine.replay(ruleset, _events);
     _path.clear();
@@ -341,10 +370,12 @@ class GameController {
     if (_paused) {
       _paused = false;
       _phase = _restingPhase();
+      _loggedEvents.add(LoggedRunEvent.resume(_elapsedMs));
     } else {
       _paused = true;
       _path.clear(); // drop any in-progress selection so it does not linger
       _phase = GamePhase.paused;
+      _loggedEvents.add(LoggedRunEvent.pause(_elapsedMs));
     }
     _emit();
   }

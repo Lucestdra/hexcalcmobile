@@ -79,6 +79,11 @@ void main() {
       '/api/v1/auth/refresh': 'post',
       '/api/v1/auth/logout': 'post',
       '/api/v1/auth/link-account': 'post',
+      '/api/v1/meta/config': 'get',
+      '/api/v1/game-runs': 'post',
+      '/api/v1/game-runs/{runId}/submit': 'post',
+      '/api/v1/game-runs/{runId}': 'get',
+      '/api/v1/game-runs/normal-results': 'post',
     };
     endpoints.forEach((String path, String method) {
       expect(paths.containsKey(path), isTrue, reason: 'missing path $path');
@@ -107,6 +112,17 @@ void main() {
       'newPassword',
     ]);
     expectRequired('LinkAccountRequest', <String>['email', 'password']);
+    // Game-run write bodies (fields the client sends unconditionally).
+    expectRequired('SubmitGameRunRequest', <String>[
+      'challengeToken',
+      'eventLog',
+    ]);
+    expectRequired('NormalRunResultRequest', <String>[
+      'rulesetVersion',
+      'generatorVersion',
+      'clientScore',
+      'playedAtUtc',
+    ]);
   });
 
   test('response schemas expose the fields the client reads', () {
@@ -125,6 +141,35 @@ void main() {
       'status',
       'createdAtUtc',
     ]);
+    expectProps('MetaConfigResponse', <String>[
+      'rulesetVersion',
+      'generatorVersion',
+      'payloadVersion',
+      'runDurationMs',
+    ]);
+    expectProps('GameRunChallengeResponse', <String>[
+      'runId',
+      'mode',
+      'seed',
+      'rulesetVersion',
+      'generatorVersion',
+      'runDurationMs',
+      'nonce',
+      'issuedAtUtc',
+      'expiresAtUtc',
+      'challengeToken',
+    ]);
+    expectProps('GameRunResultResponse', <String>[
+      'runId',
+      'mode',
+      'status',
+      'verifiedScore',
+      'clientScore',
+      'anomalyFlags',
+      'rejectionReason',
+      'submittedAtUtc',
+    ]);
+    expectProps('NormalRunAckResponse', <String>['status']);
   });
 
   test('response fields the client casts non-null are required by the spec', () {
@@ -137,6 +182,18 @@ void main() {
       'userId',
     ]);
     expectRequired('PlayerProfile', <String>['id']);
+    expectRequired('MetaConfigResponse', <String>[
+      'rulesetVersion',
+      'generatorVersion',
+    ]);
+    expectRequired('GameRunChallengeResponse', <String>[
+      'runId',
+      'seed',
+      'rulesetVersion',
+      'generatorVersion',
+      'challengeToken',
+    ]);
+    expectRequired('GameRunResultResponse', <String>['runId']);
   });
 
   test('key response field types match the client casts', () {
@@ -144,5 +201,10 @@ void main() {
     expectType('AuthTokens', 'userId', 'string');
     expectType('AuthTokens', 'expiresInSeconds', 'integer');
     expectType('PlayerProfile', 'id', 'string');
+    expectType('GameRunChallengeResponse', 'runId', 'string');
+    expectType('GameRunChallengeResponse', 'runDurationMs', 'integer');
+    expectType('GameRunResultResponse', 'status', 'string');
+    expectType('GameRunResultResponse', 'verifiedScore', 'integer');
+    expectType('MetaConfigResponse', 'runDurationMs', 'integer');
   });
 }

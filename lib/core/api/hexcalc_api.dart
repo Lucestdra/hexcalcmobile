@@ -7,8 +7,11 @@ import 'dtos.dart';
 
 /// Typed facade over the backend REST contract. Every method returns a typed DTO
 /// and throws an [AppError] on failure (never a raw `DioException`). Anonymous
-/// endpoints go through the [ApiClient.anonymous] client; `link-account` and the
-/// player endpoints go through [ApiClient.authenticated] (bearer + refresh).
+/// endpoints (auth, `meta/config`) go through the [ApiClient.anonymous] client;
+/// `link-account`, the player endpoints, and the game-run endpoints go through
+/// [ApiClient.authenticated] (bearer + single-flight refresh). Ranked submit and
+/// normal-result writes carry a caller-supplied `Idempotency-Key` header so a
+/// retried send is the same operation server-side.
 class HexcalcApi {
   HexcalcApi(this._client);
 
@@ -90,6 +93,68 @@ class HexcalcApi {
     }
   }
 
+  // ── Game runs ─────────────────────────────────────────────────────────────
+
+  /// Public active gameplay config (anonymous). Read before ranked play to gate
+  /// on the ruleset/generator versions.
+  Future<MetaConfigResponse> getMetaConfig() async {
+    try {
+      final Response<dynamic> response = await _anon.get<dynamic>(
+        '/api/v1/meta/config',
+      );
+      return _parse(response.data, MetaConfigResponse.fromJson);
+    } catch (error) {
+      throw toAppError(error);
+    }
+  }
+
+  /// Issues a new signed ranked challenge (authenticated).
+  Future<GameRunChallengeResponse> issueGameRun(IssueGameRunRequest request) =>
+      _json(
+        '/api/v1/game-runs',
+        request.toJson(),
+        GameRunChallengeResponse.fromJson,
+        _auth,
+      );
+
+  /// Submits an event log for verification. [idempotencyKey] must be reused
+  /// verbatim on every retry of the same submission (sourced from the outbox item).
+  Future<GameRunResultResponse> submitGameRun(
+    String runId,
+    SubmitGameRunRequest request, {
+    required String idempotencyKey,
+  }) => _jsonWithOptions(
+    '/api/v1/game-runs/$runId/submit',
+    request.toJson(),
+    GameRunResultResponse.fromJson,
+    _auth,
+    Options(headers: <String, dynamic>{'Idempotency-Key': idempotencyKey}),
+  );
+
+  /// Fetches a run's current verification status/result (authenticated).
+  Future<GameRunResultResponse> getGameRun(String runId) async {
+    try {
+      final Response<dynamic> response = await _auth.get<dynamic>(
+        '/api/v1/game-runs/$runId',
+      );
+      return _parse(response.data, GameRunResultResponse.fromJson);
+    } catch (error) {
+      throw toAppError(error);
+    }
+  }
+
+  /// Records an offline normal-run result idempotently (authenticated).
+  Future<NormalRunAckResponse> postNormalResult(
+    NormalRunResultRequest request, {
+    required String idempotencyKey,
+  }) => _jsonWithOptions(
+    '/api/v1/game-runs/normal-results',
+    request.toJson(),
+    NormalRunAckResponse.fromJson,
+    _auth,
+    Options(headers: <String, dynamic>{'Idempotency-Key': idempotencyKey}),
+  );
+
   Future<T> _json<T>(
     String path,
     Map<String, dynamic> body,
@@ -100,6 +165,25 @@ class HexcalcApi {
       final Response<dynamic> response = await client.post<dynamic>(
         path,
         data: body,
+      );
+      return _parse(response.data, parse);
+    } catch (error) {
+      throw toAppError(error);
+    }
+  }
+
+  Future<T> _jsonWithOptions<T>(
+    String path,
+    Map<String, dynamic> body,
+    T Function(Map<String, dynamic>) parse,
+    Dio client,
+    Options options,
+  ) async {
+    try {
+      final Response<dynamic> response = await client.post<dynamic>(
+        path,
+        data: body,
+        options: options,
       );
       return _parse(response.data, parse);
     } catch (error) {
